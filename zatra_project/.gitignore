@@ -1,0 +1,23 @@
+# General
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media/
+
+# Virtual Environments (أهم جزء عشان ما يرفع ملفات البيئة الثقيلة)
+venv/
+env/
+.env
+.venv/
+
+# Editor Settings (ملفات إعدادات المحرر التي لا تهم الفريق)
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS junk files
+.DS_Store
+Thumbs.db
