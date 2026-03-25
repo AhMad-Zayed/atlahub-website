@@ -1,0 +1,69 @@
+{
+  "brand": { "name": "Atla Hub Tech", "founder": "Ahmed Zayed" },
+  "hero": {
+    "headline": "High-Converting Digital Solutions & Elite Cybersecurity",
+    "subheadline": "Stop losing clients to poor design. We build result-driven websites, robust applications, and secure systems that scale your business.",
+    "team_text": "Led by Ahmed Zayed & 6 elite specialists.",
+    "cta_primary": "Start Your Project",
+    "cta_secondary": "View Portfolio"
+  },
+  "services": [
+    {
+      "id": "programming",
+      "title": "Programming & Web Development",
+      "description": "High-converting digital platforms, from corporate websites to robust enterprise applications.",
+      "result": "Scalable, high-speed platforms that maximize user retention and continuous conversions.",
+      "highlight": "",
+      "icon": "code"
+    },
+    {
+      "id": "marketing",
+      "title": "Strategic Digital Marketing",
+      "description": "Data-driven campaigns across all major platforms built to dominate your specific market.",
+      "result": "Lower Customer Acquisition Cost (CAC), predictable lead flow, and massive brand ROI.",
+      "highlight": "",
+      "icon": "trending-up"
+    },
+    {
+      "id": "cybersecurity",
+      "title": "Elite Cybersecurity",
+      "description": "Military-grade protection for your digital assets and rapid response protocols.",
+      "result": "Zero downtime, uncompromised data integrity, and total peace of mind.",
+      "highlight": "Emergency Breach & Blackmail Response",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "media",
+      "title": "Field Media Production",
+      "description": "Dynamic on-the-ground media creation and high-impact visual storytelling.",
+      "result": "Viral brand awareness and deep, authentic connections with your target market.",
+      "highlight": "Interactive Audience Engagement & Street Show Production",
+      "icon": "video"
+    }
+  ],
+  "whyUs": {
+    "headline": "Why Choose Atla Hub?",
+    "subheadline": "We're not just developers; we are your strategic growth partners.",
+    "points": [
+      {
+        "title": "Result-Driven, Not Feature-Packed",
+        "description": "We focus on metrics that matter: conversion rates, user engagement, and ROI. Every line of code serves a business goal."
+      },
+      {
+        "title": "Elite, Specialized Team",
+        "description": "You get direct access to a curated team of senior specialists, not a bloated agency with junior staff."
+      },
+      {
+        "title": "24/7 Emergency Response",
+        "description": "Our cybersecurity and technical teams are on standby around the clock, ensuring zero downtime and immediate crisis management."
+      }
+    ]
+  },
+  "founderStory": {
+    "headline": "From a Single Laptop to a Global Force",
+    "story": "Founded by Ahmed Zayed, Atla Hub Tech was born from a simple observation: too many businesses were failing due to poor technology and weak security. Ahmed assembled a team of the best minds he knew, each an expert in their field, to create a new kind of agency—one built on tangible results, military-grade precision, and an obsession with client success.",
+    "image": "/assets/ahmed-zayed-profile.jpg"
+  },
+  "portfolio": [],
+  "clients": ["Al-Quds University", "Tamer Beauty Center", "Dragon Supplements"]
+}
