@@ -1,69 +1,346 @@
 {
-  "brand": { "name": "Atla Hub Tech", "founder": "Ahmed Zayed" },
-  "hero": {
-    "headline": "High-Converting Digital Solutions & Elite Cybersecurity",
-    "subheadline": "Stop losing clients to poor design. We build result-driven websites, robust applications, and secure systems that scale your business.",
-    "team_text": "Led by Ahmed Zayed & 6 elite specialists.",
-    "cta_primary": "Start Your Project",
-    "cta_secondary": "View Portfolio"
-  },
-  "services": [
-    {
-      "id": "programming",
-      "title": "Programming & Web Development",
-      "description": "High-converting digital platforms, from corporate websites to robust enterprise applications.",
-      "result": "Scalable, high-speed platforms that maximize user retention and continuous conversions.",
-      "highlight": "",
-      "icon": "code"
+  "en": {
+    "brand": {
+      "part1": "Atla Hub ",
+      "part2": "Tech"
     },
-    {
-      "id": "marketing",
-      "title": "Strategic Digital Marketing",
-      "description": "Data-driven campaigns across all major platforms built to dominate your specific market.",
-      "result": "Lower Customer Acquisition Cost (CAC), predictable lead flow, and massive brand ROI.",
-      "highlight": "",
-      "icon": "trending-up"
+    "nav": {
+      "home": "Home",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "academy": "Academy",
+      "about": "About",
+      "contact": "Contact",
+      "startProject": "Start Project",
+      "langEn": "EN",
+      "langAr": "AR"
     },
-    {
-      "id": "cybersecurity",
-      "title": "Elite Cybersecurity",
-      "description": "Military-grade protection for your digital assets and rapid response protocols.",
-      "result": "Zero downtime, uncompromised data integrity, and total peace of mind.",
-      "highlight": "Emergency Breach & Blackmail Response",
-      "icon": "shield-alert"
-    },
-    {
-      "id": "media",
-      "title": "Field Media Production",
-      "description": "Dynamic on-the-ground media creation and high-impact visual storytelling.",
-      "result": "Viral brand awareness and deep, authentic connections with your target market.",
-      "highlight": "Interactive Audience Engagement & Street Show Production",
-      "icon": "video"
-    }
-  ],
-  "whyUs": {
-    "headline": "Why Choose Atla Hub?",
-    "subheadline": "We're not just developers; we are your strategic growth partners.",
-    "points": [
+    "heroSlides": [
       {
-        "title": "Result-Driven, Not Feature-Packed",
-        "description": "We focus on metrics that matter: conversion rates, user engagement, and ROI. Every line of code serves a business goal."
+        "title": "Jerusalem Vision, Global Domination.",
+        "description": "Deploy elite tech solutions worldwide. We engineer your growth from Jerusalem to Atlanta."
       },
       {
-        "title": "Elite, Specialized Team",
-        "description": "You get direct access to a curated team of senior specialists, not a bloated agency with junior staff."
+        "title": "Your Unbreakable Digital Shield.",
+        "description": "Military-grade protection against cyber warfare and blackmail. 24/7 elite response."
       },
       {
-        "title": "24/7 Emergency Response",
-        "description": "Our cybersecurity and technical teams are on standby around the clock, ensuring zero downtime and immediate crisis management."
+        "title": "Cinematic Brand Authority.",
+        "description": "Capture total market attention with high-impact, interactive field media."
       }
-    ]
+    ],
+    "hero": {
+      "cta_primary": "Start Your Project",
+      "cta_secondary": "View Results"
+    },
+    "services": {
+      "headline": "Dominate Your Market",
+      "subheadline": "Military-grade precision meets hyper-growth digital strategies.",
+      "uniqueBadge": "Elite Advantage",
+      "list": [
+        {
+          "id": "programming",
+          "title": "Enterprise Web Development",
+          "description": "Uncompromising architectures built to scale and convert.",
+          "highlight": "",
+          "icon": "code"
+        },
+        {
+          "id": "marketing",
+          "title": "Hyper-Growth Marketing",
+          "description": "Data-driven campaigns to ruthlessly acquire high-value clients.",
+          "highlight": "",
+          "icon": "trending-up"
+        },
+        {
+          "id": "cybersecurity",
+          "title": "Elite Cybersecurity",
+          "description": "Military-grade defense mechanisms locking down your digital assets.",
+          "highlight": "Emergency Blackmail Response",
+          "icon": "shield-alert"
+        },
+        {
+          "id": "media",
+          "title": "High-Impact Media",
+          "description": "Visually dominate your industry with cinematic field production.",
+          "highlight": "Viral Street Operations",
+          "icon": "video"
+        }
+      ]
+    },
+    "process": {
+      "headline": "Our Elite Framework",
+      "subheadline": "We do not guess. We operate on a proven, systematic methodology.",
+      "steps": [
+        {
+          "title": "Discovery & Audit",
+          "description": "We deep-dive into your existing infrastructure and market positioning."
+        },
+        {
+          "title": "Strategic Planning",
+          "description": "Crafting a tactical blueprint focused purely on ROI and scalability."
+        },
+        {
+          "title": "Rapid Execution",
+          "description": "Our specialists engineer the solution with military-grade precision."
+        },
+        {
+          "title": "Deployment & Scale",
+          "description": "Launch into production and monitor actively for performance and growth."
+        }
+      ]
+    },
+    "portfolio": {
+      "headline": "Proven Results",
+      "subheadline": "Explore the elite systems and applications we have engineered for our partners.",
+      "resultLabel": "Result",
+      "loading": "Loading projects..."
+    },
+    "founder": {
+      "headline": "A Vision Born from Precision",
+      "story": "Founded by Ahmed Zayed, Atla Hub Tech is a powerhouse of elite specialists. We do not settle for good. We obsess over secure systems and unstoppable growth.",
+      "badge": "Led by Ahmed Zayed & Elite Specialists",
+      "image": "",
+      "fallbackTitle": "Ahmed Zayed",
+      "fallbackSubtitle": "Founder & Strategic Lead"
+    },
+    "clients": {
+      "headline": "Trusted By Industry Leaders",
+      "subheadline": "We are proud to partner with ambitious organizations.",
+      "loading": "Loading clients..."
+    },
+    "academy": {
+      "badge": "Coming Soon",
+      "headline": "Atla Hub Academy",
+      "description": "Elite training programs tailored for the next generation of software engineers and high-level cybersecurity experts.",
+      "cta": "Explore Programs"
+    },
+    "whyUs": {
+      "headline": "The Atla Hub Elite Standard",
+      "subheadline": "We do not do average. We are your unapologetic growth partners.",
+      "points": [
+        {
+          "title": "Result-Driven, Not Feature-Packed",
+          "description": "We focus on metrics that matter: conversion rates, user engagement, and measurable ROI."
+        },
+        {
+          "title": "Elite, Specialized Team",
+          "description": "Direct access to a curated team of senior specialists instead of a bloated agency structure."
+        },
+        {
+          "title": "24/7 Emergency Response",
+          "description": "Cybersecurity and technical teams stay on standby around the clock to reduce downtime and risk."
+        }
+      ]
+    },
+    "contact": {
+      "headline": "Let's Build Your Reality",
+      "subheadline": "Stop waiting. Start scaling. Reach out to our team today.",
+      "successTitle": "Transmission Secured",
+      "successMessage": "Our team will contact you shortly to initiate the protocol.",
+      "errorMessage": "Failed to send your request. Please try again or use direct contact methods.",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "service": "Requested Capability",
+        "message": "Project Details / Challenge"
+      },
+      "placeholders": {
+        "name": "John Doe",
+        "email": "john@company.com",
+        "message": "Describe the outcome you are looking to achieve..."
+      },
+      "servicePlaceholder": "Select a core integration...",
+      "serviceOptions": [
+        "Programming & Web Development",
+        "Strategic Digital Marketing",
+        "Elite Cybersecurity & Response",
+        "Field Media Production",
+        "Other Integration"
+      ],
+      "submit": "Initiate Project",
+      "submitting": "Sending..."
+    },
+    "footer": {
+      "description": "High-conversion, result-driven enterprise solutions. Specializing in cybersecurity, development, and high-impact media.",
+      "quickLinksTitle": "Quick Links",
+      "contactTitle": "Contact",
+      "adminPortal": "Admin Portal",
+      "emergency": "Global emergency response available 24/7.",
+      "copyright": "Atla Hub Tech. All rights reserved.",
+      "founder": "Founder: Ahmed Zayed."
+    }
   },
-  "founderStory": {
-    "headline": "From a Single Laptop to a Global Force",
-    "story": "Founded by Ahmed Zayed, Atla Hub Tech was born from a simple observation: too many businesses were failing due to poor technology and weak security. Ahmed assembled a team of the best minds he knew, each an expert in their field, to create a new kind of agency—one built on tangible results, military-grade precision, and an obsession with client success.",
-    "image": "/assets/ahmed-zayed-profile.jpg"
-  },
-  "portfolio": [],
-  "clients": ["Al-Quds University", "Tamer Beauty Center", "Dragon Supplements"]
+  "ar": {
+    "brand": {
+      "part1": "أتلا هاب ",
+      "part2": "تك"
+    },
+    "nav": {
+      "home": "الرئيسية",
+      "services": "خدماتنا",
+      "portfolio": "أعمالنا",
+      "academy": "الأكاديمية",
+      "about": "من نحن",
+      "contact": "اتصل بنا",
+      "startProject": "ابدأ مشروعك",
+      "langEn": "EN",
+      "langAr": "عر"
+    },
+    "heroSlides": [
+      {
+        "title": "رؤية مقدسية، هيمنة عالمية.",
+        "description": "انشر حلولك التكنولوجية المتميزة عالمياً. نهندس نموك من القدس إلى أتلانتا."
+      },
+      {
+        "title": "درعك الرقمي الذي لا يُخترق.",
+        "description": "حماية عسكرية الجودة ضد الحرب السيبرانية والابتزاز. استجابة نخبوية على مدار الساعة."
+      },
+      {
+        "title": "سلطة سينمائية لعلامتك التجارية.",
+        "description": "استحوذ على اهتمام السوق بالكامل من خلال إعلام ميداني تفاعلي وعالي التأثير."
+      }
+    ],
+    "hero": {
+      "cta_primary": "ابدأ مشروعك",
+      "cta_secondary": "شاهد النتائج"
+    },
+    "services": {
+      "headline": "سيطر على سوقك",
+      "subheadline": "دقة عسكرية تلتقي باستراتيجيات النمو الرقمي الفائق.",
+      "uniqueBadge": "ميزة النخبة",
+      "list": [
+        {
+          "id": "programming",
+          "title": "تطوير ويب للمؤسسات",
+          "description": "بنى تحتية لا تعرف المساومة، مصممة للتوسع وزيادة التحويلات.",
+          "highlight": "",
+          "icon": "code"
+        },
+        {
+          "id": "marketing",
+          "title": "تسويق النمو الفائق",
+          "description": "حملات مبنية على البيانات لاكتساب العملاء ذوي القيمة العالية.",
+          "highlight": "",
+          "icon": "trending-up"
+        },
+        {
+          "id": "cybersecurity",
+          "title": "أمن سيبراني للنخبة",
+          "description": "آليات دفاع عسكرية لإغلاق أصولك الرقمية وحمايتها بالكامل.",
+          "highlight": "استجابة طارئة لحالات الابتزاز",
+          "icon": "shield-alert"
+        },
+        {
+          "id": "media",
+          "title": "إعلام عالي التأثير",
+          "description": "سيطر على صناعتك بصرياً من خلال إنتاج ميداني سينمائي.",
+          "highlight": "عمليات إعلامية ميدانية واسعة الانتشار",
+          "icon": "video"
+        }
+      ]
+    },
+    "process": {
+      "headline": "منهجيتنا التنفيذية",
+      "subheadline": "نحن لا نخمن. نعمل وفق أسلوب واضح ومجرب.",
+      "steps": [
+        {
+          "title": "الاكتشاف والتحليل",
+          "description": "نراجع بنيتك الحالية وموقعك في السوق بعمق."
+        },
+        {
+          "title": "التخطيط الاستراتيجي",
+          "description": "نضع خارطة تنفيذ تركز على العائد والتوسع."
+        },
+        {
+          "title": "التنفيذ السريع",
+          "description": "ينفذ فريقنا الحل بدقة عالية ومعايير احترافية."
+        },
+        {
+          "title": "الإطلاق والتوسع",
+          "description": "نطلق النظام ونتابع الأداء باستمرار لضمان النمو."
+        }
+      ]
+    },
+    "portfolio": {
+      "headline": "نتائج مثبتة",
+      "subheadline": "اكتشف الأنظمة والتطبيقات التي قمنا ببنائها لشركائنا.",
+      "resultLabel": "النتيجة",
+      "loading": "جارٍ تحميل المشاريع..."
+    },
+    "founder": {
+      "headline": "رؤية وُلدت من قلب الدقة",
+      "story": "تأسست أتلا هاب تك على يد أحمد زايد، وهي تضم نخبة من الخبراء. لا نرضى بالحلول العادية، بل نركز على الأنظمة الآمنة والنمو المستمر.",
+      "badge": "بقيادة أحمد زايد ونخبة من المختصين",
+      "image": "",
+      "fallbackTitle": "أحمد زايد",
+      "fallbackSubtitle": "المؤسس والقائد الاستراتيجي"
+    },
+    "clients": {
+      "headline": "موثوقون لدى جهات طموحة",
+      "subheadline": "نفخر بالشراكة مع مؤسسات تبحث عن التميز والنمو.",
+      "loading": "جارٍ تحميل العملاء..."
+    },
+    "academy": {
+      "badge": "قريباً",
+      "headline": "أكاديمية أتلا هاب",
+      "description": "برامج تدريبية متقدمة مخصصة للجيل القادم من مهندسي البرمجيات وخبراء الأمن السيبراني.",
+      "cta": "استكشف البرامج"
+    },
+    "whyUs": {
+      "headline": "معيار أتلا هاب للنخبة",
+      "subheadline": "لا نقدم حلولاً متوسطة. نحن شركاء نمو يركزون على الأثر الحقيقي.",
+      "points": [
+        {
+          "title": "تركيز على النتائج",
+          "description": "نركز على مؤشرات مهمة مثل التحويل والتفاعل والعائد على الاستثمار."
+        },
+        {
+          "title": "فريق متخصص",
+          "description": "تتعامل مباشرة مع فريق خبير ومركز بدلاً من هيكل وكالة مزدحم."
+        },
+        {
+          "title": "استجابة طارئة 24/7",
+          "description": "فرقنا الفنية والأمنية جاهزة على مدار الساعة لتقليل المخاطر والتوقف."
+        }
+      ]
+    },
+    "contact": {
+      "headline": "لنحوّل فكرتك إلى واقع",
+      "subheadline": "لا تؤجل. ابدأ التوسع اليوم وتواصل مع فريقنا.",
+      "successTitle": "تم استلام الطلب",
+      "successMessage": "سيتواصل معك فريقنا قريباً لبدء الخطوات التالية.",
+      "errorMessage": "تعذر إرسال الطلب. حاول مرة أخرى أو استخدم وسائل التواصل المباشرة.",
+      "fields": {
+        "name": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "service": "الخدمة المطلوبة",
+        "message": "تفاصيل المشروع أو التحدي"
+      },
+      "placeholders": {
+        "name": "أحمد محمد",
+        "email": "name@company.com",
+        "message": "اشرح النتيجة التي تريد الوصول إليها..."
+      },
+      "servicePlaceholder": "اختر الخدمة المناسبة...",
+      "serviceOptions": [
+        "البرمجة وتطوير الويب",
+        "التسويق الرقمي الاستراتيجي",
+        "الأمن السيبراني والاستجابة",
+        "الإنتاج الإعلامي الميداني",
+        "خدمة أخرى"
+      ],
+      "submit": "ابدأ المشروع",
+      "submitting": "جارٍ الإرسال..."
+    },
+    "footer": {
+      "description": "حلول مؤسسية تركز على النتائج، متخصصة في الأمن السيبراني والتطوير والإعلام عالي التأثير.",
+      "quickLinksTitle": "روابط سريعة",
+      "contactTitle": "التواصل",
+      "adminPortal": "بوابة الإدارة",
+      "emergency": "استجابة طارئة عالمية متاحة على مدار الساعة.",
+      "copyright": "أتلا هاب تك. جميع الحقوق محفوظة.",
+      "founder": "المؤسس: أحمد زايد."
+    }
+  }
 }

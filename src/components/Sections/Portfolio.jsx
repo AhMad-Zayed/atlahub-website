@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import content from '@/data/content.json';
 
-export default function Portfolio() {
+export default function Portfolio({ lang = 'en' }) {
+  const data = content[lang]?.portfolio || content.en.portfolio;
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +27,7 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <section id="portfolio" className="py-24 bg-gray-50 relative overflow-hidden">
+    <section id="portfolio" className="py-32 bg-gray-50 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -34,12 +36,28 @@ export default function Portfolio() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold font-cairo text-gray-900 mb-4">Proven Results</h2>
-          <p className="text-xl text-gray-600 font-tajawal max-w-2xl mx-auto">Explore the elite systems and applications we have engineered for our partners.</p>
+          <h2 className="text-4xl lg:text-5xl font-bold font-cairo text-gray-900 mb-4">{data.headline}</h2>
+          <p className="text-xl text-gray-600 font-tajawal max-w-2xl mx-auto">{data.subheadline}</p>
         </motion.div>
 
         {loading ? (
-          <div className="flex justify-center py-12"><span className="w-10 h-10 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></span></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label={data.loading}>
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 animate-pulse">
+                <div className="h-48 bg-gray-200"></div>
+                <div className="p-6 space-y-4">
+                  <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-full"></div>
+                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                  </div>
+                  <div className="pt-4 border-t border-gray-100">
+                    <div className="h-5 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => (
@@ -53,13 +71,13 @@ export default function Portfolio() {
               >
                 <div className="h-48 overflow-hidden relative bg-gray-200">
                    <img src={item.image_url} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                   <div className="absolute top-4 left-4 px-3 py-1 bg-gray-900/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-md border border-gray-700">{item.type}</div>
+                   <div className="absolute top-4 start-4 px-3 py-1 bg-gray-900/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-md border border-gray-700">{item.type}</div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold font-cairo mb-2 text-gray-900">{item.title}</h3>
                   <p className="text-gray-600 font-tajawal mb-4 line-clamp-3">{item.description}</p>
                   <div className="pt-4 border-t border-gray-100">
-                    <p className="text-brand-blue font-bold font-cairo">Result: <span className="text-gray-900 font-normal">{item.result}</span></p>
+                    <p className="text-brand-blue font-bold font-cairo">{data.resultLabel}: <span className="text-gray-900 font-normal">{item.result}</span></p>
                   </div>
                 </div>
               </motion.div>

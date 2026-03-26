@@ -3,11 +3,11 @@
 import content from '@/data/content.json';
 import { motion } from 'framer-motion';
 
-export default function WhyUs() {
-  const { whyUs } = content;
+export default function WhyUs({ lang }) {
+  const whyUs = content[lang]?.whyUs || { headline: '', subheadline: '', points: [] };
   
   return (
-    <section id="why-us" className="py-24 bg-gray-50">
+    <section id="why-us" className="py-32 bg-gray-50">
       <div className="container mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}

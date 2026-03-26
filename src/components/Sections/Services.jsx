@@ -1,8 +1,8 @@
 'use client';
 
-import content from '@/data/content.json';
-import { Code, TrendingUp, ShieldAlert, Video, ArrowRight } from 'lucide-react';
+import { Code, TrendingUp, ShieldAlert, Video } from 'lucide-react';
 import { motion } from 'framer-motion';
+import content from '@/data/content.json';
 
 const iconMap = {
   code: <Code className="w-8 h-8 text-brand-blue-light" />,
@@ -11,13 +11,13 @@ const iconMap = {
   video: <Video className="w-8 h-8 text-brand-blue-light" />,
 };
 
-export default function Services() {
-  const { services } = content;
+export default function Services({ lang = 'en' }) {
+  const data = content[lang]?.services || content.en.services;
+  const services = data?.list || [];
 
   return (
-    <section id="services" className="relative py-20 bg-white overflow-hidden">
-      {/* Tech Pattern Overlay */}
-      <div className="absolute inset-0 bg-[url('/assets/tech-pattern.svg')] bg-repeat opacity-5 z-0 pointer-events-none"></div>
+    <section id="services" className="relative py-32 bg-white overflow-hidden">
+      <div className="absolute inset-0 bg-tech-pattern pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div 
@@ -27,9 +27,9 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold font-cairo text-gray-900">Our Core Capabilities</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold font-cairo text-gray-900">{data?.headline}</h2>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            We deliver end-to-end solutions that drive growth, ensure security, and capture attention.
+            {data?.subheadline}
           </p>
         </motion.div>
 
@@ -63,7 +63,7 @@ export default function Services() {
                   </div>
                   {isHighlighted && (
                     <span className="text-xs font-bold uppercase tracking-wider text-brand-blue-light animate-pulse">
-                      Unique Selling Point
+                      {data?.uniqueBadge}
                     </span>
                   )}
                 </div>
