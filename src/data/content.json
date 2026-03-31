@@ -206,9 +206,9 @@
         {
           "id": "software",
           "title": "Software",
-          "summary": "Application and systems work focused on logistics operations and process clarity.",
+          "summary": "Application and systems work focused on logistics operations, pharmaceutical access, and process clarity.",
           "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
-          "projectCount": "1"
+          "projectCount": "2"
         },
         {
           "id": "media",
@@ -253,7 +253,7 @@
           "subtitle": "Operational software projects built for reliability, usability, and maintainable growth.",
           "projects": [
             {
-              "name": "Shahin Logistics SaaS",
+              "name": "Shahin Logistics",
               "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
               "role": "Platform architecture, geospatial modeling, and proprietary route-optimization engineering for logistics operations across West Bank road conditions, checkpoint volatility, and multi-drop dispatch planning.",
               "action": "Built a routing engine that blends weighted graph search, delivery-window scoring, driver capacity balancing, and checkpoint-aware stop sequencing, then surfaced it through dispatcher dashboards, audit trails, and SaaS workflow controls for real-time operations.",
@@ -263,6 +263,20 @@
                 "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_2.jpg",
                 "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_3.jpg",
                 "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_4.jpg"
+              ]
+            },
+            {
+              "name": "Tech-Pharm",
+              "image": null,
+              "role": "Product architecture, information hierarchy, and frontend delivery for a pharmaceutical platform focused on dependable discovery and access workflows.",
+              "action": "Engineered a comprehensive pharmaceutical digital experience around structured product access, performant page delivery, and a maintainable web architecture that supports scalable catalog growth.",
+              "result": "Delivered a comprehensive pharmaceutical digital solution focusing on medical product accessibility and high-performance web architecture.",
+              "links": [
+                {
+                  "label": "tech-pharm.com",
+                  "type": "website",
+                  "url": "https://tech-pharm.com/"
+                }
               ]
             }
           ]
@@ -316,7 +330,7 @@
           "subtitle": "Training programs designed around practical tools, guided learning, and technical accessibility.",
           "projects": [
             {
-              "name": "Ro'wad Al-Elm Flutter/ML Boot Camp",
+              "name": "Ro'wad Al-Elm Flutter Boot Camp",
               "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
               "role": "Curriculum architecture, Flutter application training, and ML classification integration for a mobile-first technical boot camp.",
               "action": "Designed a boot camp that combines Flutter UI engineering, responsive state-driven screens, dataset preparation, TensorFlow Lite model wiring, and real-time classification flows inside a deployable learner project.",
@@ -376,7 +390,7 @@
           "subtitle": "Identity and packaging work created to improve recognition, consistency, and product presentation.",
           "projects": [
             {
-              "name": "Teki Lushes - Brand Identity & Packaging (USA)",
+              "name": "Teki Lushes (USA)",
               "image": "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
               "role": "Packaging design direction, gummy product presentation, and visual identity refinement for a USA-facing consumer brand.",
               "action": "Developed the gummy packaging system across label hierarchy, flavor-forward color blocking, shelf-ready typography, and product visualization assets to give Teki Lushes a cleaner retail story and more premium visual coherence.",
@@ -441,7 +455,7 @@
       "feature": {
         "label": "Flutter Showcase",
         "subtitle": "Mobile-First Track",
-        "title": "Ro'wad Al-Elm Flutter/ML Boot Camp",
+        "title": "Ro'wad Al-Elm Flutter Boot Camp",
         "description": "A mobile-first curriculum that pairs Flutter UI development with ML classification on-device. Learners build a working inference flow using TensorFlow Lite, connect it to a responsive interface, and validate results through real-world test data.",
         "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
         "caption": "Flutter UI + On-device ML",
@@ -717,9 +731,9 @@
         {
           "id": "software",
           "title": "البرمجيات",
-          "summary": "أعمال تطبيقية وأنظمة تشغيلية موجهة لقطاع اللوجستيات وتنظيم العمليات.",
+          "summary": "أعمال تطبيقية وأنظمة تشغيلية موجهة لقطاع اللوجستيات وإتاحة المنتجات الطبية وتنظيم العمليات.",
           "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
-          "projectCount": "1"
+          "projectCount": "2"
         },
         {
           "id": "media",
@@ -764,7 +778,7 @@
           "subtitle": "مشاريع برمجية تشغيلية بنيت من أجل الاعتمادية وسهولة الاستخدام وقابلية التوسع.",
           "projects": [
             {
-              "name": "Shahin Logistics SaaS",
+              "name": "Shahin Logistics",
               "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
               "role": "تصميم معمارية المنصة والنمذجة الجغرافية وتطوير خوارزمية مملوكة لتحسين المسارات بما يلائم تضاريس الضفة الغربية وتقلبات الحواجز وتخطيط التوصيل متعدد النقاط.",
               "action": "تم بناء محرك مسارات يدمج البحث البياني الموزون مع تقييم نوافذ التسليم وموازنة سعة السائقين وتسلسل التوقفات المتأثر بالحواجز، ثم ربطه بلوحات تشغيل وسجلات تدقيق وأدوات SaaS لإدارة القرار اللحظي.",
@@ -774,6 +788,20 @@
                 "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_2.jpg",
                 "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_3.jpg",
                 "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_4.jpg"
+              ]
+            },
+            {
+              "name": "Tech-Pharm",
+              "image": null,
+              "role": "تصميم معمارية المنتج وبنية المحتوى وتنفيذ واجهات منصة دوائية تركز على سهولة الوصول إلى المنتجات الطبية واعتمادية التجربة الرقمية.",
+              "action": "تم تطوير تجربة رقمية دوائية شاملة تقوم على تنظيم الوصول إلى المنتجات، وسرعة تحميل الصفحات، ومعمارية ويب قابلة للتوسع مع نمو المحتوى والفئات.",
+              "result": "حل رقمي دوائي متكامل يركز على سهولة الوصول إلى المنتجات الطبية وبنية ويب عالية الأداء.",
+              "links": [
+                {
+                  "label": "tech-pharm.com",
+                  "type": "website",
+                  "url": "https://tech-pharm.com/"
+                }
               ]
             }
           ]
@@ -827,7 +855,7 @@
           "subtitle": "برامج تدريبية تطبيقية مبنية على التدرج العملي وتبسيط المفاهيم التقنية.",
           "projects": [
             {
-              "name": "معسكر رواد العلم Flutter/ML",
+              "name": "Ro'wad Al-Elm Flutter Boot Camp",
               "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
               "role": "تصميم المنهج، وتدريب Flutter، ودمج مسارات تصنيف التعلم الآلي داخل تجربة تعلم تطبيقية موجهة للموبايل.",
               "action": "تم بناء معسكر تدريبي يدمج هندسة واجهات Flutter مع الشاشات المتجاوبة وربط النماذج عبر TensorFlow Lite وتجهيز البيانات وتدفقات التصنيف الفوري داخل مشروع قابل للعرض.",
@@ -887,7 +915,7 @@
           "subtitle": "أعمال هوية بصرية وتصميم عبوات تهدف إلى رفع الاتساق وتحسين تقديم المنتج.",
           "projects": [
             {
-              "name": "Teki Lushes - الهوية البصرية والعبوات (الولايات المتحدة)",
+              "name": "Teki Lushes (USA)",
               "image": "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
               "role": "تصميم عبوات منتجات الجومي وتطوير الاتجاه البصري والهوية الداعمة لعلامة موجهة للسوق الأمريكي.",
               "action": "تم تطوير نظام تغليف للجومي يشمل هرمية المعلومات على العبوة، وألواناً واضحة بحسب النكهة، ومعالجة طباعية جاهزة للعرض، وأصولاً بصرية تجعل المنتج أكثر حضوراً على الرف.",
@@ -952,7 +980,7 @@
       "feature": {
         "label": "واجهة Flutter",
         "subtitle": "مسار موبايل أولاً",
-        "title": "معسكر رواد العلم Flutter/ML",
+        "title": "Ro'wad Al-Elm Flutter Boot Camp",
         "description": "منهج موبايل أولاً يدمج تطوير واجهات Flutter مع تصنيف ML على الجهاز. يتعلم المتدربون بناء تدفق استدلال باستخدام TensorFlow Lite وربطه بواجهة تفاعلية واختبار النتائج على بيانات واقعية.",
         "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
         "caption": "واجهة Flutter + تصنيف ML",

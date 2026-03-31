@@ -12,7 +12,11 @@ export default function PortfolioMedia({
   sizes = '100vw',
   showVideoHint = false,
   fallbackLabel,
+  fit = 'cover',
+  fill = true,
 }) {
+  const fitClass = fit === 'contain' ? 'object-contain' : 'object-cover';
+
   if (!src) {
     return (
       <div
@@ -39,7 +43,26 @@ export default function PortfolioMedia({
   if (isRemoteUrl(src)) {
     return (
       <>
-        <img src={src} alt={alt} className={`h-full w-full object-cover ${className}`} loading={priority ? 'eager' : 'lazy'} />
+        <img
+          src={src}
+          alt={alt}
+          className={`${fill ? 'h-full w-full' : 'h-auto w-full'} ${fitClass} ${className}`}
+          loading={priority ? 'eager' : 'lazy'}
+        />
+        {overlay}
+      </>
+    );
+  }
+
+  if (!fill) {
+    return (
+      <>
+        <img
+          src={src}
+          alt={alt}
+          className={`h-auto w-full ${fitClass} ${className}`}
+          loading={priority ? 'eager' : 'lazy'}
+        />
         {overlay}
       </>
     );
@@ -53,7 +76,7 @@ export default function PortfolioMedia({
         fill
         priority={priority}
         sizes={sizes}
-        className={`object-cover ${className}`}
+        className={`${fitClass} ${className}`}
       />
       {overlay}
     </>

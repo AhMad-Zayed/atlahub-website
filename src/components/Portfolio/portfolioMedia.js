@@ -73,3 +73,35 @@ export function getProjectPrimaryMedia(project) {
   const firstVideo = getFirstVideoLink(project?.links);
   return firstVideo ? getVideoThumbnail(firstVideo.url, firstVideo.type) : null;
 }
+
+export function buildProjectMediaItems(project) {
+  const imageSources = project?.gallery?.length
+    ? project.gallery
+    : project?.image
+      ? [project.image]
+      : [];
+
+  const imageItems = imageSources.map((src, index) => ({
+    id: `image-${index}`,
+    type: 'image',
+    src,
+    thumbnail: src,
+    title: `${project?.name || 'Project'} ${index + 1}`,
+  }));
+
+  const videoItems = (project?.links || [])
+    .filter((link) => link.type === 'youtube' || link.type === 'facebook')
+    .map((link, index) => ({
+      id: `video-${index}`,
+      type: 'video',
+      src: link.url,
+      thumbnail: getVideoThumbnail(link.url, link.type),
+      embedUrl: getVideoEmbedUrl(link.url, link.type),
+      label: link.label,
+      linkType: link.type,
+      title: `${project?.name || 'Project'} ${link.label || index + 1}`,
+    }))
+    .filter((item) => item.embedUrl);
+
+  return [...imageItems, ...videoItems];
+}
