@@ -1,14 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import content from '@/data/content.json';
 
-export default function Founder({ lang = 'en' }) {
-  const data = content[lang]?.founder || content.en.founder;
-  const [imageFailed, setImageFailed] = useState(false);
-  const showImage = Boolean(data.image) && !imageFailed;
-
+export default function Founder({ data }) {
   return (
     <section id="about" className="relative py-32 bg-gray-900 text-white overflow-hidden">
       <div className="absolute inset-0 bg-tech-pattern pointer-events-none"></div>
@@ -21,6 +15,7 @@ export default function Founder({ lang = 'en' }) {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="text-start"
         >
           <h2 className="text-4xl md:text-5xl font-bold font-cairo text-white mb-6">
             {data.headline}
@@ -42,25 +37,12 @@ export default function Founder({ lang = 'en' }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative mx-auto w-full max-w-md aspect-square rounded-2xl overflow-hidden border border-gray-700 shadow-2xl"
         >
-          {showImage ? (
-            <>
-              <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/40 to-transparent z-10"></div>
-              <img
-                src={data.image}
-                alt={data.fallbackTitle}
-                className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
-                onError={() => setImageFailed(true)}
-              />
-            </>
-          ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-brand-blue/30 p-8 text-center">
-              <div className="mb-5 flex h-24 w-24 items-center justify-center rounded-full border border-brand-blue/40 bg-brand-blue/15 text-3xl font-bold text-brand-blue-light">
-                AZ
-              </div>
-              <p className="text-2xl font-bold font-cairo text-white">{data.fallbackTitle}</p>
-              <p className="mt-3 text-sm font-tajawal text-gray-300">{data.fallbackSubtitle}</p>
-            </div>
-          )}
+          <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/40 to-transparent z-10"></div>
+          <img
+            src={data.image}
+            alt={data.alt}
+            className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
+          />
         </motion.div>
       </div>
     </section>

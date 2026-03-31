@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Search, Map, Code2, Rocket } from 'lucide-react';
-import content from '@/data/content.json';
 
 const icons = [
   <Search key="search" className="w-8 h-8" />,
@@ -11,8 +10,7 @@ const icons = [
   <Rocket key="rocket" className="w-8 h-8" />,
 ];
 
-export default function Process({ lang = 'en' }) {
-  const data = content[lang]?.process || content.en.process;
+export default function Process({ data }) {
   const steps = (data.steps || []).map((step, index) => ({
     ...step,
     icon: icons[index] || icons[icons.length - 1],

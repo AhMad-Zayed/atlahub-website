@@ -1,89 +1,59 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import content from '@/data/content.json';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import PortfolioCard from '@/components/Portfolio/PortfolioCard';
 
-export default function Portfolio({ lang = 'en' }) {
-  const data = content[lang]?.portfolio || content.en.portfolio;
-  const [portfolioItems, setPortfolioItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function Portfolio({ data, lang = 'en' }) {
+  const [mounted, setMounted] = useState(false);
+  const items = data?.list || [];
 
   useEffect(() => {
-    async function fetchPortfolio() {
-      try {
-        const res = await fetch('/api/portfolio');
-        if (res.ok) {
-          const data = await res.json();
-          setPortfolioItems(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch portfolio', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchPortfolio();
+    setMounted(true);
   }, []);
 
   return (
-    <section id="portfolio" className="py-32 bg-gray-50 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold font-cairo text-gray-900 mb-4">{data.headline}</h2>
-          <p className="text-xl text-gray-600 font-tajawal max-w-2xl mx-auto">{data.subheadline}</p>
-        </motion.div>
+    <section id="portfolio" className="relative overflow-hidden bg-[#08111d] py-24 md:py-32">
+      <div className="absolute inset-x-0 top-0 h-48 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.09),transparent_58%)]" />
 
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label={data.loading}>
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 animate-pulse">
-                <div className="h-48 bg-gray-200"></div>
-                <div className="p-6 space-y-4">
-                  <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-                  <div className="space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-full"></div>
-                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <div className="h-5 bg-gray-200 rounded w-1/2"></div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioItems.map((item, index) => (
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                key={item.id} 
-                className="group relative bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-[0_0_30px_rgba(0,86,179,0.3)] hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="h-48 overflow-hidden relative bg-gray-200">
-                   <img src={item.image_url} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                   <div className="absolute top-4 start-4 px-3 py-1 bg-gray-900/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-md border border-gray-700">{item.type}</div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold font-cairo mb-2 text-gray-900">{item.title}</h3>
-                  <p className="text-gray-600 font-tajawal mb-4 line-clamp-3">{item.description}</p>
-                  <div className="pt-4 border-t border-gray-100">
-                    <p className="text-brand-blue font-bold font-cairo">{data.resultLabel}: <span className="text-gray-900 font-normal">{item.result}</span></p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <p className="mb-5 font-[family-name:var(--font-inter)] text-[0.72rem] uppercase tracking-[0.42em] text-white/55">
+            {data?.headline}
+          </p>
+          <h2 className="font-[family-name:var(--font-playfair)] text-4xl italic tracking-tight text-white md:text-5xl">
+            {data?.headline}
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-200">
+            {data?.subheadline}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {items.map((item, index) => (
+            <PortfolioCard
+              key={item.id}
+              item={item}
+              href={`/${lang}/portfolio/${item.id}`}
+              projectsLabel={data?.projectsLabel}
+              viewCategory={data?.viewCategory}
+              videoLabel={data?.videoLabel}
+              mounted={mounted}
+              index={index}
+            />
+          ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link
+            href={`/${lang}/portfolio`}
+            className="inline-flex items-center gap-3 rounded-full border border-white/14 px-6 py-3 text-sm font-medium text-slate-200 transition-all duration-300 hover:border-white/25 hover:bg-white/[0.04] hover:text-white"
+          >
+            <span>{data?.viewPortfolio}</span>
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -1,27 +1,19 @@
 'use strict';
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import dynamic from 'next/dynamic';
-import atlantaJerusalem from '../../assets/images/Atlanta_Jerusalem.png';
-import content from '@/data/content.json';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
 const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), { ssr: false });
 
-export default function HeroSlider({ lang = 'en' }) {
-  const heroContent = content[lang] || content.en;
-  const slides = (heroContent.heroSlides || []).map((slide) => ({ ...slide, image: atlantaJerusalem }));
-  const ctaData = heroContent.hero || {};
-  const isArabic = lang === 'ar';
-
+export default function HeroSlider({ data }) {
+  const slides = data?.slides || [];
   return (
     <section className="relative h-screen w-full bg-blue-50 overflow-hidden" id="hero">
       <div className="absolute inset-0 z-0 bg-tech-pattern" />
@@ -47,7 +39,7 @@ export default function HeroSlider({ lang = 'en' }) {
           <SwiperSlide key={index} className="relative h-full w-full">
             <Image
               src={slide.image}
-              alt="Atla Hub Tech"
+              alt={slide.title}
               fill
               className="object-cover"
               priority
@@ -60,7 +52,7 @@ export default function HeroSlider({ lang = 'en' }) {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-white max-w-3xl"
               >
-                <h1 className={`font-cairo text-4xl sm:text-5xl md:text-6xl font-extrabold mb-5 leading-tight ${isArabic ? 'md:leading-[1.4]' : ''}`}>
+                <h1 className="font-cairo text-4xl sm:text-5xl md:text-6xl font-extrabold mb-5 leading-tight md:leading-[1.25]">
                   {slide.title}
                 </h1>
                 <p className="font-tajawal text-base sm:text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
@@ -68,10 +60,10 @@ export default function HeroSlider({ lang = 'en' }) {
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <button className="font-tajawal font-bold bg-gradient-to-r from-blue-700 to-blue-400 text-white px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
-                    {ctaData?.cta_primary}
+                    {data?.ctaPrimary}
                   </button>
                   <button className="font-tajawal font-bold border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white/20 transition-colors">
-                    {ctaData?.cta_secondary}
+                    {data?.ctaSecondary}
                   </button>
                 </div>
               </MotionDiv>

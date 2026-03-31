@@ -1,11 +1,10 @@
 'use client';
 
-import content from '@/data/content.json';
 import { motion } from 'framer-motion';
 
-export default function WhyUs({ lang }) {
-  const whyUs = content[lang]?.whyUs || { headline: '', subheadline: '', points: [] };
-  
+export default function WhyUs({ data }) {
+  const whyUs = data || { headline: '', subheadline: '', points: [] };
+
   return (
     <section id="why-us" className="py-32 bg-gray-50">
       <div className="container mx-auto px-6">

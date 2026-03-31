@@ -11,22 +11,22 @@ import Academy from '@/components/Sections/Academy';
 import WhyUs from '@/components/Sections/WhyUs';
 import Contact from '@/components/Sections/Contact';
 
-export default function Home({ params }) {
-  const { lang } = params;
+export default async function Home({ params }) {
+  const { lang } = await params;
   const pageContent = content[lang] || content.en;
 
   return (
     <>
       <Navbar lang={lang} navData={pageContent.nav} brandData={pageContent.brand} />
-      <Hero lang={lang} />
-      <Services lang={lang} />
-      <Process lang={lang} />
-      <Portfolio lang={lang} />
-      <Founder lang={lang} />
-      <Clients lang={lang} />
-      <Academy lang={lang} />
-      <WhyUs lang={lang} />
-      <Contact lang={lang} />
+      <Hero data={pageContent.hero} />
+      <Services data={pageContent.services} lang={lang} />
+      <Process data={pageContent.process} />
+      <Portfolio data={pageContent.portfolio} lang={lang} />
+      <Founder data={pageContent.founder} />
+      <Clients data={pageContent.clients} lang={lang} />
+      <Academy data={pageContent.academy} />
+      <WhyUs data={pageContent.whyUs} />
+      <Contact data={pageContent.contact} />
       <Footer lang={lang} navData={pageContent.nav} brandData={pageContent.brand} footerData={pageContent.footer} />
     </>
   );

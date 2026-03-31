@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 
-export default function AdminIndexPage({ params }) {
-  redirect(`/${params.lang}/admin/login`);
+export default async function AdminIndexPage({ params }) {
+  const { lang } = await params;
+  redirect(`/${lang}/admin/login`);
 }

@@ -3,15 +3,26 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply text-gray-900 bg-gray-50;
+  :root {
+    color-scheme: dark;
   }
+
+  html {
+    @apply bg-slate-950;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
   html[dir="ltr"] body {
     @apply font-tajawal;
   }
+
   html[dir="rtl"] body {
     @apply font-cairo;
   }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-cairo;
   }

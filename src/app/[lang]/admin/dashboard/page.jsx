@@ -13,7 +13,7 @@ async function getContactMessages() {
 }
 
 export default async function DashboardPage({ params }) {
-    const { lang } = params;
+    const { lang } = await params;
     const portfolioItems = await getPortfolioItems();
     const contactMessages = await getContactMessages();
     const logoutAction = handleLogout.bind(null, lang);

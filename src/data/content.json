@@ -15,58 +15,163 @@
       "langEn": "EN",
       "langAr": "AR"
     },
-    "heroSlides": [
-      {
-        "title": "Jerusalem Vision, Global Domination.",
-        "description": "Deploy elite tech solutions worldwide. We engineer your growth from Jerusalem to Atlanta."
-      },
-      {
-        "title": "Your Unbreakable Digital Shield.",
-        "description": "Military-grade protection against cyber warfare and blackmail. 24/7 elite response."
-      },
-      {
-        "title": "Cinematic Brand Authority.",
-        "description": "Capture total market attention with high-impact, interactive field media."
-      }
-    ],
     "hero": {
-      "cta_primary": "Start Your Project",
-      "cta_secondary": "View Results"
+      "ctaPrimary": "Start Your Project",
+      "ctaSecondary": "View Results",
+      "slides": [
+        {
+          "title": "Jerusalem Vision, Global Domination.",
+          "description": "Deploy elite tech solutions worldwide. We engineer your growth from Jerusalem to Atlanta.",
+          "image": "/assets/images/Atlanta_Jerusalem.png"
+        },
+        {
+          "title": "Your Unbreakable Digital Shield.",
+          "description": "Military-grade protection against cyber warfare and blackmail. 24/7 elite response.",
+          "image": "/assets/images/Atlanta_Jerusalem.png"
+        },
+        {
+          "title": "Cinematic Brand Authority.",
+          "description": "Capture total market attention with high-impact, interactive field media.",
+          "image": "/assets/images/Atlanta_Jerusalem.png"
+        }
+      ]
     },
     "services": {
-      "headline": "Dominate Your Market",
-      "subheadline": "Military-grade precision meets hyper-growth digital strategies.",
-      "uniqueBadge": "Elite Advantage",
+      "headline": "Services Built for Real Business Operations",
+      "subheadline": "Scalable technical delivery across software, marketing, infrastructure, cybersecurity, and applied training.",
+      "uniqueBadge": "Featured",
       "list": [
         {
-          "id": "programming",
-          "title": "Enterprise Web Development",
-          "description": "Uncompromising architectures built to scale and convert.",
-          "highlight": "",
+          "id": "software-development",
+          "title": "Software Development",
+          "description": "Mobile apps, websites, and enterprise systems designed for maintainability, performance, and long-term growth.",
+          "highlight": "Mobile Apps, Websites, Enterprise Systems",
+          "featured": true,
           "icon": "code"
         },
         {
-          "id": "marketing",
-          "title": "Hyper-Growth Marketing",
-          "description": "Data-driven campaigns to ruthlessly acquire high-value clients.",
-          "highlight": "",
+          "id": "digital-marketing-creative",
+          "title": "Digital Marketing & Creative",
+          "description": "Structured content, design, paid media, and visual production aligned with clear brand and campaign objectives.",
+          "highlight": "Content, Design, Ads, Video, Brand Identity",
           "icon": "trending-up"
         },
         {
-          "id": "cybersecurity",
-          "title": "Elite Cybersecurity",
-          "description": "Military-grade defense mechanisms locking down your digital assets.",
-          "highlight": "Emergency Blackmail Response",
+          "id": "cybersecurity-forensics",
+          "title": "Cybersecurity & Forensics",
+          "description": "Security audits, digital forensics, and emergency incident response for organizations facing active technical risk.",
+          "highlight": "Incident Response, Recovery, Investigation",
           "icon": "shield-alert"
         },
         {
-          "id": "media",
-          "title": "High-Impact Media",
-          "description": "Visually dominate your industry with cinematic field production.",
-          "highlight": "Viral Street Operations",
-          "icon": "video"
+          "id": "infrastructure",
+          "title": "Infrastructure",
+          "description": "Business email hosting and e-commerce management services that improve operational reliability and ownership of critical systems.",
+          "highlight": "Private Domains, Unlimited Email, Store Operations",
+          "icon": "server"
+        },
+        {
+          "id": "academy",
+          "title": "Academy",
+          "description": "Professional training tracks covering digital mental health, cybersecurity, AI, mobile development, and pentesting.",
+          "highlight": "Training Programs and Applied Workshops",
+          "icon": "academy"
         }
       ]
+    },
+    "serviceDetails": {
+      "software-development": {
+        "title": "Software Development",
+        "subtitle": "Mobile apps, websites, and enterprise systems built for reliable operation and future scale.",
+        "valueProposition": "This service helps organizations replace fragile or disconnected tools with software that is easier to operate, extend, and secure. It is suited for businesses that need dependable customer-facing products, internal systems, or workflow automation.",
+        "technicalScope": [
+          "Responsive websites and web applications",
+          "Native-feeling mobile application delivery",
+          "Enterprise systems for operations, reporting, and internal workflows",
+          "API integration and system connectivity",
+          "Architecture planning, codebase structuring, and deployment readiness"
+        ],
+        "process": [
+          "Analysis: define business requirements, users, workflows, and technical constraints",
+          "Execution: design the architecture, build the product, and validate the core use cases",
+          "Support: stabilize, document, improve, and expand based on real usage"
+        ],
+        "whyUs": "Our work combines practical engineering execution with academic technical training, allowing us to design systems that are not only functional, but structured for maintainability, security, and long-term operational value."
+      },
+      "digital-marketing-creative": {
+        "title": "Digital Marketing & Creative",
+        "subtitle": "Strategic content, visual communication, and campaign execution for brands that need clear positioning and measurable reach.",
+        "valueProposition": "This service solves fragmented brand communication and inconsistent digital execution. It helps businesses produce coherent campaigns, stronger visual identity, and content systems that support growth instead of one-off publishing.",
+        "technicalScope": [
+          "Content writing for websites, campaigns, and social media",
+          "Graphic design for digital brand assets and campaign materials",
+          "Social media management and publishing workflows",
+          "Paid ads planning, setup, and optimization",
+          "Video production and editing for promotional and educational use",
+          "Brand identity systems and visual consistency guidance"
+        ],
+        "process": [
+          "Analysis: review positioning, audience, channels, and campaign objectives",
+          "Execution: build the creative direction, produce assets, and run coordinated campaigns",
+          "Support: monitor results, refine messaging, and maintain content delivery"
+        ],
+        "whyUs": "We approach marketing and creative work as a structured delivery function. Our team combines technical execution, design discipline, and academic grounding to produce communication that is clear, usable, and aligned with business outcomes."
+      },
+      "cybersecurity-forensics": {
+        "title": "Cybersecurity & Forensics",
+        "subtitle": "Security audits, forensic investigation, and emergency response for active incidents and high-risk environments.",
+        "valueProposition": "This service addresses security weaknesses, breach investigation needs, and urgent recovery scenarios. It is designed for organizations and individuals who need a structured response to compromise, extortion, account abuse, or unclear technical evidence.",
+        "technicalScope": [
+          "Security audits for applications, accounts, and operating environments",
+          "Digital forensics and evidence review",
+          "Emergency incident response for hacking and blackmail recovery",
+          "Account recovery coordination and exposure containment",
+          "Post-incident hardening and risk reduction planning"
+        ],
+        "process": [
+          "Analysis: identify the incident type, affected systems, and evidence sources",
+          "Execution: investigate, contain, recover, and document the response path",
+          "Support: strengthen controls, close gaps, and provide follow-up guidance"
+        ],
+        "whyUs": "This work requires technical precision, careful documentation, and responsible handling of sensitive information. Our background combines cybersecurity practice with university-level technical study, which supports disciplined investigation and remediation."
+      },
+      "infrastructure": {
+        "title": "Infrastructure",
+        "subtitle": "Operational services that improve ownership, reliability, and continuity for business communication and e-commerce systems.",
+        "valueProposition": "This service solves common operational weaknesses such as unstable business email, limited domain control, and unmanaged e-commerce administration. It helps organizations move toward more reliable daily operations with clearer technical ownership.",
+        "technicalScope": [
+          "Professional business email hosting on private domains",
+          "Unlimited email account provisioning",
+          "DNS and domain-related configuration support",
+          "SMTP and delivery stability guidance",
+          "Mailbox organization and business communication setup",
+          "E-commerce management for products, store operations, and routine maintenance"
+        ],
+        "process": [
+          "Analysis: review the existing domain, email, and store environment",
+          "Execution: configure the service stack, organize accounts, and stabilize operations",
+          "Support: monitor issues, assist with updates, and maintain operational continuity"
+        ],
+        "whyUs": "Infrastructure work is only valuable when it is reliable in day-to-day use. Our approach is practical, detail-oriented, and informed by technical training that supports stable configuration, documentation, and support."
+      },
+      "academy": {
+        "title": "Academy",
+        "subtitle": "Applied technical training designed for learners, teams, and institutions that need relevant, current digital skills.",
+        "valueProposition": "This service helps organizations and learners build practical knowledge in areas that have immediate educational and professional relevance. The focus is on usable understanding, not abstract theory alone.",
+        "technicalScope": [
+          "Training in digital mental health concepts and applications",
+          "Cybersecurity foundations and defensive practice",
+          "Generative AI concepts, workflows, and responsible usage",
+          "Mobile development training",
+          "Pentesting fundamentals and hands-on technical exposure"
+        ],
+        "process": [
+          "Analysis: define audience level, learning goals, and delivery format",
+          "Execution: prepare curriculum, deliver training, and guide practical exercises",
+          "Support: provide follow-up material, structured notes, and next-step recommendations"
+        ],
+        "whyUs": "Our academy offering is shaped by hands-on technical practice and university-level academic background. That combination allows us to present complex topics in a structured, practical, and credible format."
+      }
     },
     "process": {
       "headline": "Our Elite Framework",
@@ -91,29 +196,263 @@
       ]
     },
     "portfolio": {
-      "headline": "Proven Results",
-      "subheadline": "Explore the elite systems and applications we have engineered for our partners.",
-      "resultLabel": "Result",
-      "loading": "Loading projects..."
+      "headline": "Selected Work",
+      "subheadline": "A structured view of projects delivered across software, media, training, marketing, and design.",
+      "viewPortfolio": "Open Portfolio",
+      "viewCategory": "View Category",
+      "projectsLabel": "Projects",
+      "videoLabel": "Video",
+      "list": [
+        {
+          "id": "software",
+          "title": "Software",
+          "summary": "Application and systems work focused on logistics operations and process clarity.",
+          "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
+          "projectCount": "1"
+        },
+        {
+          "id": "media",
+          "title": "Media",
+          "summary": "Production and communication support for educational and development-focused institutions.",
+          "image": "https://i.ytimg.com/vi/uh-aQXF17Pc/hqdefault.jpg",
+          "projectCount": "2",
+          "hasVideo": true
+        },
+        {
+          "id": "academy",
+          "title": "Academy",
+          "summary": "Applied training programs covering Flutter and machine learning foundations.",
+          "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+          "projectCount": "1"
+        },
+        {
+          "id": "cybertraining",
+          "title": "CyberTraining",
+          "summary": "Digital security training delivered through a structured training-of-trainers format.",
+          "image": null,
+          "projectCount": "1"
+        },
+        {
+          "id": "marketing",
+          "title": "Marketing",
+          "summary": "Campaign execution for beauty and social-first brands using short-form content and paid reach.",
+          "image": null,
+          "projectCount": "2"
+        },
+        {
+          "id": "design",
+          "title": "Design",
+          "summary": "Brand identity and packaging design work tailored for an international product audience.",
+          "image": "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
+          "projectCount": "1"
+        }
+      ],
+      "details": {
+        "software": {
+          "title": "Software",
+          "subtitle": "Operational software projects built for reliability, usability, and maintainable growth.",
+          "projects": [
+            {
+              "name": "Shahin Logistics SaaS",
+              "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
+              "role": "Platform architecture, geospatial modeling, and proprietary route-optimization engineering for logistics operations across West Bank road conditions, checkpoint volatility, and multi-drop dispatch planning.",
+              "action": "Built a routing engine that blends weighted graph search, delivery-window scoring, driver capacity balancing, and checkpoint-aware stop sequencing, then surfaced it through dispatcher dashboards, audit trails, and SaaS workflow controls for real-time operations.",
+              "result": "Delivered a logistics platform that reduces manual scheduling load, improves dispatch confidence in fragmented geography, and gives operations teams a reliable optimization layer tuned for the realities of West Bank mobility.",
+              "gallery": [
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_2.jpg",
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_3.jpg",
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_4.jpg"
+              ]
+            }
+          ]
+        },
+        "media": {
+          "title": "Media",
+          "subtitle": "Media and production work designed to support institutional communication with clarity and consistency.",
+          "projects": [
+            {
+              "name": "Al-Quds University",
+              "image": null,
+              "role": "Creative direction, production design, cinematic framing, and institutional storytelling for university-facing campaigns and academic visibility.",
+              "action": "Produced high-end university media with polished shot planning, branded motion pacing, and channel-ready edits optimized for social distribution, awareness campaigns, and premium institutional presentation.",
+              "result": "Strengthened the university's public-facing media presence with reusable, premium production assets that elevate perceived brand quality across digital touchpoints.",
+              "links": [
+                {
+                  "label": "YouTube 01",
+                  "type": "youtube",
+                  "url": "https://www.youtube.com/watch?v=uh-aQXF17Pc"
+                },
+                {
+                  "label": "YouTube 02",
+                  "type": "youtube",
+                  "url": "https://www.youtube.com/watch?v=Ok03W6gU7ws"
+                }
+              ]
+            },
+            {
+              "name": "Bethlehem University",
+              "image": null,
+              "role": "Institutional media production, social-first edit strategy, and premium visual storytelling for academic outreach and campus brand communication.",
+              "action": "Delivered polished short-form edits for Bethlehem University using high-clarity visuals, refined pacing, and platform-tuned publishing outputs for both YouTube and Facebook Reel distribution.",
+              "result": "Created an expensive-looking media layer for university communications that improves digital engagement and gives academic initiatives a stronger editorial presence.",
+              "links": [
+                {
+                  "label": "YouTube 03",
+                  "type": "youtube",
+                  "url": "https://www.youtube.com/watch?v=l7Q6JHTkZmA"
+                },
+                {
+                  "label": "Facebook Reel",
+                  "type": "facebook",
+                  "url": "https://www.facebook.com/reel/1284120520051055"
+                }
+              ]
+            }
+          ]
+        },
+        "academy": {
+          "title": "Academy",
+          "subtitle": "Training programs designed around practical tools, guided learning, and technical accessibility.",
+          "projects": [
+            {
+              "name": "Ro'wad Al-Elm Flutter/ML Boot Camp",
+              "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+              "role": "Curriculum architecture, Flutter application training, and ML classification integration for a mobile-first technical boot camp.",
+              "action": "Designed a boot camp that combines Flutter UI engineering, responsive state-driven screens, dataset preparation, TensorFlow Lite model wiring, and real-time classification flows inside a deployable learner project.",
+              "result": "Enabled trainees to build a production-style mobile prototype that connects polished Flutter interfaces to live ML inference, giving them both engineering workflow discipline and applied AI implementation exposure.",
+              "gallery": [
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_2.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_3.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_4.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_5.jpg"
+              ]
+            }
+          ]
+        },
+        "cybertraining": {
+          "title": "CyberTraining",
+          "subtitle": "Security training programs focused on practical awareness, structured delivery, and professional relevance.",
+          "projects": [
+            {
+              "name": "ToT Digital Security (7amleh)",
+              "image": null,
+              "role": "Training-of-trainers support in digital security concepts and delivery structure.",
+              "action": "Prepared and delivered training material to help participants transfer digital security knowledge effectively.",
+              "result": "Created a more organized and scalable training experience for security-focused knowledge sharing.",
+              "links": [
+                {
+                  "label": "7amleh",
+                  "type": "website",
+                  "url": "https://7amleh.org"
+                }
+              ]
+            }
+          ]
+        },
+        "marketing": {
+          "title": "Marketing",
+          "subtitle": "Campaign work built around platform behavior, content clarity, and measurable attention.",
+          "projects": [
+            {
+              "name": "Tamer Beauty Center",
+              "image": null,
+              "role": "Campaign planning, content direction, and social media execution.",
+              "action": "Built coordinated campaign output around beauty services using platform-native content and visual consistency.",
+              "result": "Strengthened campaign structure and improved the brand's digital presentation."
+            },
+            {
+              "name": "Samkaty - TikTok Campaigns",
+              "image": null,
+              "role": "Short-form campaign execution focused on TikTok content and audience engagement.",
+              "action": "Designed campaign material and publishing flow around platform-specific creative requirements.",
+              "result": "Supported stronger visibility and a more focused content rhythm on short-form social channels."
+            }
+          ]
+        },
+        "design": {
+          "title": "Design",
+          "subtitle": "Identity and packaging work created to improve recognition, consistency, and product presentation.",
+          "projects": [
+            {
+              "name": "Teki Lushes - Brand Identity & Packaging (USA)",
+              "image": "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
+              "role": "Packaging design direction, gummy product presentation, and visual identity refinement for a USA-facing consumer brand.",
+              "action": "Developed the gummy packaging system across label hierarchy, flavor-forward color blocking, shelf-ready typography, and product visualization assets to give Teki Lushes a cleaner retail story and more premium visual coherence.",
+              "result": "Delivered a polished packaging family that improves shelf recognition, reinforces product credibility, and gives the brand a stronger international-facing presentation.",
+              "gallery": [
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_2.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_3.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_4.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_5.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_6.jpg"
+              ]
+            }
+          ]
+        }
+      }
     },
     "founder": {
       "headline": "A Vision Born from Precision",
       "story": "Founded by Ahmed Zayed, Atla Hub Tech is a powerhouse of elite specialists. We do not settle for good. We obsess over secure systems and unstoppable growth.",
       "badge": "Led by Ahmed Zayed & Elite Specialists",
-      "image": "",
-      "fallbackTitle": "Ahmed Zayed",
-      "fallbackSubtitle": "Founder & Strategic Lead"
+      "image": "/assets/images/founder.jpg",
+      "alt": "Ahmed Zayed"
     },
     "clients": {
-      "headline": "Trusted By Industry Leaders",
-      "subheadline": "We are proud to partner with ambitious organizations.",
-      "loading": "Loading clients..."
+      "headline": "Trusted by 20+ Leading Brands",
+      "subheadline": "We collaborate with ambitious brands across multiple industries.",
+      "loading": "Loading clients...",
+      "list": [
+        { "name": "Tamer Beauty Center", "logo": "/assets/images/clients/Tamer_Beauty_Center.jpg" },
+        { "name": "Tia Beauty Center", "logo": "/assets/images/clients/Tia_beauty_center.jpg" },
+        { "name": "AlTal Coffee", "logo": "/assets/images/clients/AlTal_Coffee.jpg" },
+        { "name": "Zena Beauty", "logo": "/assets/images/clients/Zena_Beauty.jpg" },
+        { "name": "Best Line Doors", "logo": "/assets/images/clients/Best Line Doors.jpg" },
+        { "name": "King Al-Qudra Restaurant", "logo": "/assets/images/clients/مطعم ملك القدرة.png" },
+        { "name": "Silwan Schools Parents Central Committee", "logo": "/assets/images/clients/اللجنة المركزية لأولياء امور مدارس سلوان.jpg" },
+        { "name": "Fadi Hamido, King of Molasses and Hookahs", "logo": "/assets/images/clients/فادي حميدو ملك المعسل والاراجيل.png" },
+        { "name": "Cinderella Beauty", "logo": "/assets/images/clients/Cinderella Beauty.jpg" },
+        { "name": "Royal Airport Restaurant", "logo": "/assets/images/clients/مطعم المطار الملكي.jpg" },
+        { "name": "Ahava Home Renovation", "logo": "/assets/images/clients/Ahava Home renovation.jpg" },
+        { "name": "Master Butcher", "logo": "/assets/images/clients/Master Butcher .jpg" },
+        { "name": "Asiad Delivery Services", "logo": "/assets/images/clients/شركة أسياد لخدمات التوصيل.jpg" },
+        { "name": "Al-Rayhan Villas for Daily Rent - Jericho", "logo": "/assets/images/clients/فلل الريحان للايجار اليومي أريحا.jpg" },
+        { "name": "Tamkeen Educational Center", "logo": "/assets/images/clients/مركز تمكين التعليمي.jpg" },
+        { "name": "Almatalleh Villas - فلل المطلة", "logo": "/assets/images/clients/Almatalleh Villas - فلل المطلة.jpg" },
+        { "name": "Aya Sofia Real Estate Group", "logo": "/assets/images/clients/مجموعة آيا صوفيا العقارية.jpg" },
+        { "name": "Bayt Al-Maqdis Real Estate Group", "logo": "/assets/images/clients/مجموعة بيت المقدس للعقارات.jpg" },
+        { "name": "Bouquet Ward", "logo": "/assets/images/clients/بوكيه ward.jpg" },
+        { "name": "Al Sultan Restaurant", "logo": "/assets/images/clients/مطعم السلطان-Al sultan.jpg" },
+        { "name": "Arab Center for Social Media Advancement", "logo": "/assets/images/clients/Arab Center for Social Media Advancement.svg" },
+        { "name": "MIFTAH", "logo": "/assets/images/clients/MIFTAH مفتاح.jpg" },
+        { "name": "Anwar Al-Quds College", "logo": "/assets/images/clients/كلية انوار القدس.jpg" },
+        { "name": "Palestinian Vision Organization", "logo": "/assets/images/clients/ Palestinian Vision Organization.png" },
+        { "name": "Al-Quds University", "logo": "/assets/images/clients/Al-Quds University.png" }
+      ]
     },
     "academy": {
       "badge": "Coming Soon",
       "headline": "Atla Hub Academy",
       "description": "Elite training programs tailored for the next generation of software engineers and high-level cybersecurity experts.",
-      "cta": "Explore Programs"
+      "cta": "Explore Programs",
+      "feature": {
+        "label": "Flutter Showcase",
+        "subtitle": "Mobile-First Track",
+        "title": "Ro'wad Al-Elm Flutter/ML Boot Camp",
+        "description": "A mobile-first curriculum that pairs Flutter UI development with ML classification on-device. Learners build a working inference flow using TensorFlow Lite, connect it to a responsive interface, and validate results through real-world test data.",
+        "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+        "caption": "Flutter UI + On-device ML",
+        "footnote": "Mobile-first training interface",
+        "chips": [
+          "Flutter UI",
+          "ML Classification",
+          "TensorFlow Lite",
+          "Mobile-first"
+        ]
+      }
     },
     "whyUs": {
       "headline": "The Atla Hub Elite Standard",
@@ -187,58 +526,163 @@
       "langEn": "EN",
       "langAr": "عر"
     },
-    "heroSlides": [
-      {
-        "title": "رؤية مقدسية، هيمنة عالمية.",
-        "description": "انشر حلولك التكنولوجية المتميزة عالمياً. نهندس نموك من القدس إلى أتلانتا."
-      },
-      {
-        "title": "درعك الرقمي الذي لا يُخترق.",
-        "description": "حماية عسكرية الجودة ضد الحرب السيبرانية والابتزاز. استجابة نخبوية على مدار الساعة."
-      },
-      {
-        "title": "سلطة سينمائية لعلامتك التجارية.",
-        "description": "استحوذ على اهتمام السوق بالكامل من خلال إعلام ميداني تفاعلي وعالي التأثير."
-      }
-    ],
     "hero": {
-      "cta_primary": "ابدأ مشروعك",
-      "cta_secondary": "شاهد النتائج"
+      "ctaPrimary": "ابدأ مشروعك",
+      "ctaSecondary": "شاهد النتائج",
+      "slides": [
+        {
+          "title": "رؤية مقدسية، هيمنة عالمية.",
+          "description": "انشر حلولك التكنولوجية المتميزة عالمياً. نهندس نموك من القدس إلى أتلانتا.",
+          "image": "/assets/images/Atlanta_Jerusalem.png"
+        },
+        {
+          "title": "درعك الرقمي الذي لا يُخترق.",
+          "description": "حماية عسكرية الجودة ضد الحرب السيبرانية والابتزاز. استجابة نخبوية على مدار الساعة.",
+          "image": "/assets/images/Atlanta_Jerusalem.png"
+        },
+        {
+          "title": "سلطة سينمائية لعلامتك التجارية.",
+          "description": "استحوذ على اهتمام السوق بالكامل من خلال إعلام ميداني تفاعلي وعالي التأثير.",
+          "image": "/assets/images/Atlanta_Jerusalem.png"
+        }
+      ]
     },
     "services": {
-      "headline": "سيطر على سوقك",
-      "subheadline": "دقة عسكرية تلتقي باستراتيجيات النمو الرقمي الفائق.",
-      "uniqueBadge": "ميزة النخبة",
+      "headline": "خدمات مبنية لاحتياجات الأعمال الفعلية",
+      "subheadline": "تنفيذ تقني قابل للتوسع عبر البرمجيات، والتسويق، والبنية التحتية، والأمن السيبراني، والتدريب التطبيقي.",
+      "uniqueBadge": "خدمة بارزة",
       "list": [
         {
-          "id": "programming",
-          "title": "تطوير ويب للمؤسسات",
-          "description": "بنى تحتية لا تعرف المساومة، مصممة للتوسع وزيادة التحويلات.",
-          "highlight": "",
+          "id": "software-development",
+          "title": "تطوير البرمجيات",
+          "description": "تطبيقات موبايل، ومواقع، وأنظمة مؤسسية مصممة للاستقرار وقابلية الصيانة والتوسع على المدى الطويل.",
+          "highlight": "تطبيقات موبايل، مواقع، أنظمة مؤسسية",
+          "featured": true,
           "icon": "code"
         },
         {
-          "id": "marketing",
-          "title": "تسويق النمو الفائق",
-          "description": "حملات مبنية على البيانات لاكتساب العملاء ذوي القيمة العالية.",
-          "highlight": "",
+          "id": "digital-marketing-creative",
+          "title": "التسويق الرقمي والإبداعي",
+          "description": "محتوى منظم، وتصميم، وإعلانات مدفوعة، وإنتاج بصري مرتبط بأهداف العلامة التجارية والحملات بوضوح.",
+          "highlight": "محتوى، تصميم، إعلانات، فيديو، هوية بصرية",
           "icon": "trending-up"
         },
         {
-          "id": "cybersecurity",
-          "title": "أمن سيبراني للنخبة",
-          "description": "آليات دفاع عسكرية لإغلاق أصولك الرقمية وحمايتها بالكامل.",
-          "highlight": "استجابة طارئة لحالات الابتزاز",
+          "id": "cybersecurity-forensics",
+          "title": "الأمن السيبراني والأدلة الرقمية",
+          "description": "تدقيقات أمنية، وتحليل أدلة رقمية، واستجابة طارئة للحوادث في البيئات التي تتعرض لمخاطر تقنية فعلية.",
+          "highlight": "استجابة للحوادث، تعافٍ، وتحقيق تقني",
           "icon": "shield-alert"
         },
         {
-          "id": "media",
-          "title": "إعلام عالي التأثير",
-          "description": "سيطر على صناعتك بصرياً من خلال إنتاج ميداني سينمائي.",
-          "highlight": "عمليات إعلامية ميدانية واسعة الانتشار",
-          "icon": "video"
+          "id": "infrastructure",
+          "title": "البنية التحتية",
+          "description": "استضافة بريد أعمال احترافية وإدارة متاجر إلكترونية لتحسين الاعتمادية والملكية التقنية للأنظمة التشغيلية.",
+          "highlight": "نطاقات خاصة، بريد غير محدود، تشغيل المتجر",
+          "icon": "server"
+        },
+        {
+          "id": "academy",
+          "title": "الأكاديمية",
+          "description": "برامج تدريبية مهنية في الصحة النفسية الرقمية، والأمن السيبراني، والذكاء التوليدي، وتطوير الموبايل، والاختبار الاختراقي.",
+          "highlight": "برامج تدريبية وورش تطبيقية",
+          "icon": "academy"
         }
       ]
+    },
+    "serviceDetails": {
+      "software-development": {
+        "title": "تطوير البرمجيات",
+        "subtitle": "تطبيقات موبايل، ومواقع، وأنظمة مؤسسية مبنية لتعمل باستقرار وتدعم النمو المستقبلي.",
+        "valueProposition": "تعالج هذه الخدمة مشكلات الأنظمة الضعيفة أو الأدوات غير المترابطة عبر بناء حلول برمجية أسهل في الإدارة والتطوير والتأمين. وهي مناسبة للشركات التي تحتاج إلى منتجات موجهة للعملاء أو أنظمة داخلية أو أتمتة لعملياتها.",
+        "technicalScope": [
+          "مواقع وتطبيقات ويب متجاوبة",
+          "تطوير تطبيقات موبايل بتجربة استخدام مستقرة",
+          "أنظمة مؤسسية للعمليات والتقارير وسير العمل الداخلي",
+          "تكامل واجهات API وربط الأنظمة",
+          "تخطيط معماري وهيكلة الكود وتجهيزات الإطلاق"
+        ],
+        "process": [
+          "التحليل: تحديد المتطلبات، والمستخدمين، وسير العمل، والقيود التقنية",
+          "التنفيذ: تصميم المعمارية، وبناء المنتج، والتحقق من حالات الاستخدام الأساسية",
+          "الدعم: تحسين الاستقرار، والتوثيق، والتطوير اللاحق وفق الاستخدام الفعلي"
+        ],
+        "whyUs": "يعتمد عملنا على تنفيذ هندسي عملي مدعوم بخلفية أكاديمية جامعية، مما يساعدنا على بناء أنظمة قابلة للصيانة وآمنة وذات قيمة تشغيلية طويلة المدى."
+      },
+      "digital-marketing-creative": {
+        "title": "التسويق الرقمي والإبداعي",
+        "subtitle": "تنفيذ استراتيجي للمحتوى والهوية البصرية والحملات للعلامات التي تحتاج إلى حضور واضح ونتائج قابلة للقياس.",
+        "valueProposition": "تعالج هذه الخدمة ضعف الاتساق في الرسائل التسويقية والتنفيذ الرقمي المتقطع. وهي تساعد الشركات على بناء حملات مترابطة وهوية أوضح ونظام محتوى يخدم النمو بدلاً من النشر العشوائي.",
+        "technicalScope": [
+          "كتابة المحتوى للمواقع والحملات ومنصات التواصل",
+          "التصميم الجرافيكي للأصول البصرية والمواد التسويقية",
+          "إدارة حسابات التواصل الاجتماعي وتنظيم النشر",
+          "تخطيط الإعلانات المدفوعة وإعدادها وتحسينها",
+          "إنتاج الفيديو والمونتاج للأغراض التسويقية والتعليمية",
+          "بناء الهوية البصرية وضبط اتساق العلامة"
+        ],
+        "process": [
+          "التحليل: مراجعة التموضع والجمهور والقنوات والأهداف",
+          "التنفيذ: تطوير الاتجاه الإبداعي وإنتاج المواد وتشغيل الحملات",
+          "الدعم: متابعة النتائج وتحسين الرسائل واستمرارية النشر"
+        ],
+        "whyUs": "نتعامل مع التسويق والإبداع بوصفهما وظيفة تنفيذية منظمة. يجمع فريقنا بين الفهم التقني والانضباط التصميمي والخلفية الأكاديمية لتقديم محتوى واضح وعملي ومتوافق مع أهداف العمل."
+      },
+      "cybersecurity-forensics": {
+        "title": "الأمن السيبراني والأدلة الرقمية",
+        "subtitle": "تدقيقات أمنية وتحقيقات رقمية واستجابة طارئة للحوادث والبيئات عالية المخاطر.",
+        "valueProposition": "تعالج هذه الخدمة الثغرات الأمنية والحاجة إلى التحقيق الرقمي وسيناريوهات التعافي العاجل. وهي موجهة للجهات والأفراد الذين يواجهون اختراقاً أو ابتزازاً أو إساءة استخدام للحسابات أو حاجة لفهم الأدلة التقنية بدقة.",
+        "technicalScope": [
+          "تدقيقات أمنية للتطبيقات والحسابات والبيئات التشغيلية",
+          "تحليل الأدلة الرقمية ومراجعة المؤشرات الفنية",
+          "استجابة طارئة لحوادث الاختراق وحالات الابتزاز",
+          "دعم استعادة الحسابات واحتواء الأثر",
+          "تقوية ما بعد الحادث وخطط تقليل المخاطر"
+        ],
+        "process": [
+          "التحليل: تحديد نوع الحادث والأنظمة المتأثرة ومصادر الأدلة",
+          "التنفيذ: التحقيق والاحتواء والتعافي وتوثيق مسار الاستجابة",
+          "الدعم: سد الثغرات وتحسين الضوابط وتقديم التوصيات اللاحقة"
+        ],
+        "whyUs": "هذا النوع من العمل يحتاج إلى دقة تقنية وتوثيق منظم وتعامل مسؤول مع بيانات حساسة. وتدعم خلفيتنا الأكاديمية الجامعية في المجالات التقنية منهجية منضبطة في التحقيق والمعالجة."
+      },
+      "infrastructure": {
+        "title": "البنية التحتية",
+        "subtitle": "خدمات تشغيلية ترفع الاعتمادية والملكية التقنية للبريد المؤسسي وأنظمة التجارة الإلكترونية.",
+        "valueProposition": "تعالج هذه الخدمة المشكلات التشغيلية الشائعة مثل ضعف استقرار البريد المؤسسي أو غياب السيطرة على النطاقات أو ضعف إدارة المتاجر الإلكترونية. وهي تساعد الشركات على بناء تشغيل يومي أكثر موثوقية.",
+        "technicalScope": [
+          "استضافة بريد أعمال احترافية على نطاقات خاصة",
+          "إنشاء عدد غير محدود من حسابات البريد",
+          "دعم إعدادات DNS والنطاقات",
+          "تحسين استقرار SMTP وموثوقية التسليم",
+          "تنظيم صناديق البريد وإعدادات التواصل المؤسسي",
+          "إدارة المتاجر الإلكترونية للمنتجات والعمليات والصيانة الدورية"
+        ],
+        "process": [
+          "التحليل: مراجعة بيئة النطاقات والبريد والمتجر الحالية",
+          "التنفيذ: إعداد الخدمة وتنظيم الحسابات وتحسين استقرار التشغيل",
+          "الدعم: متابعة المشكلات والمساعدة في التحديثات واستمرارية الخدمة"
+        ],
+        "whyUs": "قيمة البنية التحتية تظهر في موثوقيتها اليومية. نعتمد نهجاً عملياً ومنظماً يستند إلى تدريب تقني وأكاديمي يساعد على إعداد الأنظمة وتوثيقها ودعمها بشكل مستقر."
+      },
+      "academy": {
+        "title": "الأكاديمية",
+        "subtitle": "تدريب تقني تطبيقي موجه للأفراد والفرق والمؤسسات التي تحتاج إلى مهارات رقمية حديثة ومرتبطة بسوق العمل.",
+        "valueProposition": "تساعد هذه الخدمة المتعلمين والمؤسسات على تطوير معرفة عملية في مجالات لها قيمة مهنية وتعليمية مباشرة، مع التركيز على الفهم القابل للتطبيق بدلاً من الطرح النظري فقط.",
+        "technicalScope": [
+          "التدريب في مفاهيم وتطبيقات الصحة النفسية الرقمية",
+          "أساسيات الأمن السيبراني والممارسة الدفاعية",
+          "مفاهيم الذكاء الاصطناعي التوليدي وسير العمل والاستخدام المسؤول",
+          "التدريب في تطوير تطبيقات الموبايل",
+          "أساسيات الاختبار الاختراقي والتجارب العملية"
+        ],
+        "process": [
+          "التحليل: تحديد مستوى المتدربين والأهداف وصيغة التقديم",
+          "التنفيذ: إعداد المنهج وتقديم التدريب وتوجيه التطبيق العملي",
+          "الدعم: تقديم مواد متابعة وملاحظات منظمة وتوصيات للخطوات القادمة"
+        ],
+        "whyUs": "يعتمد الطرح التدريبي لدينا على خبرة تقنية عملية مدعومة بخلفية أكاديمية جامعية، مما يساعدنا على تقديم موضوعات معقدة بشكل منظم وعملي وموثوق."
+      }
     },
     "process": {
       "headline": "منهجيتنا التنفيذية",
@@ -263,29 +707,263 @@
       ]
     },
     "portfolio": {
-      "headline": "نتائج مثبتة",
-      "subheadline": "اكتشف الأنظمة والتطبيقات التي قمنا ببنائها لشركائنا.",
-      "resultLabel": "النتيجة",
-      "loading": "جارٍ تحميل المشاريع..."
+      "headline": "أعمال مختارة",
+      "subheadline": "عرض منظم لمشاريع تم تنفيذها عبر البرمجيات، والإعلام، والتدريب، والتسويق، والتصميم.",
+      "viewPortfolio": "فتح الأعمال",
+      "viewCategory": "عرض القسم",
+      "projectsLabel": "المشاريع",
+      "videoLabel": "فيديو",
+      "list": [
+        {
+          "id": "software",
+          "title": "البرمجيات",
+          "summary": "أعمال تطبيقية وأنظمة تشغيلية موجهة لقطاع اللوجستيات وتنظيم العمليات.",
+          "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
+          "projectCount": "1"
+        },
+        {
+          "id": "media",
+          "title": "الإعلام",
+          "summary": "تنفيذات إعلامية ودعم بصري لمؤسسات تعليمية وتنموية.",
+          "image": "https://i.ytimg.com/vi/uh-aQXF17Pc/hqdefault.jpg",
+          "projectCount": "2",
+          "hasVideo": true
+        },
+        {
+          "id": "academy",
+          "title": "الأكاديمية",
+          "summary": "برامج تدريبية تطبيقية في Flutter ومفاهيم التعلم الآلي.",
+          "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+          "projectCount": "1"
+        },
+        {
+          "id": "cybertraining",
+          "title": "التدريب السيبراني",
+          "summary": "تدريب منظم في الأمن الرقمي بصيغة تدريب المدربين.",
+          "image": null,
+          "projectCount": "1"
+        },
+        {
+          "id": "marketing",
+          "title": "التسويق",
+          "summary": "تنفيذ حملات لعلامات تعتمد على المحتوى القصير والانتشار عبر المنصات الاجتماعية.",
+          "image": null,
+          "projectCount": "2"
+        },
+        {
+          "id": "design",
+          "title": "التصميم",
+          "summary": "هوية بصرية وتصميم عبوات موجهان لعلامة تستهدف سوقاً دولياً.",
+          "image": "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
+          "projectCount": "1"
+        }
+      ],
+      "details": {
+        "software": {
+          "title": "البرمجيات",
+          "subtitle": "مشاريع برمجية تشغيلية بنيت من أجل الاعتمادية وسهولة الاستخدام وقابلية التوسع.",
+          "projects": [
+            {
+              "name": "Shahin Logistics SaaS",
+              "image": "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
+              "role": "تصميم معمارية المنصة والنمذجة الجغرافية وتطوير خوارزمية مملوكة لتحسين المسارات بما يلائم تضاريس الضفة الغربية وتقلبات الحواجز وتخطيط التوصيل متعدد النقاط.",
+              "action": "تم بناء محرك مسارات يدمج البحث البياني الموزون مع تقييم نوافذ التسليم وموازنة سعة السائقين وتسلسل التوقفات المتأثر بالحواجز، ثم ربطه بلوحات تشغيل وسجلات تدقيق وأدوات SaaS لإدارة القرار اللحظي.",
+              "result": "تم تسليم منصة لوجستية تقلل العبء اليدوي في الجدولة، وترفع موثوقية قرارات الإرسال، وتمنح فرق التشغيل طبقة تحسين عملية مصممة لواقع الحركة داخل الضفة الغربية.",
+              "gallery": [
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_1.jpg",
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_2.jpg",
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_3.jpg",
+                "/assets/images/portfolio/Shahin_logistics_AtlaHub_tech_Ahmad_Zayed_4.jpg"
+              ]
+            }
+          ]
+        },
+        "media": {
+          "title": "الإعلام",
+          "subtitle": "أعمال إعلامية وإنتاج بصري تخدم التواصل المؤسسي بوضوح واتساق.",
+          "projects": [
+            {
+              "name": "جامعة القدس",
+              "image": null,
+              "role": "اتجاه إبداعي، وإنتاج بصري سينمائي، وصياغة قصص مؤسسية تدعم الحضور الأكاديمي والاتصال الجامعي.",
+              "action": "تم إنتاج مواد إعلامية جامعية عالية الجودة عبر تخطيط بصري محكم وإيقاع مونتاج احترافي ومخرجات جاهزة للنشر على المنصات الاجتماعية ضمن هوية مؤسسية متماسكة.",
+              "result": "تعزيز الحضور الإعلامي لجامعة القدس عبر أصول إنتاجية راقية وقابلة لإعادة الاستخدام ترفع القيمة المدركة للعلامة المؤسسية رقمياً.",
+              "links": [
+                {
+                  "label": "يوتيوب 01",
+                  "type": "youtube",
+                  "url": "https://www.youtube.com/watch?v=uh-aQXF17Pc"
+                },
+                {
+                  "label": "يوتيوب 02",
+                  "type": "youtube",
+                  "url": "https://www.youtube.com/watch?v=Ok03W6gU7ws"
+                }
+              ]
+            },
+            {
+              "name": "جامعة بيت لحم",
+              "image": null,
+              "role": "إنتاج إعلامي مؤسسي، واستراتيجية مونتاج قصيرة، وسرد بصري احترافي يخدم الانتشار الأكاديمي وحضور الجامعة الرقمي.",
+              "action": "تم تقديم مقاطع قصيرة مصقولة لجامعة بيت لحم مع وضوح بصري عالٍ وإيقاع تحرير مناسب للمنصات ومخرجات جاهزة للنشر على يوتيوب وفيسبوك ريل.",
+              "result": "بناء طبقة إعلامية فاخرة لاتصال الجامعة الرقمي تعزز التفاعل وتمنح الأنشطة الأكاديمية حضوراً تحريرياً أكثر قوة وأناقة.",
+              "links": [
+                {
+                  "label": "يوتيوب 03",
+                  "type": "youtube",
+                  "url": "https://www.youtube.com/watch?v=l7Q6JHTkZmA"
+                },
+                {
+                  "label": "فيسبوك ريل",
+                  "type": "facebook",
+                  "url": "https://www.facebook.com/reel/1284120520051055"
+                }
+              ]
+            }
+          ]
+        },
+        "academy": {
+          "title": "الأكاديمية",
+          "subtitle": "برامج تدريبية تطبيقية مبنية على التدرج العملي وتبسيط المفاهيم التقنية.",
+          "projects": [
+            {
+              "name": "معسكر رواد العلم Flutter/ML",
+              "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+              "role": "تصميم المنهج، وتدريب Flutter، ودمج مسارات تصنيف التعلم الآلي داخل تجربة تعلم تطبيقية موجهة للموبايل.",
+              "action": "تم بناء معسكر تدريبي يدمج هندسة واجهات Flutter مع الشاشات المتجاوبة وربط النماذج عبر TensorFlow Lite وتجهيز البيانات وتدفقات التصنيف الفوري داخل مشروع قابل للعرض.",
+              "result": "تمكين المتدربين من تطوير نموذج موبايل بطابع إنتاجي يربط بين واجهات Flutter الأنيقة والاستدلال الفوري للتعلم الآلي، بما يعزز فهمهم لتدفق بناء التطبيقات الذكية.",
+              "gallery": [
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_2.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_3.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_4.jpg",
+                "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_5.jpg"
+              ]
+            }
+          ]
+        },
+        "cybertraining": {
+          "title": "التدريب السيبراني",
+          "subtitle": "برامج تدريبية في الأمن الرقمي تركّز على التطبيق العملي والتنظيم المعرفي.",
+          "projects": [
+            {
+              "name": "ToT Digital Security (7amleh)",
+              "image": null,
+              "role": "دعم تدريب المدربين في مفاهيم الأمن الرقمي وآليات التقديم المنظم.",
+              "action": "تم إعداد وتقديم مواد تدريبية تساعد المشاركين على نقل المعرفة الأمنية بصورة فعالة.",
+              "result": "بناء تجربة تدريبية أكثر تنظيماً وقابلية للتكرار في برامج الأمن الرقمي.",
+              "links": [
+                {
+                  "label": "7amleh",
+                  "type": "website",
+                  "url": "https://7amleh.org"
+                }
+              ]
+            }
+          ]
+        },
+        "marketing": {
+          "title": "التسويق",
+          "subtitle": "تنفيذ حملات مبني على فهم المنصات، ووضوح المحتوى، وتحقيق وصول منظم.",
+          "projects": [
+            {
+              "name": "مركز تامر للتجميل",
+              "image": null,
+              "role": "تخطيط حملات، وتوجيه محتوى، وتنفيذ على منصات التواصل.",
+              "action": "تم بناء مخرجات حملة منسقة حول خدمات التجميل باستخدام محتوى مناسب للمنصة واتساق بصري واضح.",
+              "result": "تحسين هيكل الحملات وتعزيز الحضور الرقمي للعلامة."
+            },
+            {
+              "name": "Samkaty - حملات تيك توك",
+              "image": null,
+              "role": "تنفيذ حملات قصيرة المحتوى تركز على TikTok وتفاعل الجمهور.",
+              "action": "تم تصميم المواد ومسار النشر وفق متطلبات المحتوى القصير وسلوك المنصة.",
+              "result": "دعم ظهور أوضح وإيقاع محتوى أكثر تركيزاً على القنوات الاجتماعية السريعة."
+            }
+          ]
+        },
+        "design": {
+          "title": "التصميم",
+          "subtitle": "أعمال هوية بصرية وتصميم عبوات تهدف إلى رفع الاتساق وتحسين تقديم المنتج.",
+          "projects": [
+            {
+              "name": "Teki Lushes - الهوية البصرية والعبوات (الولايات المتحدة)",
+              "image": "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
+              "role": "تصميم عبوات منتجات الجومي وتطوير الاتجاه البصري والهوية الداعمة لعلامة موجهة للسوق الأمريكي.",
+              "action": "تم تطوير نظام تغليف للجومي يشمل هرمية المعلومات على العبوة، وألواناً واضحة بحسب النكهة، ومعالجة طباعية جاهزة للعرض، وأصولاً بصرية تجعل المنتج أكثر حضوراً على الرف.",
+              "result": "تقديم عائلة عبوات مصقولة ترفع قابلية التعرّف على المنتج وتعزز الثقة البصرية وتمنح العلامة حضوراً أقوى في السوق الدولي.",
+              "gallery": [
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_1.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_2.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_3.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_4.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_5.jpg",
+                "/assets/images/portfolio/AtlaHub_graphic_Design_Ahmad_Zayed_6.jpg"
+              ]
+            }
+          ]
+        }
+      }
     },
     "founder": {
       "headline": "رؤية وُلدت من قلب الدقة",
       "story": "تأسست أتلا هاب تك على يد أحمد زايد، وهي تضم نخبة من الخبراء. لا نرضى بالحلول العادية، بل نركز على الأنظمة الآمنة والنمو المستمر.",
       "badge": "بقيادة أحمد زايد ونخبة من المختصين",
-      "image": "",
-      "fallbackTitle": "أحمد زايد",
-      "fallbackSubtitle": "المؤسس والقائد الاستراتيجي"
+      "image": "/assets/images/founder.jpg",
+      "alt": "أحمد زايد"
     },
     "clients": {
-      "headline": "موثوقون لدى جهات طموحة",
-      "subheadline": "نفخر بالشراكة مع مؤسسات تبحث عن التميز والنمو.",
-      "loading": "جارٍ تحميل العملاء..."
+      "headline": "موثوق بنا من أكثر من 20 علامة رائدة",
+      "subheadline": "نتعاون مع علامات طموحة من قطاعات متعددة.",
+      "loading": "جارٍ تحميل العملاء...",
+      "list": [
+        { "name": "مركز تامر للتجميل", "logo": "/assets/images/clients/Tamer_Beauty_Center.jpg" },
+        { "name": "مركز تيا للتجميل", "logo": "/assets/images/clients/Tia_beauty_center.jpg" },
+        { "name": "التل كوفي", "logo": "/assets/images/clients/AlTal_Coffee.jpg" },
+        { "name": "زينة بيوتي", "logo": "/assets/images/clients/Zena_Beauty.jpg" },
+        { "name": "بيست لاين للأبواب", "logo": "/assets/images/clients/Best Line Doors.jpg" },
+        { "name": "مطعم ملك القدرة", "logo": "/assets/images/clients/مطعم ملك القدرة.png" },
+        { "name": "اللجنة المركزية لأولياء أمور مدارس سلوان", "logo": "/assets/images/clients/اللجنة المركزية لأولياء امور مدارس سلوان.jpg" },
+        { "name": "فادي حميدو ملك المعسل والأراجيل", "logo": "/assets/images/clients/فادي حميدو ملك المعسل والاراجيل.png" },
+        { "name": "سندريلا بيوتي", "logo": "/assets/images/clients/Cinderella Beauty.jpg" },
+        { "name": "مطعم المطار الملكي", "logo": "/assets/images/clients/مطعم المطار الملكي.jpg" },
+        { "name": "أهفا لترميم المنازل", "logo": "/assets/images/clients/Ahava Home renovation.jpg" },
+        { "name": "ماستر بوتشر", "logo": "/assets/images/clients/Master Butcher .jpg" },
+        { "name": "شركة أسياد لخدمات التوصيل", "logo": "/assets/images/clients/شركة أسياد لخدمات التوصيل.jpg" },
+        { "name": "فلل الريحان للإيجار اليومي - أريحا", "logo": "/assets/images/clients/فلل الريحان للايجار اليومي أريحا.jpg" },
+        { "name": "مركز تمكين التعليمي", "logo": "/assets/images/clients/مركز تمكين التعليمي.jpg" },
+        { "name": "فلل المطلة", "logo": "/assets/images/clients/Almatalleh Villas - فلل المطلة.jpg" },
+        { "name": "مجموعة آيا صوفيا العقارية", "logo": "/assets/images/clients/مجموعة آيا صوفيا العقارية.jpg" },
+        { "name": "مجموعة بيت المقدس للعقارات", "logo": "/assets/images/clients/مجموعة بيت المقدس للعقارات.jpg" },
+        { "name": "بوكيه ورد", "logo": "/assets/images/clients/بوكيه ward.jpg" },
+        { "name": "مطعم السلطان", "logo": "/assets/images/clients/مطعم السلطان-Al sultan.jpg" },
+        { "name": "المركز العربي لتطوير الإعلام الاجتماعي", "logo": "/assets/images/clients/Arab Center for Social Media Advancement.svg" },
+        { "name": "مفتاح", "logo": "/assets/images/clients/MIFTAH مفتاح.jpg" },
+        { "name": "كلية أنوار القدس", "logo": "/assets/images/clients/كلية انوار القدس.jpg" },
+        { "name": "منظمة الرؤية الفلسطينية", "logo": "/assets/images/clients/ Palestinian Vision Organization.png" },
+        { "name": "جامعة القدس", "logo": "/assets/images/clients/Al-Quds University.png" }
+      ]
     },
     "academy": {
       "badge": "قريباً",
       "headline": "أكاديمية أتلا هاب",
       "description": "برامج تدريبية متقدمة مخصصة للجيل القادم من مهندسي البرمجيات وخبراء الأمن السيبراني.",
-      "cta": "استكشف البرامج"
+      "cta": "استكشف البرامج",
+      "feature": {
+        "label": "واجهة Flutter",
+        "subtitle": "مسار موبايل أولاً",
+        "title": "معسكر رواد العلم Flutter/ML",
+        "description": "منهج موبايل أولاً يدمج تطوير واجهات Flutter مع تصنيف ML على الجهاز. يتعلم المتدربون بناء تدفق استدلال باستخدام TensorFlow Lite وربطه بواجهة تفاعلية واختبار النتائج على بيانات واقعية.",
+        "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
+        "caption": "واجهة Flutter + تصنيف ML",
+        "footnote": "واجهة تدريب مخصصة للموبايل",
+        "chips": [
+          "واجهات Flutter",
+          "تصنيف ML",
+          "TensorFlow Lite",
+          "أولوية الموبايل"
+        ]
+      }
     },
     "whyUs": {
       "headline": "معيار أتلا هاب للنخبة",

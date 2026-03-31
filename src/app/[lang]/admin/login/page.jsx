@@ -1,10 +1,12 @@
 'use client';
 
+import { use } from 'react';
 import { useFormState } from 'react-dom';
 import { handleLogin } from '../actions';
 
 export default function LoginPage({ params }) {
-  const loginAction = handleLogin.bind(null, params.lang);
+  const { lang } = use(params);
+  const loginAction = handleLogin.bind(null, lang);
   const [state, formAction] = useFormState(loginAction, undefined);
 
   return (

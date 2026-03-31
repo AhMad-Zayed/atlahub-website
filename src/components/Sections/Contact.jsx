@@ -1,10 +1,8 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import content from '@/data/content.json';
 
-export default function Contact({ lang = 'en' }) {
-  const data = content[lang]?.contact || content.en.contact;
+export default function Contact({ data }) {
   const [formData, setFormData] = useState({ name: '', email: '', service: '', message: '' });
   const [status, setStatus] = useState('idle');
 
@@ -69,18 +67,18 @@ export default function Contact({ lang = 'en' }) {
           <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">{data.fields.name}</label>
-                <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-white placeholder-gray-500" placeholder={data.placeholders.name} />
+                <label className="mb-2 block text-start text-sm font-bold uppercase tracking-wide text-gray-300">{data.fields.name}</label>
+                <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full rounded-lg border border-gray-700 bg-gray-900/50 px-4 py-3 text-start text-white placeholder-gray-500 outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-brand-blue" placeholder={data.placeholders.name} />
               </div>
               <div>
-                <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">{data.fields.email}</label>
-                <input required type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-white placeholder-gray-500" placeholder={data.placeholders.email} />
+                <label className="mb-2 block text-start text-sm font-bold uppercase tracking-wide text-gray-300">{data.fields.email}</label>
+                <input required type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full rounded-lg border border-gray-700 bg-gray-900/50 px-4 py-3 text-start text-white placeholder-gray-500 outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-brand-blue" placeholder={data.placeholders.email} />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">{data.fields.service}</label>
-              <select required value={formData.service} onChange={(e) => setFormData({...formData, service: e.target.value})} className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-white appearance-none">
+              <label className="mb-2 block text-start text-sm font-bold uppercase tracking-wide text-gray-300">{data.fields.service}</label>
+              <select required value={formData.service} onChange={(e) => setFormData({...formData, service: e.target.value})} className="w-full appearance-none rounded-lg border border-gray-700 bg-gray-900/50 px-4 py-3 text-start text-white outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-brand-blue">
                 <option value="" disabled>{data.servicePlaceholder}</option>
                 {data.serviceOptions.map((option) => (
                   <option key={option} value={option}>{option}</option>
@@ -89,8 +87,8 @@ export default function Contact({ lang = 'en' }) {
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">{data.fields.message}</label>
-              <textarea required value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} rows="4" className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none transition-all text-white placeholder-gray-500 resize-y" placeholder={data.placeholders.message}></textarea>
+              <label className="mb-2 block text-start text-sm font-bold uppercase tracking-wide text-gray-300">{data.fields.message}</label>
+              <textarea required value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} rows="4" className="w-full resize-y rounded-lg border border-gray-700 bg-gray-900/50 px-4 py-3 text-start text-white placeholder-gray-500 outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-brand-blue" placeholder={data.placeholders.message}></textarea>
             </div>
 
             {status === 'error' && <p className="text-red-400 text-sm font-bold">{data.errorMessage}</p>}

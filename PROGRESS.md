@@ -42,3 +42,10 @@ This file tracks the development progress against the MASTER_SOP.md.
 *   **[Completed]** Externalize all strings from components and pass data via Server Page props.
 *   **[Completed]** Replace physical CSS properties (`ml-`, `text-left`) with logical properties (`ms-`, `text-start`) for automatic RTL support.
 *   **[Completed]** 100% Bilingual Content Integration: Removed all hardcoded text from components and implemented robust dynamic prop injection using `content.json`.
+
+### Phase 4: UI/UX Polish & Expansion Preparation
+*   **[Completed]** Fixed critical UI bugs (Logo distortion, Hydration errors on language toggles, i18n layout direction).
+*   **[Completed]** Stabilized `Navbar.jsx` hydration by deferring pathname-based language switching until after mount while keeping the server/client logo structure identical.
+*   **[Completed]** Prepared architecture for content expansion (Client logos & detailed Services array).
+*   **[Completed]** Added bilingual dynamic service detail pages at `/[lang]/services/[id]` and refactored `content.json` to use grounded technical service definitions and detailed delivery scope.
+*   **[Completed]** Added bilingual dynamic portfolio routes at `/[lang]/portfolio` and `/[lang]/portfolio/[id]`, replaced the legacy API-driven homepage portfolio section with centralized `content.json` data, and connected navigation links to the new organized showcase.
