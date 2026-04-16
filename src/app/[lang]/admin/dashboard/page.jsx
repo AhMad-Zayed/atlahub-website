@@ -29,6 +29,7 @@ import UnifiedTimeline from '@/components/PLM/UnifiedTimeline';
 import { PORTFOLIO_CATEGORIES, getPortfolioItems } from '@/lib/portfolio-admin';
 import { getPipelineProjects } from '@/lib/onboarding';
 import { getContactMessages } from '@/lib/messages-store';
+import content from '@/data/content.json';
 import prisma from '@/lib/prisma';
 import CreateEliteProjectModal from '@/components/Admin/CreateEliteProjectModal';
 import UserJourneyMap from '@/components/Admin/UserJourneyMap';

@@ -310,3 +310,83 @@ model Event {
   timestamp DateTime @default(now()) @db.Timestamp(0)
   payload   Json?
 }
+
+// ---------------------------------------------------------------------------
+// AtlaHub Elite: Agency Management System
+// ---------------------------------------------------------------------------
+
+model AgencyClient {
+  id                 String   @id @default(uuid()) @db.Uuid
+  brandName          String   @db.VarChar(255)
+  logoUrl            String?  @db.Text
+  primaryContact     String   @db.VarChar(255)
+  preferredCurrency  String   @default("USD") @db.VarChar(10)
+  languagePreference String   @default("en") @db.VarChar(10)
+  createdAt          DateTime @default(now()) @db.Timestamp(0)
+  
+  campaigns          AgencyCampaign[]
+}
+
+enum CampaignStatus {
+  PENDING
+  FUNDED
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+model AgencyCampaign {
+  id                  String         @id @default(uuid()) @db.Uuid
+  clientId            String         @db.Uuid
+  client              AgencyClient   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  title               String         @db.VarChar(255)
+  status              CampaignStatus @default(PENDING)
+  totalClientPaid     Float          @default(0)
+  actualPlatformSpend Float          @default(0)
+  serviceFee          Float          @default(0)
+  profitMargin        Float          @default(0)
+  createdAt           DateTime       @default(now()) @db.Timestamp(0)
+  updatedAt           DateTime       @updatedAt @db.Timestamp(0)
+  
+  adItems             AdItem[]
+  messages            CampaignMessage[]
+  logs                CampaignLog[]
+
+  @@index([clientId])
+}
+
+model AdItem {
+  id             String         @id @default(uuid()) @db.Uuid
+  campaignId     String         @db.Uuid
+  campaign       AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  url            String         @db.Text
+  previewImage   String?        @db.Text
+  targetAudience String?        @db.Text
+  reachGoal      Int            @default(0)
+  status         String         @default("PENDING") @db.VarChar(64) // PENDING, APPROVED, ACTIVE
+  createdAt      DateTime       @default(now()) @db.Timestamp(0)
+
+  @@index([campaignId])
+}
+
+model CampaignMessage {
+  id         String         @id @default(uuid()) @db.Uuid
+  campaignId String         @db.Uuid
+  campaign   AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  sender     String         @db.VarChar(64) // "CLIENT" or "ADMIN"
+  text       String         @db.Text
+  createdAt  DateTime       @default(now()) @db.Timestamp(0)
+
+  @@index([campaignId])
+}
+
+model CampaignLog {
+  id         String         @id @default(uuid()) @db.Uuid
+  campaignId String         @db.Uuid
+  campaign   AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  action     String         @db.VarChar(255)
+  details    String?        @db.Text
+  createdAt  DateTime       @default(now()) @db.Timestamp(0)
+
+  @@index([campaignId])
+}
