@@ -16,7 +16,7 @@ function computeProfit(totalPaid, platformSpend, serviceFee) {
 // ----------------------------------------------------
 
 export async function createAgencyClient(data) {
-  const client = await prisma.agencyClient.create({
+  const client = await prisma.client.create({
     data: {
       name: data.name,
       primaryContact: data.primaryContact,
@@ -26,12 +26,12 @@ export async function createAgencyClient(data) {
     }
   });
   
-  revalidatePath('/[lang]/admin/agency', 'page');
+  revalidatePath('/', 'layout');
   return client;
 }
 
 export async function createAgencyCampaign(clientId, title) {
-  const campaign = await prisma.agencyCampaign.create({
+  const campaign = await prisma.campaign.create({
     data: {
       clientId,
       title,
@@ -39,7 +39,7 @@ export async function createAgencyCampaign(clientId, title) {
     }
   });
 
-  await prisma.campaignLog.create({
+  await prisma.log.create({
     data: {
       campaignId: campaign.id,
       action: 'CAMPAIGN_CREATED',
@@ -47,7 +47,7 @@ export async function createAgencyCampaign(clientId, title) {
     }
   });
 
-  revalidatePath('/[lang]/admin/agency', 'page');
+  revalidatePath('/', 'layout');
   return campaign;
 }
 
@@ -60,17 +60,16 @@ export async function updateCampaignFinances(campaignId, data) {
   
   const profitMargin = computeProfit(totalClientPaid, actualPlatformSpend, serviceFee);
 
-  const campaign = await prisma.agencyCampaign.update({
+  const campaign = await prisma.campaign.update({
     where: { id: campaignId },
     data: {
       totalClientPaid,
       actualPlatformSpend,
       serviceFee,
-      profitMargin
     }
   });
 
-  await prisma.campaignLog.create({
+  await prisma.log.create({
     data: {
       campaignId,
       action: 'BUDGET_UPDATED',
@@ -78,16 +77,15 @@ export async function updateCampaignFinances(campaignId, data) {
     }
   });
 
-  revalidatePath('/[lang]/admin/agency', 'page');
-  revalidatePath(`/[lang]/client-portal/${campaign.clientId}`, 'page');
+  revalidatePath('/', 'layout');
   return campaign;
 }
 
 export async function setCampaignStatus(campaignId, newStatus) {
-  const oldCampaign = await prisma.agencyCampaign.findUnique({ where: { id: campaignId }});
+  const oldCampaign = await prisma.campaign.findUnique({ where: { id: campaignId }});
   if (!oldCampaign) throw new Error('Not found');
 
-  const campaign = await prisma.agencyCampaign.update({
+  const campaign = await prisma.campaign.update({
     where: { id: campaignId },
     data: { status: newStatus }
   });
@@ -95,7 +93,7 @@ export async function setCampaignStatus(campaignId, newStatus) {
   // Intelligence Automation Hook
   if (oldCampaign.status !== 'ACTIVE' && newStatus === 'ACTIVE') {
     // Simulate WhatsApp/Email external push by asserting a strong log.
-    await prisma.campaignLog.create({
+    await prisma.log.create({
       data: {
         campaignId,
         action: 'STATUS_SYNC_BROADCAST',
@@ -103,7 +101,7 @@ export async function setCampaignStatus(campaignId, newStatus) {
       }
     });
   } else {
-    await prisma.campaignLog.create({
+    await prisma.log.create({
       data: {
         campaignId,
         action: 'STATUS_CHANGED',
@@ -112,8 +110,7 @@ export async function setCampaignStatus(campaignId, newStatus) {
     });
   }
 
-  revalidatePath('/[lang]/admin/agency', 'page');
-  revalidatePath(`/[lang]/client-portal/${campaign.clientId}`, 'page');
+  revalidatePath('/', 'layout');
   return campaign;
 }
 
@@ -134,7 +131,7 @@ export async function submitClientAdLink(campaignId, urlsArray) {
     data: insertions
   });
 
-  await prisma.campaignLog.create({
+  await prisma.log.create({
     data: {
       campaignId,
       action: 'AD_LINKS_SUBMITTED',
@@ -143,8 +140,7 @@ export async function submitClientAdLink(campaignId, urlsArray) {
     }
   });
 
-  const campaign = await prisma.agencyCampaign.findUnique({ where: { id: campaignId }});
-  revalidatePath(`/[lang]/client-portal/${campaign?.clientId}`, 'page');
+  revalidatePath('/', 'layout');
   return ads;
 }
 
@@ -154,7 +150,7 @@ export async function uploadAdPreview(adId, previewImageUrl) {
     data: { previewImage: previewImageUrl, status: 'ACTIVE' }
   });
 
-  await prisma.campaignLog.create({
+  await prisma.log.create({
     data: {
       campaignId: ad.campaignId,
       action: 'PROOF_OF_WORK_UPLOADED',
@@ -163,9 +159,7 @@ export async function uploadAdPreview(adId, previewImageUrl) {
     }
   });
 
-  const campaign = await prisma.agencyCampaign.findUnique({ where: { id: ad.campaignId }});
-  revalidatePath('/[lang]/admin/agency', 'page');
-  revalidatePath(`/[lang]/client-portal/${campaign?.clientId}`, 'page');
+  revalidatePath('/', 'layout');
   return ad;
 }
 
@@ -179,45 +173,23 @@ export async function batchApproveAdItems(adItemIds) {
   if (adItemIds.length > 0) {
     const sample = await prisma.adItem.findUnique({ where: { id: adItemIds[0] }});
     if (sample) {
-      await prisma.campaignLog.create({
+      await prisma.log.create({
         data: {
           campaignId: sample.campaignId,
           action: 'BATCH_APPROVAL',
           details: `Admin batch approved ${adItemIds.length} ad links.`
         }
       });
-      const campaign = await prisma.agencyCampaign.findUnique({ where: { id: sample.campaignId }});
-      revalidatePath('/[lang]/admin/agency', 'page');
-      revalidatePath(`/[lang]/client-portal/${campaign?.clientId}`, 'page');
+      revalidatePath('/', 'layout');
     }
   }
-}
-
-// ----------------------------------------------------
-// Client portal chat
-// ----------------------------------------------------
-
-export async function postCampaignMessage(campaignId, sender, text) {
-  await prisma.campaignMessage.create({
-    data: {
-      campaignId,
-      sender,
-      text
-    }
-  });
-  
-  const campaign = await prisma.agencyCampaign.findUnique({ where: { id: campaignId }});
-  if (sender === 'CLIENT') {
-    revalidatePath('/[lang]/admin/agency', 'page');
-  }
-  revalidatePath(`/[lang]/client-portal/${campaign?.clientId}`, 'page');
 }
 
 export async function checkMockData() {
   // Developer function to auto-hydrate client if empty.
-  const clients = await prisma.agencyClient.count();
+  const clients = await prisma.client.count();
   if (clients === 0) {
-    const tamer = await prisma.agencyClient.create({
+    const tamer = await prisma.client.create({
       data: {
         name: 'Tamer Beauty Center',
         primaryContact: 'tamer@example.com',
