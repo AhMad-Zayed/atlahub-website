@@ -1,7 +1,3 @@
-// AtlaHub PLM — production schema (MySQL / Namecheap compatible)
-// Run: npx prisma generate && npx prisma db push
-// See: database/migrations/README-PLM.md for data migration from legacy `status` strings
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,389 +7,64 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ---------------------------------------------------------------------------
-// Legacy portfolio table (existing site content)
-// ---------------------------------------------------------------------------
-
-model portfolio {
-  id               Int       @id @default(autoincrement())
-  title            String    @db.VarChar(255)
-  description      String?   @db.Text
-  image_url        String?   @db.Text
-  type             String?   @db.VarChar(64)
-  result           String?   @db.Text
-  category         String?   @db.VarChar(64)
-  cover_image_url  String?   @db.Text
-  gallery_json     String?   @db.Text
-  video_links_json String?   @db.Text
-  role_summary     String?   @db.Text
-  action_summary   String?   @db.Text
-  tech_focus       String?   @db.Text
-  created_at       DateTime? @default(now()) @db.Timestamp(0)
-  updated_at       DateTime? @default(now()) @db.Timestamp(0)
-}
-
-model users {
-  id       Int    @id @default(autoincrement())
-  username String @unique(map: "username") @db.VarChar(255)
-  password String @db.VarChar(255)
-}
-
-// ---------------------------------------------------------------------------
-// PLM: Services & dynamic form templates
-// ---------------------------------------------------------------------------
-
-model Service {
-  id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(255)
-  description String?  @db.Text
-  icon        String?  @db.VarChar(255)
-  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamp(0)
-
-  templates FormTemplate[]
-  projects  Project[]
-
-  @@map("services")
-}
-
-/// Wizard JSON: steps[] with fields; versioned per service.
-model FormTemplate {
-  id         Int      @id @default(autoincrement())
-  serviceId  Int      @map("service_id")
-  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-  version    Int
-  schemaJson Json     @map("schema_json")
-  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamp(0)
-
-  snapshots ProjectSnapshot[]
-
-  @@unique([serviceId, version])
-  @@index([serviceId])
-  @@map("form_templates")
-}
-
-// ---------------------------------------------------------------------------
-// Project lifecycle (source of truth for pipeline)
-// ---------------------------------------------------------------------------
-
-enum ProjectLifecycleStatus {
-  DRAFT
-  SENT
-  SUBMITTED
-  UNDER_REVIEW
-  NEEDS_REVISION
-  APPROVED
-  COMPLETED
-}
-
-enum ProjectType {
-  CLIENT_SERVICES
-  VISUAL_ID
-  PROPOSAL
-}
-
-model Project {
-  id                Int                    @id @default(autoincrement())
-  title             String                 @db.VarChar(255)
-  client_name       String                 @map("client_name") @db.VarChar(255)
-  lifecycleStatus   ProjectLifecycleStatus @default(DRAFT) @map("lifecycle_status")
-  type              ProjectType            @default(CLIENT_SERVICES) @map("project_type")
-  serviceId         Int?                   @map("service_id")
-  service           Service?               @relation(fields: [serviceId], references: [id], onDelete: SetNull)
-  /// Admin-only: JSON array of field keys that must be re-opened when NEEDS_REVISION
-  revisionFieldKeys Json?                  @map("revision_field_keys")
-  createdAt         DateTime               @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt         DateTime               @default(now()) @updatedAt @map("updated_at") @db.Timestamp(0)
-
-  submission     OnboardingSubmission?
-  tokens         SecureToken[]
-  accessTokens   AccessToken[]
-  assets         Asset[]
-  portfolioEntry PortfolioProject?
-  snapshot       ProjectSnapshot?
-  activityLogs   ActivityLog[]
-  deliverables   Deliverable[]
-  collaboratorNotes CollaboratorNote[]
-
-  @@index([serviceId])
-  @@index([lifecycleStatus])
-  @@map("Project")
-}
-
-/// Locked copy of the form schema (+ optional field toggles) at project creation.
-model ProjectSnapshot {
-  id                 Int           @id @default(autoincrement())
-  projectId          Int           @unique @map("project_id")
-  project            Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  formTemplateId     Int?          @map("form_template_id")
-  formTemplate       FormTemplate? @relation(fields: [formTemplateId], references: [id], onDelete: SetNull)
-  templateVersion    Int?          @map("template_version")
-  schemaSnapshotJson Json          @map("schema_snapshot_json")
-  fieldOverridesJson Json?         @map("field_overrides_json")
-  createdAt          DateTime      @default(now()) @map("created_at") @db.Timestamp(0)
-
-  @@map("project_snapshots")
-}
-
-/// Append-only audit trail (immutability enforced in application layer).
-model ActivityLog {
-  id           Int               @id @default(autoincrement())
-  projectId    Int               @map("project_id")
-  project      Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  actorRole    ActivityActorRole @map("actor_role")
-  action       String            @db.VarChar(128)
-  metadataJson Json?             @map("metadata_json")
-  ipAddress    String?           @map("ip_address") @db.VarChar(45)
-  createdAt    DateTime          @default(now()) @map("created_at") @db.Timestamp(0)
-
-  @@index([projectId, createdAt])
-  @@map("activity_logs")
-}
-
-enum ActivityActorRole {
-  ADMIN
-  CLIENT
-  SYSTEM
-}
-
-enum DeliverableStatus {
-  PENDING
-  APPROVED
-  REVISION
-}
-
-model Deliverable {
-  id        Int               @id @default(autoincrement())
-  projectId Int               @map("project_id")
-  project   Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  version   Int
-  title     String?           @db.VarChar(255)
-  fileUrl   String            @map("file_url") @db.Text
-  type      String            @db.VarChar(64)
-  status    DeliverableStatus @default(PENDING)
-  createdAt DateTime          @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt DateTime          @updatedAt @map("updated_at") @db.Timestamp(0)
-
-  comments  DeliverableComment[]
-
-  @@unique([projectId, type, version])
-  @@index([projectId])
-  @@map("deliverables")
-}
-
-model DeliverableComment {
-  id            Int         @id @default(autoincrement())
-  deliverableId Int         @map("deliverable_id")
-  deliverable   Deliverable @relation(fields: [deliverableId], references: [id], onDelete: Cascade)
-  author        String      @db.VarChar(128)
-  comment       String      @db.Text
-  pinX          Float?      @map("pin_x")
-  pinY          Float?      @map("pin_y")
-  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
-
-  @@index([deliverableId])
-  @@map("deliverable_comments")
-}
-
-model CollaboratorNote {
-  id        Int      @id @default(autoincrement())
-  projectId Int      @map("project_id")
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  author    String   @db.VarChar(128)
-  content   String   @db.Text
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(0)
-
-  @@index([projectId])
-  @@map("collaborator_notes")
-}
-
-// ---------------------------------------------------------------------------
-// Onboarding submission (legacy fixed steps + optional dynamic JSON blob)
-// ---------------------------------------------------------------------------
-
-model OnboardingSubmission {
-  id            Int     @id @default(autoincrement())
-  project       Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId     Int     @unique
-  step1_soul    String  @db.Text
-  step2_market  String  @db.Text
-  step3_visual  String  @db.Text
-  step4_media   Json
-  step5_summary String  @db.Text
-  data          Json?
-}
-
-// ---------------------------------------------------------------------------
-// Access tokens: only SHA-256 digest of the bearer is persisted.
-// Legacy rows may still use `id` as the URL segment; new lookups prefer token_hash.
-// ---------------------------------------------------------------------------
-
-model SecureToken {
-  id         String   @id @default(uuid())
-  token_hash String   @unique @db.VarChar(64)
-  expires_at DateTime @db.Timestamp(0)
-  is_active  Boolean  @default(true)
-  is_used    Boolean  @default(false)
-  project    Project  @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  project_id Int
-
-  @@index([project_id])
-  @@map("SecureToken")
-}
-
-model AccessToken {
-  id         String   @id @default(uuid())
-  token_hash String   @db.VarChar(255)
-  expires_at DateTime @db.Timestamp(0)
-  is_active  Boolean  @default(true)
-  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId  Int
-  createdAt  DateTime @default(now()) @db.Timestamp(0)
-}
-
-model Asset {
-  id        String   @id @default(uuid())
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId Int
-  url       String   @db.Text
-  file_name String?  @db.VarChar(255)
-  file_type String?  @db.VarChar(128)
-  metadata  Json?
-  createdAt DateTime @default(now()) @db.Timestamp(0)
-}
-
-enum PortfolioBridgeStatus {
-  DRAFT
-  PUBLISHED
-}
-
-/// Bridge row: promoted project → public portfolio (draft before publish).
-model PortfolioProject {
-  id             String                 @id @default(uuid())
-  project        Project                @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId      Int                    @unique
-  featured       Boolean                @default(false)
-  summary        String?                @db.Text
-  bridgeStatus   PortfolioBridgeStatus  @default(DRAFT) @map("bridge_status")
-  createdAt      DateTime               @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt      DateTime               @updatedAt @map("updated_at") @db.Timestamp(0)
-}
-
-// ---------------------------------------------------------------------------
-// Analytics & Session Compliance Suite
-// ---------------------------------------------------------------------------
-
-model Session {
-  id         String   @id @default(uuid()) @db.Uuid
-  startTime  DateTime @default(now()) @db.Timestamp(0)
-  endTime    DateTime? @db.Timestamp(0)
-  duration   Int?
-  ipHash     String   @db.VarChar(64)
-  userAgent  String   @db.Text
-  deviceType String?  @db.VarChar(64)
-  os         String?  @db.VarChar(64)
-  browser    String?  @db.VarChar(64)
-  country    String?  @db.VarChar(64)
-  city       String?  @db.VarChar(128)
-  referrer   String?  @db.Text
-  
-  events     Event[]
-}
-
-model Event {
-  id        Int      @id @default(autoincrement())
-  sessionId String   @db.Uuid
-  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  type      String   @db.VarChar(64)
-  target    String?  @db.Text
-  timestamp DateTime @default(now()) @db.Timestamp(0)
-  payload   Json?
-}
-
-// ---------------------------------------------------------------------------
-// AtlaHub Elite: Agency Management System
-// ---------------------------------------------------------------------------
-
-model AgencyClient {
+model Client {
   id                 String   @id @default(uuid()) @db.Uuid
-  token              String   @unique @default(uuid()) @db.Uuid
   name               String   @db.VarChar(255)
   logo               String?  @db.Text
-  primaryContact     String   @db.VarChar(255)
-  preferredCurrency  String   @default("USD") @db.VarChar(10)
+  token              String   @unique @default(uuid()) @db.Uuid
   preferredLang      String   @default("en") @db.VarChar(10)
-  createdAt          DateTime @default(now()) @db.Timestamp(0)
-  
-  campaigns          AgencyCampaign[]
+  preferredCurrency  String   @default("USD") @db.VarChar(10)
+  createdAt          DateTime @default(now())
+  campaigns          Campaign[]
 }
 
-enum CampaignStatus {
-  PENDING
-  FUNDED
-  ACTIVE
-  PAUSED
-  COMPLETED
-}
-
-model AgencyCampaign {
-  id                  String         @id @default(uuid()) @db.Uuid
-  clientId            String         @db.Uuid
-  client              AgencyClient   @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  title               String         @db.VarChar(255)
-  serviceType         String?        @db.VarChar(128)
-  category            String?        @db.VarChar(128)
-  status              CampaignStatus @default(PENDING)
-  totalClientPaid     Float          @default(0)
-  actualPlatformSpend Float          @default(0)
-  serviceFee          Float          @default(0)
-  profitMargin        Float          @default(0)
-  startDate           DateTime?      @db.Timestamp(0)
-  endDate             DateTime?      @db.Timestamp(0)
-  createdAt           DateTime       @default(now()) @db.Timestamp(0)
-  updatedAt           DateTime       @updatedAt @db.Timestamp(0)
-  
+model Campaign {
+  id                  String     @id @default(uuid()) @db.Uuid
+  clientId            String     @db.Uuid
+  client              Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  serviceType         String?    @db.VarChar(128)
+  category            String?    @db.VarChar(128)
+  status              String     @default("PENDING")
+  totalClientPaid     Float      @default(0)
+  actualPlatformSpend Float      @default(0)
+  serviceFee          Float      @default(0)
+  startDate           DateTime?
+  endDate             DateTime?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
   adItems             AdItem[]
-  messages            CampaignMessage[]
-  logs                CampaignLog[]
-
-  @@index([clientId])
+  logs                Log[]
 }
 
 model AdItem {
-  id             String         @id @default(uuid()) @db.Uuid
-  campaignId     String         @db.Uuid
-  campaign       AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  postUrl        String         @db.Text
-  previewImage   String?        @db.Text
-  targetAudience String?        @db.Text
-  reachGoal      Int            @default(0)
-  itemBudget     Float          @default(0)
-  status         String         @default("PENDING") @db.VarChar(64) // PENDING, APPROVED, ACTIVE
-  createdAt      DateTime       @default(now()) @db.Timestamp(0)
-
-  @@index([campaignId])
+  id             String    @id @default(uuid()) @db.Uuid
+  campaignId     String    @db.Uuid
+  campaign       Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  postUrl        String    @db.Text
+  previewImage   String?   @db.Text
+  itemBudget     Float     @default(0)
+  status         String    @default("PENDING")
+  createdAt      DateTime  @default(now())
 }
 
-model CampaignMessage {
-  id         String         @id @default(uuid()) @db.Uuid
-  campaignId String         @db.Uuid
-  campaign   AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  sender     String         @db.VarChar(64) // "CLIENT" or "ADMIN"
-  text       String         @db.Text
-  createdAt  DateTime       @default(now()) @db.Timestamp(0)
-
-  @@index([campaignId])
+model Log {
+  id         String   @id @default(uuid()) @db.Uuid
+  campaignId String   @db.Uuid
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  action     String   @db.VarChar(255)
+  user       String   @default("SYSTEM") @db.VarChar(64)
+  details    String?  @db.Text
+  createdAt  DateTime @default(now())
 }
 
-model CampaignLog {
-  id         String         @id @default(uuid()) @db.Uuid
-  campaignId String         @db.Uuid
-  campaign   AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  action     String         @db.VarChar(255)
-  user       String         @default("SYSTEM") @db.VarChar(64)
-  details    String?        @db.Text
-  createdAt  DateTime       @default(now()) @db.Timestamp(0)
-
-  @@index([campaignId])
+model Analytics {
+  id         String   @id @default(uuid()) @db.Uuid
+  ipHash     String   @db.VarChar(255)
+  country    String?  @db.VarChar(255)
+  city       String?  @db.VarChar(255)
+  device     String?  @db.VarChar(64)
+  os         String?  @db.VarChar(64)
+  browser    String?  @db.VarChar(64)
+  metadata   Json?
+  createdAt  DateTime @default(now())
 }

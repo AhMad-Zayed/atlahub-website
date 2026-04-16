@@ -4,23 +4,21 @@ import ClientDashboardClient from './ClientDashboardClient';
 
 export const dynamic = 'force-dynamic';
 
-export default async function ClientPortalPage(props) {
+export default async function ClientTokenPage(props) {
   const params = await props.params;
-  const { clientId, lang = 'en' } = params;
+  const { token, lang = 'en' } = params;
 
-  // UUID check rough regex to avoid Prisma crashing on invalid UUID
-  if (!clientId.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)) {
+  if (!token.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)) {
     notFound();
   }
 
-  const client = await prisma.agencyClient.findUnique({
-    where: { id: clientId },
+  const client = await prisma.client.findUnique({
+    where: { token: token },
     include: {
       campaigns: {
         include: {
           adItems: { orderBy: { createdAt: 'desc' } },
-          messages: { orderBy: { createdAt: 'asc' } },
-          logs: { orderBy: { createdAt: 'desc' } }
+          logs: { orderBy: { createdAt: 'desc' }, take: 10 }
         },
         orderBy: { createdAt: 'desc' }
       }
