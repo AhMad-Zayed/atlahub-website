@@ -1,6 +1,7 @@
 'use strict';
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
@@ -15,7 +16,7 @@ const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion
 export default function HeroSlider({ data }) {
   const slides = data?.slides || [];
   return (
-    <section className="relative h-screen w-full bg-blue-50 overflow-hidden" id="hero">
+    <section className="relative h-screen w-full bg-brand-dark overflow-hidden" id="hero" data-analytics-section="hero">
       <div className="absolute inset-0 z-0 bg-tech-pattern" />
 
       <Swiper
@@ -30,7 +31,7 @@ export default function HeroSlider({ data }) {
         pagination={{
           clickable: true,
           renderBullet: (index, className) => {
-            return `<span class="${className} !bg-blue-600"></span>`;
+            return `<span class="${className} !bg-brand-azure shadow-[0_0_10px_rgba(0,123,255,0.8)]"></span>`;
           },
         }}
         className="h-full w-full"
@@ -44,7 +45,7 @@ export default function HeroSlider({ data }) {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-brand-dark/70 mix-blend-multiply" />
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 md:px-20">
               <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
@@ -59,12 +60,12 @@ export default function HeroSlider({ data }) {
                   {slide.description}
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <button className="font-tajawal font-bold bg-gradient-to-r from-blue-700 to-blue-400 text-white px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
+                  <Link href="#contact" className="inline-flex items-center justify-center font-tajawal font-bold bg-brand-azure text-white px-8 py-3 rounded-full shadow-[0_0_20px_rgba(0,123,255,0.5)] hover:shadow-[0_0_35px_rgba(0,123,255,0.8)] hover:-translate-y-1 transition-all duration-300">
                     {data?.ctaPrimary}
-                  </button>
-                  <button className="font-tajawal font-bold border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white/20 transition-colors">
+                  </Link>
+                  <Link href="#portfolio" className="inline-flex items-center justify-center font-tajawal font-bold border border-white/20 bg-white/5 backdrop-blur-md text-white px-8 py-3 rounded-full hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300">
                     {data?.ctaSecondary}
-                  </button>
+                  </Link>
                 </div>
               </MotionDiv>
             </div>

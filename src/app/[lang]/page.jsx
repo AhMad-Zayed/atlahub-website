@@ -10,10 +10,12 @@ import Clients from '@/components/Sections/Clients';
 import Academy from '@/components/Sections/Academy';
 import WhyUs from '@/components/Sections/WhyUs';
 import Contact from '@/components/Sections/Contact';
+import { getMergedPortfolio } from '@/lib/portfolio-content';
 
 export default async function Home({ params }) {
   const { lang } = await params;
   const pageContent = content[lang] || content.en;
+  const portfolio = await getMergedPortfolio(pageContent.portfolio);
 
   return (
     <>
@@ -21,10 +23,10 @@ export default async function Home({ params }) {
       <Hero data={pageContent.hero} />
       <Services data={pageContent.services} lang={lang} />
       <Process data={pageContent.process} />
-      <Portfolio data={pageContent.portfolio} lang={lang} />
+      <Portfolio data={portfolio} lang={lang} />
       <Founder data={pageContent.founder} />
       <Clients data={pageContent.clients} lang={lang} />
-      <Academy data={pageContent.academy} />
+      <Academy data={pageContent.training} />
       <WhyUs data={pageContent.whyUs} />
       <Contact data={pageContent.contact} />
       <Footer lang={lang} navData={pageContent.nav} brandData={pageContent.brand} footerData={pageContent.footer} />

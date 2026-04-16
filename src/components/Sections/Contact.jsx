@@ -11,10 +11,15 @@ export default function Contact({ data }) {
     setStatus('loading');
     
     try {
+      const fingerprint = typeof window !== 'undefined' ? window.__atlaFingerprint || '' : '';
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          fingerprint,
+          page_path: typeof window !== 'undefined' ? window.location.pathname : '/',
+        }),
       });
 
       if (res.ok) {
@@ -30,7 +35,7 @@ export default function Contact({ data }) {
   };
 
   return (
-    <section id="contact" className="relative py-32 bg-gray-900 text-white font-tajawal overflow-hidden">
+    <section id="contact" data-analytics-section="lead:contact" className="relative py-32 bg-gray-900 text-white font-tajawal overflow-hidden">
       <div className="absolute inset-0 bg-tech-pattern pointer-events-none"></div>
       <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-brand-blue to-brand-blue-light"></div>
       <div className="absolute -top-40 -end-40 w-96 h-96 bg-brand-blue/20 rounded-full blur-3xl pointer-events-none"></div>

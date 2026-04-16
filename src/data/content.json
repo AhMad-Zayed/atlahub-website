@@ -8,7 +8,7 @@
       "home": "Home",
       "services": "Services",
       "portfolio": "Portfolio",
-      "academy": "Academy",
+      "academy": "Training",
       "about": "About",
       "contact": "Contact",
       "startProject": "Start Project",
@@ -71,11 +71,11 @@
           "icon": "server"
         },
         {
-          "id": "academy",
-          "title": "Academy",
-          "description": "Professional training tracks covering digital mental health, cybersecurity, AI, mobile development, and pentesting.",
-          "highlight": "Training Programs and Applied Workshops",
-          "icon": "academy"
+          "id": "training",
+          "title": "Training",
+          "description": "Professional training tracks covering digital safety, cybersecurity, AI, mobile development, and practical technical facilitation.",
+          "highlight": "Training Programs, ToT, and Applied Workshops",
+          "icon": "training"
         }
       ]
     },
@@ -154,13 +154,14 @@
         ],
         "whyUs": "Infrastructure work is only valuable when it is reliable in day-to-day use. Our approach is practical, detail-oriented, and informed by technical training that supports stable configuration, documentation, and support."
       },
-      "academy": {
-        "title": "Academy",
-        "subtitle": "Applied technical training designed for learners, teams, and institutions that need relevant, current digital skills.",
-        "valueProposition": "This service helps organizations and learners build practical knowledge in areas that have immediate educational and professional relevance. The focus is on usable understanding, not abstract theory alone.",
+      "training": {
+        "title": "Training",
+        "subtitle": "Applied technical training designed for learners, educators, teams, and institutions that need relevant, current digital skills.",
+        "valueProposition": "This service helps organizations and learners build practical knowledge in areas that have immediate educational and professional relevance. The focus is on usable understanding, practical transfer, and safe digital practice rather than abstract theory alone.",
         "technicalScope": [
           "Training in digital mental health concepts and applications",
           "Cybersecurity foundations and defensive practice",
+          "Digital security training-of-trainers programs for schools and communities",
           "Generative AI concepts, workflows, and responsible usage",
           "Mobile development training",
           "Pentesting fundamentals and hands-on technical exposure"
@@ -170,7 +171,7 @@
           "Execution: prepare curriculum, deliver training, and guide practical exercises",
           "Support: provide follow-up material, structured notes, and next-step recommendations"
         ],
-        "whyUs": "Our academy offering is shaped by hands-on technical practice and university-level academic background. That combination allows us to present complex topics in a structured, practical, and credible format."
+        "whyUs": "Our training offering is shaped by hands-on technical practice, community-facing facilitation, and university-level academic background. That combination allows us to present complex topics in a structured, practical, and credible format for both specialist and public audiences."
       }
     },
     "process": {
@@ -219,18 +220,12 @@
           "hasVideo": true
         },
         {
-          "id": "academy",
-          "title": "Academy",
-          "summary": "Applied training programs covering Flutter and machine learning foundations.",
+          "id": "training",
+          "title": "Training",
+          "summary": "Applied learning programs spanning Flutter, machine learning, and digital security training-of-trainers for educators and communities.",
           "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
-          "projectCount": "1"
-        },
-        {
-          "id": "cybertraining",
-          "title": "CyberTraining",
-          "summary": "Digital security training delivered through a structured training-of-trainers format.",
-          "image": null,
-          "projectCount": "1"
+          "projectCount": "4",
+          "hasVideo": false
         },
         {
           "id": "marketing",
@@ -266,7 +261,7 @@
               ]
             },
             {
-              "name": "Tech-Pharm",
+              "name": "Tech-Pharm Platform",
               "image": null,
               "role": "Product architecture, information hierarchy, and frontend delivery for a pharmaceutical platform focused on dependable discovery and access workflows.",
               "action": "Engineered a comprehensive pharmaceutical digital experience around structured product access, performant page delivery, and a maintainable web architecture that supports scalable catalog growth.",
@@ -325,9 +320,9 @@
             }
           ]
         },
-        "academy": {
-          "title": "Academy",
-          "subtitle": "Training programs designed around practical tools, guided learning, and technical accessibility.",
+        "training": {
+          "title": "Training",
+          "subtitle": "Training programs designed around practical tools, guided learning, digital safety, and technical accessibility.",
           "projects": [
             {
               "name": "Ro'wad Al-Elm Flutter Boot Camp",
@@ -342,25 +337,61 @@
                 "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_4.jpg",
                 "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_5.jpg"
               ]
-            }
-          ]
-        },
-        "cybertraining": {
-          "title": "CyberTraining",
-          "subtitle": "Security training programs focused on practical awareness, structured delivery, and professional relevance.",
-          "projects": [
+            },
             {
-              "name": "ToT Digital Security (7amleh)",
-              "image": null,
-              "role": "Training-of-trainers support in digital security concepts and delivery structure.",
-              "action": "Prepared and delivered training material to help participants transfer digital security knowledge effectively.",
-              "result": "Created a more organized and scalable training experience for security-focused knowledge sharing.",
-              "links": [
-                {
-                  "label": "7amleh",
-                  "type": "website",
-                  "url": "https://7amleh.org"
-                }
+              "id": "tot-jerusalem-2022",
+              "name": "Digital Security ToT - Jerusalem Teachers (2022)",
+              "image": "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_1.jpg",
+              "role": "Led an intensive August 2022 training-of-trainers track for teachers, focusing on digital security awareness, school-safe response habits, and workshop facilitation skills for student and community settings.",
+              "action": "Simplified complex digital security terms, built educator-friendly delivery flows, and guided participants through a graduation requirement centered on presenting a practical workshop project that tested methodology, clarity, and delivery readiness.",
+              "result": "Equipped teachers with the confidence and structure to protect school environments, support students more safely, and replicate digital security knowledge through community-facing workshops backed by formal evaluation and certification.",
+              "gallery": [
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_1.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_2.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_3.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_4.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_5.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_6.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_7.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_8.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_9.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_10.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_11.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_12.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_13.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_14.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_15.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_16.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_17.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_18.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_19.jpg"
+              ]
+            },
+            {
+              "id": "best-football-player-academy-qalandia",
+              "name": "Digital Security Camp - Qalandia",
+              "image": "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player1.jpg",
+              "role": "Delivered an interactive youth-focused digital security camp centered on safe internet use, privacy awareness, and practical habits for navigating online spaces with confidence.",
+              "action": "Used workshop-style guidance and relatable cybersecurity examples to explain secure browsing, privacy preservation, and the warning signs of social engineering and cyber-extortion targeting younger audiences.",
+              "result": "Strengthened digital safety awareness among youth participants and translated cybersecurity concepts into practical prevention habits they can apply in everyday online behavior.",
+              "gallery": [
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player1.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player2.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player3.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player4.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player5.jpg"
+              ]
+            },
+            {
+              "id": "al-quds-open-university-digital-marketing",
+              "name": "Al-Quds Open University Workshop",
+              "image": "/assets/images/portfolio/Adus_open_university_DigitalMarketing_AhmaddZayed1.jpeg",
+              "role": "Led an advanced technical workshop for Digital Marketing students focused on protecting social media platforms and understanding real attack paths used in social engineering campaigns.",
+              "action": "Presented live demonstrations of phishing attacks and email spoofing, including a controlled simulation of sending an email from the professor's address to expose how impersonation can exploit trust in academic and professional settings.",
+              "result": "Connected cybersecurity theory to live technical demonstrations, helping students grasp how platform abuse, phishing, and spoofed communication can directly affect digital marketing operations and brand trust.",
+              "gallery": [
+                "/assets/images/portfolio/Adus_open_university_DigitalMarketing_AhmaddZayed1.jpeg",
+                "/assets/images/portfolio/Adus_open_university_DigitalMarketing_AhmaddZayed2.jpeg"
               ]
             }
           ]
@@ -420,51 +451,126 @@
       "subheadline": "We collaborate with ambitious brands across multiple industries.",
       "loading": "Loading clients...",
       "list": [
-        { "name": "Tamer Beauty Center", "logo": "/assets/images/clients/Tamer_Beauty_Center.jpg" },
-        { "name": "Tia Beauty Center", "logo": "/assets/images/clients/Tia_beauty_center.jpg" },
-        { "name": "AlTal Coffee", "logo": "/assets/images/clients/AlTal_Coffee.jpg" },
-        { "name": "Zena Beauty", "logo": "/assets/images/clients/Zena_Beauty.jpg" },
-        { "name": "Best Line Doors", "logo": "/assets/images/clients/Best Line Doors.jpg" },
-        { "name": "King Al-Qudra Restaurant", "logo": "/assets/images/clients/مطعم ملك القدرة.png" },
-        { "name": "Silwan Schools Parents Central Committee", "logo": "/assets/images/clients/اللجنة المركزية لأولياء امور مدارس سلوان.jpg" },
-        { "name": "Fadi Hamido, King of Molasses and Hookahs", "logo": "/assets/images/clients/فادي حميدو ملك المعسل والاراجيل.png" },
-        { "name": "Cinderella Beauty", "logo": "/assets/images/clients/Cinderella Beauty.jpg" },
-        { "name": "Royal Airport Restaurant", "logo": "/assets/images/clients/مطعم المطار الملكي.jpg" },
-        { "name": "Ahava Home Renovation", "logo": "/assets/images/clients/Ahava Home renovation.jpg" },
-        { "name": "Master Butcher", "logo": "/assets/images/clients/Master Butcher .jpg" },
-        { "name": "Asiad Delivery Services", "logo": "/assets/images/clients/شركة أسياد لخدمات التوصيل.jpg" },
-        { "name": "Al-Rayhan Villas for Daily Rent - Jericho", "logo": "/assets/images/clients/فلل الريحان للايجار اليومي أريحا.jpg" },
-        { "name": "Tamkeen Educational Center", "logo": "/assets/images/clients/مركز تمكين التعليمي.jpg" },
-        { "name": "Almatalleh Villas - فلل المطلة", "logo": "/assets/images/clients/Almatalleh Villas - فلل المطلة.jpg" },
-        { "name": "Aya Sofia Real Estate Group", "logo": "/assets/images/clients/مجموعة آيا صوفيا العقارية.jpg" },
-        { "name": "Bayt Al-Maqdis Real Estate Group", "logo": "/assets/images/clients/مجموعة بيت المقدس للعقارات.jpg" },
-        { "name": "Bouquet Ward", "logo": "/assets/images/clients/بوكيه ward.jpg" },
-        { "name": "Al Sultan Restaurant", "logo": "/assets/images/clients/مطعم السلطان-Al sultan.jpg" },
-        { "name": "Arab Center for Social Media Advancement", "logo": "/assets/images/clients/Arab Center for Social Media Advancement.svg" },
-        { "name": "MIFTAH", "logo": "/assets/images/clients/MIFTAH مفتاح.jpg" },
-        { "name": "Anwar Al-Quds College", "logo": "/assets/images/clients/كلية انوار القدس.jpg" },
-        { "name": "Palestinian Vision Organization", "logo": "/assets/images/clients/ Palestinian Vision Organization.png" },
-        { "name": "Al-Quds University", "logo": "/assets/images/clients/Al-Quds University.png" }
+        {
+          "name": "Tamer Beauty Center",
+          "logo": "/assets/images/clients/Tamer_Beauty_Center.jpg"
+        },
+        {
+          "name": "Tia Beauty Center",
+          "logo": "/assets/images/clients/Tia_beauty_center.jpg"
+        },
+        {
+          "name": "AlTal Coffee",
+          "logo": "/assets/images/clients/AlTal_Coffee.jpg"
+        },
+        {
+          "name": "Zena Beauty",
+          "logo": "/assets/images/clients/Zena_Beauty.jpg"
+        },
+        {
+          "name": "Best Line Doors",
+          "logo": "/assets/images/clients/Best Line Doors.jpg"
+        },
+        {
+          "name": "King Al-Qudra Restaurant",
+          "logo": "/assets/images/clients/مطعم ملك القدرة.png"
+        },
+        {
+          "name": "Silwan Schools Parents Central Committee",
+          "logo": "/assets/images/clients/اللجنة المركزية لأولياء امور مدارس سلوان.jpg"
+        },
+        {
+          "name": "Fadi Hamido, King of Molasses and Hookahs",
+          "logo": "/assets/images/clients/فادي حميدو ملك المعسل والاراجيل.png"
+        },
+        {
+          "name": "Cinderella Beauty",
+          "logo": "/assets/images/clients/Cinderella Beauty.jpg"
+        },
+        {
+          "name": "Royal Airport Restaurant",
+          "logo": "/assets/images/clients/مطعم المطار الملكي.jpg"
+        },
+        {
+          "name": "Ahava Home Renovation",
+          "logo": "/assets/images/clients/Ahava Home renovation.jpg"
+        },
+        {
+          "name": "Master Butcher",
+          "logo": "/assets/images/clients/Master Butcher .jpg"
+        },
+        {
+          "name": "Asiad Delivery Services",
+          "logo": "/assets/images/clients/شركة أسياد لخدمات التوصيل.jpg"
+        },
+        {
+          "name": "Al-Rayhan Villas for Daily Rent - Jericho",
+          "logo": "/assets/images/clients/فلل الريحان للايجار اليومي أريحا.jpg"
+        },
+        {
+          "name": "Tamkeen Educational Center",
+          "logo": "/assets/images/clients/مركز تمكين التعليمي.jpg"
+        },
+        {
+          "name": "Almatalleh Villas - فلل المطلة",
+          "logo": "/assets/images/clients/Almatalleh Villas - فلل المطلة.jpg"
+        },
+        {
+          "name": "Aya Sofia Real Estate Group",
+          "logo": "/assets/images/clients/مجموعة آيا صوفيا العقارية.jpg"
+        },
+        {
+          "name": "Bayt Al-Maqdis Real Estate Group",
+          "logo": "/assets/images/clients/مجموعة بيت المقدس للعقارات.jpg"
+        },
+        {
+          "name": "Bouquet Ward",
+          "logo": "/assets/images/clients/بوكيه ward.jpg"
+        },
+        {
+          "name": "Al Sultan Restaurant",
+          "logo": "/assets/images/clients/مطعم السلطان-Al sultan.jpg"
+        },
+        {
+          "name": "Arab Center for Social Media Advancement",
+          "logo": "/assets/images/clients/Arab Center for Social Media Advancement.svg"
+        },
+        {
+          "name": "MIFTAH",
+          "logo": "/assets/images/clients/MIFTAH مفتاح.jpg"
+        },
+        {
+          "name": "Anwar Al-Quds College",
+          "logo": "/assets/images/clients/كلية انوار القدس.jpg"
+        },
+        {
+          "name": "Palestinian Vision Organization",
+          "logo": "/assets/images/clients/ Palestinian Vision Organization.png"
+        },
+        {
+          "name": "Al-Quds University",
+          "logo": "/assets/images/clients/Al-Quds University.png"
+        }
       ]
     },
-    "academy": {
-      "badge": "Coming Soon",
-      "headline": "Atla Hub Academy",
-      "description": "Elite training programs tailored for the next generation of software engineers and high-level cybersecurity experts.",
-      "cta": "Explore Programs",
+    "training": {
+      "badge": "Training Focus",
+      "headline": "Atla Hub Training",
+      "description": "Elite training programs tailored for future software engineers, digital safety advocates, and educators who need practical, community-ready technical facilitation.",
+      "cta": "Explore Training",
       "feature": {
-        "label": "Flutter Showcase",
-        "subtitle": "Mobile-First Track",
-        "title": "Ro'wad Al-Elm Flutter Boot Camp",
-        "description": "A mobile-first curriculum that pairs Flutter UI development with ML classification on-device. Learners build a working inference flow using TensorFlow Lite, connect it to a responsive interface, and validate results through real-world test data.",
-        "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
-        "caption": "Flutter UI + On-device ML",
-        "footnote": "Mobile-first training interface",
+        "label": "Digital Security ToT",
+        "subtitle": "Jerusalem Teachers | August 2022",
+        "title": "Digital Security ToT - Jerusalem Teachers",
+        "description": "An educator-focused training-of-trainers program that translated digital security concepts into accessible teaching practice. Participants built workshop delivery skills, strengthened school-safe response habits, and completed a practical graduation project before certification.",
+        "image": "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_1.jpg",
+        "caption": "Community facilitation + digital safety",
+        "footnote": "Training leadership for schools and communities",
         "chips": [
-          "Flutter UI",
-          "ML Classification",
-          "TensorFlow Lite",
-          "Mobile-first"
+          "Digital Security",
+          "Teacher Enablement",
+          "Workshop Design",
+          "Community Impact"
         ]
       }
     },
@@ -533,7 +639,7 @@
       "home": "الرئيسية",
       "services": "خدماتنا",
       "portfolio": "أعمالنا",
-      "academy": "الأكاديمية",
+      "academy": "التدريب",
       "about": "من نحن",
       "contact": "اتصل بنا",
       "startProject": "ابدأ مشروعك",
@@ -596,11 +702,11 @@
           "icon": "server"
         },
         {
-          "id": "academy",
-          "title": "الأكاديمية",
-          "description": "برامج تدريبية مهنية في الصحة النفسية الرقمية، والأمن السيبراني، والذكاء التوليدي، وتطوير الموبايل، والاختبار الاختراقي.",
-          "highlight": "برامج تدريبية وورش تطبيقية",
-          "icon": "academy"
+          "id": "training",
+          "title": "التدريب",
+          "description": "مسارات تدريبية مهنية تغطي السلامة الرقمية، والأمن السيبراني، والذكاء الاصطناعي، وتطوير الموبايل، والتيسير التقني العملي.",
+          "highlight": "برامج تدريبية، تدريب مدربين، وورش تطبيقية",
+          "icon": "training"
         }
       ]
     },
@@ -679,13 +785,14 @@
         ],
         "whyUs": "قيمة البنية التحتية تظهر في موثوقيتها اليومية. نعتمد نهجاً عملياً ومنظماً يستند إلى تدريب تقني وأكاديمي يساعد على إعداد الأنظمة وتوثيقها ودعمها بشكل مستقر."
       },
-      "academy": {
-        "title": "الأكاديمية",
-        "subtitle": "تدريب تقني تطبيقي موجه للأفراد والفرق والمؤسسات التي تحتاج إلى مهارات رقمية حديثة ومرتبطة بسوق العمل.",
-        "valueProposition": "تساعد هذه الخدمة المتعلمين والمؤسسات على تطوير معرفة عملية في مجالات لها قيمة مهنية وتعليمية مباشرة، مع التركيز على الفهم القابل للتطبيق بدلاً من الطرح النظري فقط.",
+      "training": {
+        "title": "التدريب",
+        "subtitle": "تدريب تقني تطبيقي موجه للمتعلمين، والمعلمين، والفرق، والمؤسسات التي تحتاج إلى مهارات رقمية حديثة ومرتبطة بالواقع.",
+        "valueProposition": "تساعد هذه الخدمة المؤسسات والمتعلمين على بناء معرفة عملية في مجالات ذات أهمية تعليمية ومهنية مباشرة، مع التركيز على الفهم القابل للاستخدام، ونقل المعرفة، والممارسة الرقمية الآمنة بدلاً من الاكتفاء بالجانب النظري.",
         "technicalScope": [
           "التدريب في مفاهيم وتطبيقات الصحة النفسية الرقمية",
           "أساسيات الأمن السيبراني والممارسة الدفاعية",
+          "برامج تدريب مدربين في الأمان الرقمي للمدارس والمجتمعات",
           "مفاهيم الذكاء الاصطناعي التوليدي وسير العمل والاستخدام المسؤول",
           "التدريب في تطوير تطبيقات الموبايل",
           "أساسيات الاختبار الاختراقي والتجارب العملية"
@@ -695,7 +802,7 @@
           "التنفيذ: إعداد المنهج وتقديم التدريب وتوجيه التطبيق العملي",
           "الدعم: تقديم مواد متابعة وملاحظات منظمة وتوصيات للخطوات القادمة"
         ],
-        "whyUs": "يعتمد الطرح التدريبي لدينا على خبرة تقنية عملية مدعومة بخلفية أكاديمية جامعية، مما يساعدنا على تقديم موضوعات معقدة بشكل منظم وعملي وموثوق."
+        "whyUs": "تنطلق خدمات التدريب لدينا من ممارسة تقنية عملية، وخبرة في التيسير المجتمعي، وخلفية أكاديمية جامعية، ما يسمح بتقديم مواضيع معقدة بصورة منظمة وعملية وموثوقة لمتخصصين وجمهور عام في آن واحد."
       }
     },
     "process": {
@@ -744,18 +851,12 @@
           "hasVideo": true
         },
         {
-          "id": "academy",
-          "title": "الأكاديمية",
-          "summary": "برامج تدريبية تطبيقية في Flutter ومفاهيم التعلم الآلي.",
+          "id": "training",
+          "title": "التدريب",
+          "summary": "برامج تعلم تطبيقية تجمع بين Flutter، والتعلم الآلي، وتدريب المدربين في الأمان الرقمي للمعلمين والمجتمعات.",
           "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
-          "projectCount": "1"
-        },
-        {
-          "id": "cybertraining",
-          "title": "التدريب السيبراني",
-          "summary": "تدريب منظم في الأمن الرقمي بصيغة تدريب المدربين.",
-          "image": null,
-          "projectCount": "1"
+          "projectCount": "4",
+          "hasVideo": false
         },
         {
           "id": "marketing",
@@ -791,7 +892,7 @@
               ]
             },
             {
-              "name": "Tech-Pharm",
+              "name": "Tech-Pharm Platform",
               "image": null,
               "role": "تصميم معمارية المنتج وبنية المحتوى وتنفيذ واجهات منصة دوائية تركز على سهولة الوصول إلى المنتجات الطبية واعتمادية التجربة الرقمية.",
               "action": "تم تطوير تجربة رقمية دوائية شاملة تقوم على تنظيم الوصول إلى المنتجات، وسرعة تحميل الصفحات، ومعمارية ويب قابلة للتوسع مع نمو المحتوى والفئات.",
@@ -850,9 +951,9 @@
             }
           ]
         },
-        "academy": {
-          "title": "الأكاديمية",
-          "subtitle": "برامج تدريبية تطبيقية مبنية على التدرج العملي وتبسيط المفاهيم التقنية.",
+        "training": {
+          "title": "التدريب",
+          "subtitle": "برامج تدريبية تطبيقية مبنية على التدرج العملي، والسلامة الرقمية، وتبسيط المفاهيم التقنية.",
           "projects": [
             {
               "name": "Ro'wad Al-Elm Flutter Boot Camp",
@@ -867,25 +968,61 @@
                 "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_4.jpg",
                 "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_5.jpg"
               ]
-            }
-          ]
-        },
-        "cybertraining": {
-          "title": "التدريب السيبراني",
-          "subtitle": "برامج تدريبية في الأمن الرقمي تركّز على التطبيق العملي والتنظيم المعرفي.",
-          "projects": [
+            },
             {
-              "name": "ToT Digital Security (7amleh)",
-              "image": null,
-              "role": "دعم تدريب المدربين في مفاهيم الأمن الرقمي وآليات التقديم المنظم.",
-              "action": "تم إعداد وتقديم مواد تدريبية تساعد المشاركين على نقل المعرفة الأمنية بصورة فعالة.",
-              "result": "بناء تجربة تدريبية أكثر تنظيماً وقابلية للتكرار في برامج الأمن الرقمي.",
-              "links": [
-                {
-                  "label": "7amleh",
-                  "type": "website",
-                  "url": "https://7amleh.org"
-                }
+              "id": "tot-jerusalem-2022",
+              "name": "برنامج تدريب المدربين للأمان الرقمي - المعلمين (القدس 2022)",
+              "image": "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_1.jpg",
+              "role": "تنفيذ برنامج مكثف في أغسطس 2022 للمعلمين يركز على الوعي بالأمان الرقمي، والاستجابة الآمنة في البيئة المدرسية، وبناء مهارات تقديم الورش للطلاب والمجتمع.",
+              "action": "تم تبسيط المصطلحات الرقمية المعقدة، وبناء مسارات تقديم مناسبة للمعلمين، وقيادة المشاركين نحو مشروع تخرج عملي بعنوان عرض ورشة لتقييم المنهجية والوضوح والجاهزية للتقديم.",
+              "result": "تمكين المعلمين من حماية البيئة المدرسية والطلاب بصورة أفضل، ونقل المعرفة الرقمية للمجتمع من خلال ورش منظمة مدعومة بتقييم منهجي وشهادات إتمام.",
+              "gallery": [
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_1.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_2.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_3.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_4.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_5.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_6.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_7.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_8.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_9.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_10.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_11.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_12.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_13.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_14.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_15.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_16.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_17.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_18.jpg",
+                "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_19.jpg"
+              ]
+            },
+            {
+              "id": "best-football-player-academy-qalandia",
+              "name": "مخيم الأمان الرقمي - أكاديمية اللاعب الأفضل (مخيم قلنديا)",
+              "image": "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player1.jpg",
+              "role": "تنفيذ مخيم تفاعلي موجه للفئات الشابة يركز على الإنترنت الآمن، والخصوصية الرقمية، والعادات العملية للتعامل الواعي مع الفضاء الرقمي.",
+              "action": "تم تقديم الورشة بأسلوب تفاعلي مع أمثلة مبسطة وواقعية لشرح التصفح الآمن، وحماية الخصوصية، ومؤشرات الهندسة الاجتماعية والابتزاز الإلكتروني التي قد تستهدف الشباب.",
+              "result": "رفع وعي المشاركين بالمخاطر الرقمية وتحويل مفاهيم الأمن السيبراني إلى سلوكيات وقائية عملية يمكن تطبيقها في الاستخدام اليومي للإنترنت.",
+              "gallery": [
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player1.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player2.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player3.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player4.jpg",
+                "/assets/images/portfolio/Qalnda_Camp_Best_fotball_player5.jpg"
+              ]
+            },
+            {
+              "id": "al-quds-open-university-digital-marketing",
+              "name": "ورشة الأمان الرقمي في التسويق - جامعة القدس المفتوحة",
+              "image": "/assets/images/portfolio/Adus_open_university_DigitalMarketing_AhmaddZayed1.jpeg",
+              "role": "تنفيذ ورشة تقنية متقدمة لطلاب التسويق الرقمي تركز على حماية المنصات الاجتماعية وفهم المسارات العملية للهجمات المرتبطة بالهندسة الاجتماعية.",
+              "action": "تضمن التدريب عروضاً حية لهجمات التصيد الاحتيالي وانتحال البريد الإلكتروني، بما في ذلك محاكاة إرسال بريد إلكتروني من عنوان المحاضر لتوضيح كيف يمكن استغلال الثقة داخل البيئات الأكاديمية والمهنية.",
+              "result": "ربطت الورشة بين النظرية الأمنية والعروض التقنية الحية، ما ساعد الطلبة على فهم تأثير التصيد والانتحال على منصات التسويق الرقمي وسمعة العلامات التجارية.",
+              "gallery": [
+                "/assets/images/portfolio/Adus_open_university_DigitalMarketing_AhmaddZayed1.jpeg",
+                "/assets/images/portfolio/Adus_open_university_DigitalMarketing_AhmaddZayed2.jpeg"
               ]
             }
           ]
@@ -945,51 +1082,126 @@
       "subheadline": "نتعاون مع علامات طموحة من قطاعات متعددة.",
       "loading": "جارٍ تحميل العملاء...",
       "list": [
-        { "name": "مركز تامر للتجميل", "logo": "/assets/images/clients/Tamer_Beauty_Center.jpg" },
-        { "name": "مركز تيا للتجميل", "logo": "/assets/images/clients/Tia_beauty_center.jpg" },
-        { "name": "التل كوفي", "logo": "/assets/images/clients/AlTal_Coffee.jpg" },
-        { "name": "زينة بيوتي", "logo": "/assets/images/clients/Zena_Beauty.jpg" },
-        { "name": "بيست لاين للأبواب", "logo": "/assets/images/clients/Best Line Doors.jpg" },
-        { "name": "مطعم ملك القدرة", "logo": "/assets/images/clients/مطعم ملك القدرة.png" },
-        { "name": "اللجنة المركزية لأولياء أمور مدارس سلوان", "logo": "/assets/images/clients/اللجنة المركزية لأولياء امور مدارس سلوان.jpg" },
-        { "name": "فادي حميدو ملك المعسل والأراجيل", "logo": "/assets/images/clients/فادي حميدو ملك المعسل والاراجيل.png" },
-        { "name": "سندريلا بيوتي", "logo": "/assets/images/clients/Cinderella Beauty.jpg" },
-        { "name": "مطعم المطار الملكي", "logo": "/assets/images/clients/مطعم المطار الملكي.jpg" },
-        { "name": "أهفا لترميم المنازل", "logo": "/assets/images/clients/Ahava Home renovation.jpg" },
-        { "name": "ماستر بوتشر", "logo": "/assets/images/clients/Master Butcher .jpg" },
-        { "name": "شركة أسياد لخدمات التوصيل", "logo": "/assets/images/clients/شركة أسياد لخدمات التوصيل.jpg" },
-        { "name": "فلل الريحان للإيجار اليومي - أريحا", "logo": "/assets/images/clients/فلل الريحان للايجار اليومي أريحا.jpg" },
-        { "name": "مركز تمكين التعليمي", "logo": "/assets/images/clients/مركز تمكين التعليمي.jpg" },
-        { "name": "فلل المطلة", "logo": "/assets/images/clients/Almatalleh Villas - فلل المطلة.jpg" },
-        { "name": "مجموعة آيا صوفيا العقارية", "logo": "/assets/images/clients/مجموعة آيا صوفيا العقارية.jpg" },
-        { "name": "مجموعة بيت المقدس للعقارات", "logo": "/assets/images/clients/مجموعة بيت المقدس للعقارات.jpg" },
-        { "name": "بوكيه ورد", "logo": "/assets/images/clients/بوكيه ward.jpg" },
-        { "name": "مطعم السلطان", "logo": "/assets/images/clients/مطعم السلطان-Al sultan.jpg" },
-        { "name": "المركز العربي لتطوير الإعلام الاجتماعي", "logo": "/assets/images/clients/Arab Center for Social Media Advancement.svg" },
-        { "name": "مفتاح", "logo": "/assets/images/clients/MIFTAH مفتاح.jpg" },
-        { "name": "كلية أنوار القدس", "logo": "/assets/images/clients/كلية انوار القدس.jpg" },
-        { "name": "منظمة الرؤية الفلسطينية", "logo": "/assets/images/clients/ Palestinian Vision Organization.png" },
-        { "name": "جامعة القدس", "logo": "/assets/images/clients/Al-Quds University.png" }
+        {
+          "name": "مركز تامر للتجميل",
+          "logo": "/assets/images/clients/Tamer_Beauty_Center.jpg"
+        },
+        {
+          "name": "مركز تيا للتجميل",
+          "logo": "/assets/images/clients/Tia_beauty_center.jpg"
+        },
+        {
+          "name": "التل كوفي",
+          "logo": "/assets/images/clients/AlTal_Coffee.jpg"
+        },
+        {
+          "name": "زينة بيوتي",
+          "logo": "/assets/images/clients/Zena_Beauty.jpg"
+        },
+        {
+          "name": "بيست لاين للأبواب",
+          "logo": "/assets/images/clients/Best Line Doors.jpg"
+        },
+        {
+          "name": "مطعم ملك القدرة",
+          "logo": "/assets/images/clients/مطعم ملك القدرة.png"
+        },
+        {
+          "name": "اللجنة المركزية لأولياء أمور مدارس سلوان",
+          "logo": "/assets/images/clients/اللجنة المركزية لأولياء امور مدارس سلوان.jpg"
+        },
+        {
+          "name": "فادي حميدو ملك المعسل والأراجيل",
+          "logo": "/assets/images/clients/فادي حميدو ملك المعسل والاراجيل.png"
+        },
+        {
+          "name": "سندريلا بيوتي",
+          "logo": "/assets/images/clients/Cinderella Beauty.jpg"
+        },
+        {
+          "name": "مطعم المطار الملكي",
+          "logo": "/assets/images/clients/مطعم المطار الملكي.jpg"
+        },
+        {
+          "name": "أهفا لترميم المنازل",
+          "logo": "/assets/images/clients/Ahava Home renovation.jpg"
+        },
+        {
+          "name": "ماستر بوتشر",
+          "logo": "/assets/images/clients/Master Butcher .jpg"
+        },
+        {
+          "name": "شركة أسياد لخدمات التوصيل",
+          "logo": "/assets/images/clients/شركة أسياد لخدمات التوصيل.jpg"
+        },
+        {
+          "name": "فلل الريحان للإيجار اليومي - أريحا",
+          "logo": "/assets/images/clients/فلل الريحان للايجار اليومي أريحا.jpg"
+        },
+        {
+          "name": "مركز تمكين التعليمي",
+          "logo": "/assets/images/clients/مركز تمكين التعليمي.jpg"
+        },
+        {
+          "name": "فلل المطلة",
+          "logo": "/assets/images/clients/Almatalleh Villas - فلل المطلة.jpg"
+        },
+        {
+          "name": "مجموعة آيا صوفيا العقارية",
+          "logo": "/assets/images/clients/مجموعة آيا صوفيا العقارية.jpg"
+        },
+        {
+          "name": "مجموعة بيت المقدس للعقارات",
+          "logo": "/assets/images/clients/مجموعة بيت المقدس للعقارات.jpg"
+        },
+        {
+          "name": "بوكيه ورد",
+          "logo": "/assets/images/clients/بوكيه ward.jpg"
+        },
+        {
+          "name": "مطعم السلطان",
+          "logo": "/assets/images/clients/مطعم السلطان-Al sultan.jpg"
+        },
+        {
+          "name": "المركز العربي لتطوير الإعلام الاجتماعي",
+          "logo": "/assets/images/clients/Arab Center for Social Media Advancement.svg"
+        },
+        {
+          "name": "مفتاح",
+          "logo": "/assets/images/clients/MIFTAH مفتاح.jpg"
+        },
+        {
+          "name": "كلية أنوار القدس",
+          "logo": "/assets/images/clients/كلية انوار القدس.jpg"
+        },
+        {
+          "name": "منظمة الرؤية الفلسطينية",
+          "logo": "/assets/images/clients/ Palestinian Vision Organization.png"
+        },
+        {
+          "name": "جامعة القدس",
+          "logo": "/assets/images/clients/Al-Quds University.png"
+        }
       ]
     },
-    "academy": {
-      "badge": "قريباً",
-      "headline": "أكاديمية أتلا هاب",
-      "description": "برامج تدريبية متقدمة مخصصة للجيل القادم من مهندسي البرمجيات وخبراء الأمن السيبراني.",
-      "cta": "استكشف البرامج",
+    "training": {
+      "badge": "محور التدريب",
+      "headline": "تدريب أتلا هاب",
+      "description": "برامج تدريبية متقدمة مخصصة لمهندسي البرمجيات القادمين، ودعاة السلامة الرقمية، والمعلمين الذين يحتاجون إلى تيسير تقني عملي جاهز للأثر المجتمعي.",
+      "cta": "استكشف التدريب",
       "feature": {
-        "label": "واجهة Flutter",
-        "subtitle": "مسار موبايل أولاً",
-        "title": "Ro'wad Al-Elm Flutter Boot Camp",
-        "description": "منهج موبايل أولاً يدمج تطوير واجهات Flutter مع تصنيف ML على الجهاز. يتعلم المتدربون بناء تدفق استدلال باستخدام TensorFlow Lite وربطه بواجهة تفاعلية واختبار النتائج على بيانات واقعية.",
-        "image": "/assets/images/portfolio/Fullter_course_Rowad_Al-Elm_Ahmad_Zayed_2026_1.jpg",
-        "caption": "واجهة Flutter + تصنيف ML",
-        "footnote": "واجهة تدريب مخصصة للموبايل",
+        "label": "تدريب المدربين للأمان الرقمي",
+        "subtitle": "معلمو القدس | أغسطس 2022",
+        "title": "برنامج تدريب المدربين للأمان الرقمي - المعلمين",
+        "description": "برنامج تدريبي موجه للمعلمين حوّل مفاهيم الأمان الرقمي إلى ممارسة تعليمية قابلة للتطبيق. اكتسب المشاركون مهارات تقديم الورش، وتعزيز الاستجابة الآمنة داخل المدرسة، وإنجاز مشروع تخرج عملي قبل الحصول على الشهادة.",
+        "image": "/assets/images/portfolio/Tot_jerusalem_ahmad_zayed_2022_1.jpg",
+        "caption": "تمكين مجتمعي + سلامة رقمية",
+        "footnote": "قيادة تدريبية للمدارس والمجتمعات",
         "chips": [
-          "واجهات Flutter",
-          "تصنيف ML",
-          "TensorFlow Lite",
-          "أولوية الموبايل"
+          "الأمان الرقمي",
+          "تمكين المعلمين",
+          "تصميم الورش",
+          "أثر مجتمعي"
         ]
       }
     },

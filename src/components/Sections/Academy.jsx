@@ -24,9 +24,9 @@ export default function Academy({ data }) {
     : {};
 
   return (
-    <section id="academy" className="relative overflow-hidden bg-[#08111d] py-24 text-white md:py-32">
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-blue to-brand-blue-light" />
-      <div className="absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_58%)]" />
+    <section id="training" className="relative overflow-hidden bg-[#08111d] py-24 text-white md:py-32">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#ef4444] via-[#ec4899] via-[#f97316] to-[#22d3ee]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(239,68,68,0.16),transparent_26%),radial-gradient(circle_at_82%_14%,rgba(236,72,153,0.18),transparent_22%),radial-gradient(circle_at_72%_78%,rgba(34,211,238,0.14),transparent_22%),linear-gradient(180deg,rgba(8,17,29,0.72),rgba(8,17,29,0.92))]" />
 
       <MotionContainer
         {...motionProps}
@@ -34,23 +34,23 @@ export default function Academy({ data }) {
       >
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <span className="inline-flex items-center rounded-full border border-brand-blue/40 bg-brand-blue/15 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-brand-blue-light">
+            <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-1 font-tajawal text-xs font-semibold uppercase tracking-[0.4em] text-slate-100">
               {data.badge}
             </span>
-            <h2 className="mt-6 font-[family-name:var(--font-playfair)] text-4xl italic tracking-tight text-white md:text-5xl">
+            <h2 className="mt-6 font-cairo text-4xl font-semibold tracking-tight text-white md:text-5xl">
               {data.headline}
             </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-slate-200">
+            <p className="mt-5 max-w-2xl font-tajawal text-base leading-8 text-slate-200">
               {data.description}
             </p>
 
             {feature && (
-              <div className="mt-10 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 text-start">
-                <p className="text-xs font-semibold uppercase tracking-[0.36em] text-white/45">
+              <div className="mt-10 rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 text-start">
+                <p className="font-tajawal text-xs font-semibold uppercase tracking-[0.36em] text-slate-300/70">
                   {feature.subtitle}
                 </p>
-                <h3 className="mt-3 text-2xl font-semibold text-white">{feature.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-slate-200">
+                <h3 className="mt-3 font-cairo text-2xl font-semibold text-white">{feature.title}</h3>
+                <p className="mt-4 font-tajawal text-sm leading-7 text-slate-200">
                   {feature.description}
                 </p>
                 {feature.chips?.length ? (
@@ -58,7 +58,7 @@ export default function Academy({ data }) {
                     {feature.chips.map((chip) => (
                       <span
                         key={chip}
-                        className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs uppercase tracking-[0.2em] text-white/70"
+                        className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 font-tajawal text-xs uppercase tracking-[0.2em] text-slate-100"
                       >
                         {chip}
                       </span>
@@ -90,16 +90,16 @@ export default function Academy({ data }) {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#08111d]/85 via-transparent to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 px-4 pb-5 text-center">
-                    <p className="text-xs uppercase tracking-[0.35em] text-white/55">
+                    <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-white/70">
                       {feature?.label}
                     </p>
-                    <p className="mt-2 text-sm font-semibold text-white">
+                    <p className="mt-2 font-tajawal text-sm font-semibold text-white">
                       {feature?.caption}
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="mt-6 text-center text-xs uppercase tracking-[0.4em] text-white/40">
+              <div className="mt-6 text-center font-tajawal text-xs uppercase tracking-[0.4em] text-slate-300/70">
                 {feature?.footnote}
               </div>
             </div>

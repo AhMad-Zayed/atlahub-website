@@ -4,6 +4,8 @@ import logo from '@/assets/images/AtlaHub_Tech_Logo.png';
 
 export default function Footer({ lang = 'en', navData, brandData, footerData }) {
 	const homePath = `/${lang}`;
+	const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '972599000000';
+	const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
 	return (
 		<footer className="bg-gray-900 text-white font-cairo border-t-4 border-brand-blue">
@@ -43,6 +45,16 @@ export default function Footer({ lang = 'en', navData, brandData, footerData }) 
 						<ul className="space-y-2 text-slate-200">
 							<li>contact@atlahub.com</li>
 							<li className="font-semibold text-white mt-2">{footerData?.emergency}</li>
+							<li>
+								<a
+									href={whatsappUrl}
+									target="_blank"
+									rel="noreferrer"
+									className="inline-flex items-center rounded-full bg-gradient-to-r from-brand-blue to-brand-blue-light px-4 py-2 font-tajawal text-sm font-semibold text-white transition hover:opacity-90"
+								>
+									WhatsApp
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

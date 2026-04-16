@@ -1,5 +1,6 @@
 import content from '@/data/content.json';
 import PortfolioCard from '@/components/Portfolio/PortfolioCard';
+import { getMergedPortfolio } from '@/lib/portfolio-content';
 
 function StaticPortfolioCard(props) {
   return <PortfolioCard {...props} mounted={false} />;
@@ -8,7 +9,7 @@ function StaticPortfolioCard(props) {
 export default async function PortfolioIndexPage({ params }) {
   const { lang } = await params;
   const pageContent = content[lang] || content.en;
-  const portfolio = pageContent.portfolio;
+  const portfolio = await getMergedPortfolio(pageContent.portfolio);
 
   return (
     <section className="relative overflow-hidden bg-[#09111e] py-24 md:py-32">

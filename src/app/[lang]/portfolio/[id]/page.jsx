@@ -1,11 +1,23 @@
 import { notFound } from 'next/navigation';
 import content from '@/data/content.json';
 import PortfolioDetailClient from '@/components/Portfolio/PortfolioDetailClient';
+import { getMergedPortfolio } from '@/lib/portfolio-content';
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return Object.entries(content).flatMap(([lang, pageContent]) =>
+    (pageContent?.portfolio?.list || []).map((entry) => ({
+      lang,
+      id: entry.id,
+    })),
+  );
+}
 
 export default async function PortfolioDetailPage({ params }) {
   const { lang, id } = await params;
   const pageContent = content[lang] || content.en;
-  const portfolio = pageContent.portfolio;
+  const portfolio = await getMergedPortfolio(pageContent.portfolio);
   const item = portfolio?.list?.find((entry) => entry.id === id);
   const detail = portfolio?.details?.[id];
 

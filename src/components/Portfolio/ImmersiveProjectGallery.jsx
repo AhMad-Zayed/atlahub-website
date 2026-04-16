@@ -106,25 +106,25 @@ export default function ImmersiveProjectGallery({ project, labels, themeId }) {
             </div>
           </div>
 
-          <div className="space-y-5">
+          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
             {imageItems.map((item, index) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className="group block w-full text-start"
+                className="group block h-full w-full text-start"
               >
                 <motion.div
                   layoutId={`case-study-${projectKey}-${item.id}`}
-                  className="overflow-hidden rounded-[1.8rem] border border-slate-200 bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.08)] transition-transform duration-300 group-hover:-translate-y-0.5"
+                  className="flex h-full flex-col overflow-hidden rounded-[1.8rem] border border-slate-200 bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.08)] transition-transform duration-300 group-hover:-translate-y-0.5"
                 >
-                  <div className={`rounded-[1.35rem] bg-gradient-to-br ${theme.surface} p-5`}>
+                  <div className={`flex min-h-[15rem] flex-1 items-center justify-center rounded-[1.35rem] bg-gradient-to-br ${theme.surface} p-5`}>
                     <PortfolioMedia
                       src={item.src}
                       alt={item.title}
                       fit="contain"
                       fill={false}
-                      className="max-h-[45rem] rounded-[1rem]"
+                      className="max-h-[22rem] rounded-[1rem] object-contain"
                     />
                   </div>
                 </motion.div>
@@ -206,13 +206,13 @@ export default function ImmersiveProjectGallery({ project, labels, themeId }) {
                     layoutId={`case-study-${projectKey}-${activeImage.id}`}
                     className="overflow-hidden rounded-[1.8rem] border border-white/10 bg-white p-4 shadow-[0_18px_60px_rgba(15,23,42,0.25)]"
                   >
-                    <div className={`rounded-[1.35rem] bg-gradient-to-br ${theme.surface} p-4 md:p-8`}>
+                    <div className={`flex min-h-[50vh] items-center justify-center rounded-[1.35rem] bg-gradient-to-br ${theme.surface} p-4 md:p-8`}>
                       <PortfolioMedia
                         src={activeImage.src}
                         alt={activeImage.title}
                         fit="contain"
                         fill={false}
-                        className="mx-auto max-h-[70vh] rounded-[1rem]"
+                        className="mx-auto max-h-[70vh] w-full rounded-[1rem] object-contain"
                         priority
                       />
                     </div>

@@ -1,16 +1,18 @@
 import '@/styles/globals.css';
 import { headers } from 'next/headers';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Cairo, Tajawal } from 'next/font/google';
+import AnalyticsTracker from '@/components/Analytics/AnalyticsTracker';
+import ToasterProvider from '@/components/UI/ToasterProvider';
 
-const inter = Inter({
+const cairo = Cairo({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-cairo',
 });
 
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  style: ['italic'],
-  variable: '--font-playfair',
+const tajawal = Tajawal({
+  subsets: ['latin', 'arabic'],
+  weight: ['300', '400', '500', '700', '800'],
+  variable: '--font-tajawal',
 });
 
 export const metadata = {
@@ -31,8 +33,10 @@ export default async function RootLayout({ children }) {
     <html lang={lang} dir={dir} suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${playfairDisplay.variable} min-h-screen bg-slate-950 text-slate-100 antialiased`}
+        className={`${cairo.variable} ${tajawal.variable} min-h-screen bg-slate-950 text-slate-100 antialiased`}
       >
+        <AnalyticsTracker />
+        <ToasterProvider />
         <main>{children}</main>
       </body>
     </html>

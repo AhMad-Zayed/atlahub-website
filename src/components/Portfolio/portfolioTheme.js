@@ -15,20 +15,12 @@ export const PORTFOLIO_THEME = {
     surface: 'from-[#fff1f7] via-[#fff4f8] to-[#fff7f2]',
     frame: 'min-h-[16rem]',
   },
-  academy: {
-    accent: 'from-emerald-400 via-cyan-400 to-sky-500',
-    ring: 'border-emerald-300/45',
-    glow: 'shadow-[0_28px_90px_rgba(52,211,153,0.18)]',
-    chip: 'bg-emerald-400/12 text-emerald-50',
-    surface: 'from-[#effff8] via-[#f2fbff] to-[#eef7ff]',
-    frame: 'min-h-[19rem]',
-  },
-  cybertraining: {
-    accent: 'from-slate-700 via-slate-900 to-[#0f172a]',
-    ring: 'border-slate-400/35',
-    glow: 'shadow-[0_28px_90px_rgba(15,23,42,0.22)]',
-    chip: 'bg-slate-400/12 text-slate-100',
-    surface: 'from-[#eef1f8] via-[#edf4ff] to-[#f3f7ff]',
+  training: {
+    accent: 'from-red-500 via-pink-500 via-orange-400 to-cyan-400',
+    ring: 'border-rose-300/40',
+    glow: 'shadow-[0_28px_90px_rgba(244,63,94,0.18)]',
+    chip: 'bg-slate-950/78 text-white',
+    surface: 'from-[#fff1f2] via-[#fff3f8] via-[#fff8ef] to-[#eefcff]',
     frame: 'min-h-[15rem]',
   },
   marketing: {

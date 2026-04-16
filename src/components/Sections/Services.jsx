@@ -12,6 +12,7 @@ const iconMap = {
   video: <Video className="w-8 h-8 text-brand-blue-light" />,
   server: <Server className="w-8 h-8 text-brand-blue-light" />,
   academy: <GraduationCap className="w-8 h-8 text-brand-blue-light" />,
+  training: <GraduationCap className="w-8 h-8 text-brand-blue-light" />,
 };
 
 export default function Services({ data, lang = 'en' }) {

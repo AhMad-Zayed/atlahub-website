@@ -16,6 +16,7 @@ export default function Portfolio({ data, lang = 'en' }) {
   return (
     <section
       id="portfolio"
+      data-analytics-section="portfolio"
       className="relative overflow-hidden bg-[#09111e] py-24 md:py-32"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(249,115,22,0.22),transparent_24%),radial-gradient(circle_at_83%_12%,rgba(244,63,94,0.18),transparent_22%),radial-gradient(circle_at_74%_72%,rgba(34,197,94,0.16),transparent_20%),radial-gradient(circle_at_24%_78%,rgba(14,165,233,0.18),transparent_22%),linear-gradient(180deg,#09111e_0%,#10203b_48%,#09111e_100%)]" />

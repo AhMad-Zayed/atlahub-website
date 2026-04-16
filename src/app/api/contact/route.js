@@ -1,9 +1,10 @@
-import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
+import { saveContactMessage } from '@/lib/messages-store';
+import { dispatchLeadEvent } from '@/lib/analytics-store';
 
 export async function POST(request) {
   try {
-    const { name, email, phone, service, message } = await request.json();
+    const { name, email, phone, service, message, fingerprint, page_path } = await request.json();
 
     // Basic validation
     if (!name || !email || !service || !message) {
@@ -13,10 +14,20 @@ export async function POST(request) {
       );
     }
 
-    const query = 'INSERT INTO contacts (name, email, phone, service, message) VALUES (?, ?, ?, ?, ?)';
-    const values = [name, email, phone, service, message];
-
-    await db.query(query, values);
+    await saveContactMessage({ name, email, phone, service, message });
+    await dispatchLeadEvent(
+      {
+        event_name: 'ContactLead',
+        fingerprint: String(fingerprint || ''),
+        page_path: String(page_path || '/'),
+        payload: {
+          service,
+          has_phone: Boolean(phone),
+          email_domain: String(email || '').split('@')[1] || '',
+        },
+      },
+      request.headers,
+    );
 
     return NextResponse.json({ message: 'Contact request received successfully' }, { status: 201 });
 

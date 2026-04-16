@@ -3,17 +3,20 @@ import { notFound } from 'next/navigation';
 import content from '@/data/content.json';
 import { ArrowUpRight } from 'lucide-react';
 import { getPortfolioCategoriesForService } from '@/components/Portfolio/portfolioSectors';
+import { getMergedPortfolio } from '@/lib/portfolio-content';
 
 export default async function ServiceDetailPage({ params }) {
   const { lang, id } = await params;
   const pageContent = content[lang] || content.en;
+  const portfolio = await getMergedPortfolio(pageContent.portfolio);
   const serviceOverview = pageContent.services?.list?.find((item) => item.id === id);
   const serviceDetail = pageContent.serviceDetails?.[id];
-  const categoryIds = getPortfolioCategoriesForService(id);
+  const isTrainingService = id === 'training';
+  const categoryIds = getPortfolioCategoriesForService(id, portfolio);
   const featuredCategories = categoryIds
     .map((categoryId) => {
-      const category = pageContent.portfolio?.list?.find((entry) => entry.id === categoryId);
-      const detail = pageContent.portfolio?.details?.[categoryId];
+      const category = portfolio?.list?.find((entry) => entry.id === categoryId);
+      const detail = portfolio?.details?.[categoryId];
 
       if (!category || !detail) {
         return null;
@@ -119,16 +122,24 @@ export default async function ServiceDetailPage({ params }) {
         {featuredCategories.length ? (
           <section className="mt-16 border-t border-white/10 pt-16">
             <div className="mb-10 max-w-3xl">
-              <p className="text-sm uppercase tracking-[0.3em] text-brand-blue-light">
-                {lang === 'ar' ? 'أعمال مرتبطة' : 'Relevant Work'}
+              <p className={`text-sm uppercase tracking-[0.3em] ${isTrainingService ? 'text-[#fda4af]' : 'text-brand-blue-light'}`}>
+                {isTrainingService
+                  ? lang === 'ar' ? 'قصة نجاح' : 'Success Story'
+                  : lang === 'ar' ? 'أعمال مرتبطة' : 'Relevant Work'}
               </p>
               <h2 className="mt-4 font-cairo text-3xl font-bold md:text-4xl">
-                {lang === 'ar' ? 'مشاريع بارزة في هذا القطاع' : 'Featured Projects in this Sector'}
+                {isTrainingService
+                  ? lang === 'ar' ? 'نماذج نجاح من برامج التدريب' : 'Training Success Stories'
+                  : lang === 'ar' ? 'مشاريع بارزة في هذا القطاع' : 'Featured Projects in this Sector'}
               </h2>
               <p className="mt-4 max-w-2xl leading-8 text-slate-200">
-                {lang === 'ar'
-                  ? 'نماذج مختارة من الأعمال المرتبطة مباشرة بهذا المسار الخدمي، مع تركيز على التنفيذ الفعلي والأثر التشغيلي.'
-                  : 'Selected work directly tied to this service lane, focused on practical delivery and operational impact.'}
+                {isTrainingService
+                  ? lang === 'ar'
+                    ? 'نماذج مختارة من برامج تدريبية قادها أحمد زايد وتركز على التمكين المجتمعي، وبناء المهارات، والأثر التربوي القابل للتكرار.'
+                    : "Selected training engagements led by Ahmad Zayed, focused on community empowerment, skill transfer, and repeatable educational impact."
+                  : lang === 'ar'
+                    ? 'نماذج مختارة من الأعمال المرتبطة مباشرة بهذا المسار الخدمي، مع تركيز على التنفيذ الفعلي والأثر التشغيلي.'
+                    : 'Selected work directly tied to this service lane, focused on practical delivery and operational impact.'}
               </p>
             </div>
 
@@ -136,9 +147,13 @@ export default async function ServiceDetailPage({ params }) {
               {featuredCategories.map((category) => (
                 <article
                   key={category.id}
-                  className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_24px_80px_rgba(2,6,23,0.24)]"
+                  className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_rgba(2,6,23,0.24)] ${
+                    isTrainingService
+                      ? 'border-white/12 bg-[linear-gradient(180deg,rgba(15,23,42,0.9),rgba(8,17,29,0.96))]'
+                      : 'border-white/10 bg-white/[0.03]'
+                  }`}
                 >
-                  <div className="border-b border-white/10 px-7 py-6">
+                  <div className={`border-b px-7 py-6 ${isTrainingService ? 'border-white/12 bg-[radial-gradient(circle_at_top_left,rgba(239,68,68,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(34,211,238,0.14),transparent_30%)]' : 'border-white/10'}`}>
                     <div className="flex items-start justify-between gap-5">
                       <div>
                         <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
@@ -148,8 +163,8 @@ export default async function ServiceDetailPage({ params }) {
                           {category.detail.title}
                         </h3>
                       </div>
-                      <span className="rounded-full border border-white/10 bg-black/20 px-4 py-2 text-sm text-slate-200">
-                        {category.projectCount} {pageContent.portfolio.projectsLabel}
+                      <span className={`rounded-full border px-4 py-2 text-sm ${isTrainingService ? 'border-white/15 bg-white/10 text-white' : 'border-white/10 bg-black/20 text-slate-200'}`}>
+                        {category.projectCount} {portfolio.projectsLabel}
                       </span>
                     </div>
                     <p className="mt-4 max-w-2xl leading-8 text-slate-200">
@@ -161,9 +176,20 @@ export default async function ServiceDetailPage({ params }) {
                     {category.detail.projects.map((project) => (
                       <div
                         key={project.name}
-                        className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5"
+                        className={`rounded-[1.5rem] border p-5 ${
+                          isTrainingService
+                            ? 'border-white/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]'
+                            : 'border-white/10 bg-black/20'
+                        }`}
                       >
-                        <h4 className="text-xl font-semibold text-white">{project.name}</h4>
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                          <h4 className="font-cairo text-xl font-semibold text-white">{project.name}</h4>
+                          {isTrainingService ? (
+                            <span className="rounded-full bg-gradient-to-r from-[#ef4444] via-[#ec4899] via-[#f97316] to-[#22d3ee] px-3 py-1 font-tajawal text-xs font-semibold uppercase tracking-[0.24em] text-slate-950">
+                              {lang === 'ar' ? 'أثر تدريبي' : 'Training Impact'}
+                            </span>
+                          ) : null}
+                        </div>
                         <p className="mt-3 leading-7 text-slate-200">{project.result}</p>
 
                         {project.links?.length ? (

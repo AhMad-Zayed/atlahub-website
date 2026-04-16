@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create:admin-user": "node scripts/create-admin-user.mjs",
+    "smoke:onboarding": "node scripts/smoke-onboarding.mjs"
   },
   "dependencies": {
+    "@prisma/client": "^5.22.0",
     "autoprefixer": "^10.4.27",
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.6.0",
@@ -17,13 +21,16 @@
     "next": "latest",
     "react": "^18",
     "react-dom": "^18",
+    "sonner": "^2.0.7",
     "swiper": "^12.1.3",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "zod": "latest"
   },
   "devDependencies": {
     "eslint": "^9.0.0",
     "eslint-config-next": "latest",
     "postcss": "^8.5.8",
+    "prisma": "^5.13.0",
     "tailwindcss": "^3.4.19"
   }
 }

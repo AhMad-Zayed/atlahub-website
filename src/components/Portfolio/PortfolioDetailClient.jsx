@@ -91,7 +91,7 @@ export default function PortfolioDetailClient({ lang = 'en', item, detail, label
         </MotionShell>
 
         <MotionShell mounted={mounted} className="mt-8">
-          <div className="overflow-hidden rounded-[2.4rem] bg-gradient-to-br from-emerald-400 via-cyan-400 to-sky-500 p-[1px] shadow-[0_35px_120px_rgba(15,23,42,0.14)]">
+          <div className={`overflow-hidden rounded-[2.4rem] bg-gradient-to-br ${theme.accent} p-[1px] shadow-[0_35px_120px_rgba(15,23,42,0.14)]`}>
             <div className="grid gap-10 rounded-[2.35rem] bg-[linear-gradient(135deg,rgba(8,17,30,0.94),rgba(9,20,38,0.84))] p-8 md:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
               <div className="space-y-6">
                 <p className="font-tajawal text-[0.78rem] uppercase tracking-[0.42em] text-slate-200/80">
@@ -142,6 +142,7 @@ export default function PortfolioDetailClient({ lang = 'en', item, detail, label
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.18 }}
                 variants={itemVariants}
+                data-analytics-section={`project:${project.name}`}
                 className="overflow-hidden rounded-[2.25rem] border border-slate-200 bg-white shadow-[0_28px_110px_rgba(15,23,42,0.08)]"
               >
                 <div className={`h-1 w-full bg-gradient-to-r ${theme.accent}`} />
@@ -157,15 +158,15 @@ export default function PortfolioDetailClient({ lang = 'en', item, detail, label
                     </div>
 
                     <div className="space-y-5">
-                      <div className="rounded-[1.5rem] bg-slate-50 p-6">
+                      <div className="rounded-[1.5rem] bg-slate-50 p-6" data-analytics-section={`project:${project.name}:role`}>
                         <p className="font-tajawal text-xs uppercase tracking-[0.34em] text-slate-500">{labels.role}</p>
                         <p className="mt-3 font-tajawal text-base leading-8 text-slate-700">{project.role}</p>
                       </div>
-                      <div className="rounded-[1.5rem] bg-slate-50 p-6">
+                      <div className="rounded-[1.5rem] bg-slate-50 p-6" data-analytics-section={`project:${project.name}:action`}>
                         <p className="font-tajawal text-xs uppercase tracking-[0.34em] text-slate-500">{labels.action}</p>
                         <p className="mt-3 font-tajawal text-base leading-8 text-slate-700">{project.action}</p>
                       </div>
-                      <div className="rounded-[1.5rem] bg-slate-950 p-6">
+                      <div className="rounded-[1.5rem] bg-slate-950 p-6" data-analytics-section={`project:${project.name}:result`}>
                         <p className="font-tajawal text-xs uppercase tracking-[0.34em] text-slate-300/75">{labels.result}</p>
                         <p className="mt-3 font-tajawal text-base leading-8 text-slate-200">{project.result}</p>
                       </div>
@@ -189,7 +190,7 @@ export default function PortfolioDetailClient({ lang = 'en', item, detail, label
                     ) : null}
                   </div>
 
-                  <div className="rounded-[1.9rem] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-1">
+                  <div className="rounded-[1.9rem] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-1" data-analytics-section={`project:${project.name}:gallery`}>
                     <div className="rounded-[1.7rem] border border-slate-200 bg-white p-6">
                       <ImmersiveProjectGallery
                         project={project}
