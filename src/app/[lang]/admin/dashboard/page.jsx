@@ -30,7 +30,7 @@ import { PORTFOLIO_CATEGORIES, getPortfolioItems } from '@/lib/portfolio-admin';
 import { getPipelineProjects } from '@/lib/onboarding';
 import { getContactMessages } from '@/lib/messages-store';
 import content from '@/data/content.json';
-import { getAnalyticsSummary } from '@/lib/analytics-store';
+import prisma from '@/lib/prisma';
 import CreateEliteProjectModal from '@/components/Admin/CreateEliteProjectModal';
 import UserJourneyMap from '@/components/Admin/UserJourneyMap';
 
@@ -80,7 +80,49 @@ export default async function DashboardPage({ params }) {
   const arContent = content.ar || {};
   const portfolioItems = await getPortfolioItems();
   const contactMessages = await getContactMessages();
-  const analyticsSummary = await getAnalyticsSummary();
+
+  const totalEvents = await prisma.analytics.count();
+  const leads = await prisma.analytics.count({
+    where: { event: { contains: 'lead', mode: 'insensitive' } },
+  });
+  const projectEngagement = await prisma.analytics.count({
+    where: { path: { contains: 'project', mode: 'insensitive' } },
+  });
+  
+  const trendsByEvent = await prisma.analytics.groupBy({
+    by: ['event'],
+    _count: {
+      id: true,
+    },
+  });
+
+  const recentEvents = await prisma.analytics.findMany({
+    orderBy: { timestamp: 'desc' },
+    take: 20,
+  });
+
+  const analyticsSummary = {
+    totals: {
+      total_reach: totalEvents,
+      project_engagement: projectEngagement,
+      unique_identities: totalEvents, 
+      qualified_leads: leads,
+    },
+    technicalInterestHeatmap: trendsByEvent.map((trend) => ({
+      section: trend.event,
+      interactions: trend._count.id,
+      clicks: 0,
+      avg_dwell_seconds: 0,
+    })),
+    userJourneyTimeline: recentEvents.map((ev) => ({
+      created_at: ev.timestamp.toISOString(),
+      visitor: 'Anonymous',
+      project: ev.path || 'Global',
+      action: ev.event,
+      dwell_ms: 0,
+      source_host: 'direct',
+    })),
+  };
   const logoutAction = handleLogout.bind(null, lang);
   const updateSiteAction = updateSiteSections.bind(null, lang);
   const addItemAction = addPortfolioItem.bind(null, lang);
