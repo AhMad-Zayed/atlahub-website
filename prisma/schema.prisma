@@ -279,3 +279,15 @@ model PortfolioProject {
   createdAt      DateTime               @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt      DateTime               @updatedAt @map("updated_at") @db.Timestamp(0)
 }
+
+// ---------------------------------------------------------------------------
+// Analytics
+// ---------------------------------------------------------------------------
+
+model Analytics {
+  id        Int      @id @default(autoincrement())
+  event     String   @db.VarChar(255)
+  path      String?  @db.VarChar(255)
+  timestamp DateTime @default(now()) @db.Timestamp(0)
+  metadata  Json?
+}

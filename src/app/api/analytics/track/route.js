@@ -1,13 +1,22 @@
 import { NextResponse } from 'next/server';
-import { trackBehaviorEvent } from '@/lib/analytics-store';
+import prisma from '@/lib/prisma';
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const result = await trackBehaviorEvent(body, request.headers);
-    return NextResponse.json(result, { status: 201 });
+    
+    // Save to PostgreSQL via Prisma
+    const analyticsEntry = await prisma.analytics.create({
+      data: {
+        event: body.type || body.event || 'unknown',
+        path: body.page_path || body.path || null,
+        metadata: body, // store entire payload in metadata
+      },
+    });
+
+    return NextResponse.json({ ok: true, id: analyticsEntry.id }, { status: 201 });
   } catch (error) {
-    console.error('Failed to track behavior event:', error);
-    return NextResponse.json({ message: 'Tracking failed' }, { status: 500 });
+    console.error('Failed to track analytics event:', error);
+    return NextResponse.json({ message: 'Tracking failed', error: String(error) }, { status: 500 });
   }
 }

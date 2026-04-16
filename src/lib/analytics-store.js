@@ -1,9 +1,8 @@
-import { promises as fs } from 'fs';
-import path from 'path';
 import crypto from 'crypto';
 
-const ANALYTICS_FILE_PATH = path.join(process.cwd(), 'src/data/analytics.json');
-const ANALYTICS_TMP_FILE_PATH = path.join(process.cwd(), 'src/data/analytics.json.tmp');
+// Legacy fs and path imports removed to fix Vercel EROFS errors
+// We now fall back to an ephemeral memory model for legacy methods not yet migrated to Prisma.
+let memoryAnalytics = null;
 const MAX_EVENTS = 12000;
 const MAX_LEADS = 3000;
 let analyticsWriteQueue = Promise.resolve();
@@ -86,43 +85,24 @@ function createEmptyAnalytics() {
 }
 
 async function ensureAnalyticsFile() {
-  try {
-    await fs.access(ANALYTICS_FILE_PATH);
-  } catch {
-    await fs.writeFile(ANALYTICS_FILE_PATH, `${JSON.stringify(createEmptyAnalytics(), null, 2)}\n`, 'utf8');
-  }
+  // No-op for Vercel compatibility
 }
 
 async function readAnalytics() {
-  await ensureAnalyticsFile();
-  try {
-    const raw = await fs.readFile(ANALYTICS_FILE_PATH, 'utf8');
-    const parsed = JSON.parse(raw);
-    return {
-      ...createEmptyAnalytics(),
-      ...parsed,
-      profiles: parsed?.profiles && typeof parsed.profiles === 'object' ? parsed.profiles : {},
-      events: Array.isArray(parsed?.events) ? parsed.events : [],
-      leads: Array.isArray(parsed?.leads) ? parsed.leads : [],
-      capi_dispatch_queue: Array.isArray(parsed?.capi_dispatch_queue) ? parsed.capi_dispatch_queue : [],
-    };
-  } catch (error) {
-    console.error('Failed to parse analytics.json, using empty analytics object:', error);
-    return createEmptyAnalytics();
+  if (!memoryAnalytics) {
+    memoryAnalytics = createEmptyAnalytics();
   }
+  return memoryAnalytics;
 }
 
 async function saveAnalytics(analytics) {
-  const next = {
+  memoryAnalytics = {
     ...analytics,
     events: (analytics.events || []).slice(-MAX_EVENTS),
     leads: (analytics.leads || []).slice(-MAX_LEADS),
     capi_dispatch_queue: (analytics.capi_dispatch_queue || []).slice(-MAX_LEADS),
     updated_at: nowIso(),
   };
-  const serialized = `${JSON.stringify(next, null, 2)}\n`;
-  await fs.writeFile(ANALYTICS_TMP_FILE_PATH, serialized, 'utf8');
-  await fs.rename(ANALYTICS_TMP_FILE_PATH, ANALYTICS_FILE_PATH);
 }
 
 async function withAnalyticsWriteLock(task) {
