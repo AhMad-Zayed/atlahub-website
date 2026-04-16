@@ -18,11 +18,13 @@ export default function ClientDashboardClient({ client, lang }) {
     if (!linkInput.trim() || !activeCampaign) return;
     setIsSubmitting(true);
     try {
-      await submitClientAdLink(activeCampaign.id, linkInput);
-      toast.success('Ad Link Submitted gracefully.');
+      // Split by lines or commas
+      const links = linkInput.split(/[\n,]+/).map(l => l.trim()).filter(l => l.length > 0);
+      await submitClientAdLink(activeCampaign.id, links);
+      toast.success(`${links.length} Ad Links Submitted gracefully.`);
       setLinkInput('');
     } catch {
-      toast.error('Failed to submit link.');
+      toast.error('Failed to submit links.');
     }
     setIsSubmitting(false);
   };
@@ -115,17 +117,17 @@ export default function ClientDashboardClient({ client, lang }) {
               {/* Ad Submissions & Proof */}
               <div className="p-6 rounded-[2rem] bg-slate-900 border border-white/5 shadow-2xl">
                 <h3 className="text-xl font-cairo font-bold mb-6">Smart Link Drop</h3>
-                <form onSubmit={handleLinkSubmit} className="flex gap-2">
-                  <input
-                    type="url"
+                <form onSubmit={handleLinkSubmit} className="flex flex-col gap-2">
+                  <textarea
                     required
-                    placeholder="Paste TikTok/Insta link here..."
-                    className="flex-1 rounded-xl bg-white/5 border border-white/10 px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50"
+                    placeholder="Paste TikTok/Insta links here... (One per line or comma separated)"
+                    className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50"
+                    rows={3}
                     value={linkInput}
                     onChange={(e) => setLinkInput(e.target.value)}
                   />
-                  <button disabled={isSubmitting} type="submit" className="px-6 py-2 bg-amber-500 text-slate-950 font-bold rounded-xl text-sm hover:bg-amber-400 transition disabled:opacity-50">
-                    Submit
+                  <button disabled={isSubmitting} type="submit" className="w-full py-3 bg-amber-500 text-slate-950 font-bold rounded-xl text-sm hover:bg-amber-400 transition disabled:opacity-50">
+                    Submit Links
                   </button>
                 </form>
 
@@ -138,8 +140,8 @@ export default function ClientDashboardClient({ client, lang }) {
                         <div className="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center text-xs text-slate-500">Processing</div>
                       )}
                       <div className="flex-1 overflow-hidden">
-                        <p className="text-xs truncate text-amber-300">{ad.url}</p>
-                        <p className="text-[10px] uppercase mt-2 font-bold text-slate-400 tracking-wider">Status: {ad.status}</p>
+                        <p className="text-xs truncate text-amber-300">{ad.postUrl}</p>
+                        <p className="text-[10px] uppercase mt-2 font-bold text-slate-400 tracking-wider">Status: {ad.status} · Budget: ${ad.itemBudget}</p>
                       </div>
                     </div>
                   ))}

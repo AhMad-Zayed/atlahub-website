@@ -317,11 +317,12 @@ model Event {
 
 model AgencyClient {
   id                 String   @id @default(uuid()) @db.Uuid
-  brandName          String   @db.VarChar(255)
-  logoUrl            String?  @db.Text
+  token              String   @unique @default(uuid()) @db.Uuid
+  name               String   @db.VarChar(255)
+  logo               String?  @db.Text
   primaryContact     String   @db.VarChar(255)
   preferredCurrency  String   @default("USD") @db.VarChar(10)
-  languagePreference String   @default("en") @db.VarChar(10)
+  preferredLang      String   @default("en") @db.VarChar(10)
   createdAt          DateTime @default(now()) @db.Timestamp(0)
   
   campaigns          AgencyCampaign[]
@@ -340,11 +341,15 @@ model AgencyCampaign {
   clientId            String         @db.Uuid
   client              AgencyClient   @relation(fields: [clientId], references: [id], onDelete: Cascade)
   title               String         @db.VarChar(255)
+  serviceType         String?        @db.VarChar(128)
+  category            String?        @db.VarChar(128)
   status              CampaignStatus @default(PENDING)
   totalClientPaid     Float          @default(0)
   actualPlatformSpend Float          @default(0)
   serviceFee          Float          @default(0)
   profitMargin        Float          @default(0)
+  startDate           DateTime?      @db.Timestamp(0)
+  endDate             DateTime?      @db.Timestamp(0)
   createdAt           DateTime       @default(now()) @db.Timestamp(0)
   updatedAt           DateTime       @updatedAt @db.Timestamp(0)
   
@@ -359,10 +364,11 @@ model AdItem {
   id             String         @id @default(uuid()) @db.Uuid
   campaignId     String         @db.Uuid
   campaign       AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  url            String         @db.Text
+  postUrl        String         @db.Text
   previewImage   String?        @db.Text
   targetAudience String?        @db.Text
   reachGoal      Int            @default(0)
+  itemBudget     Float          @default(0)
   status         String         @default("PENDING") @db.VarChar(64) // PENDING, APPROVED, ACTIVE
   createdAt      DateTime       @default(now()) @db.Timestamp(0)
 
@@ -385,6 +391,7 @@ model CampaignLog {
   campaignId String         @db.Uuid
   campaign   AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   action     String         @db.VarChar(255)
+  user       String         @default("SYSTEM") @db.VarChar(64)
   details    String?        @db.Text
   createdAt  DateTime       @default(now()) @db.Timestamp(0)
 

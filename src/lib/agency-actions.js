@@ -18,11 +18,11 @@ function computeProfit(totalPaid, platformSpend, serviceFee) {
 export async function createAgencyClient(data) {
   const client = await prisma.agencyClient.create({
     data: {
-      brandName: data.brandName,
+      name: data.name,
       primaryContact: data.primaryContact,
-      logoUrl: data.logoUrl || null,
+      logo: data.logo || null,
       preferredCurrency: data.preferredCurrency || 'USD',
-      languagePreference: data.languagePreference || 'en',
+      preferredLang: data.preferredLang || 'en',
     }
   });
   
@@ -121,27 +121,31 @@ export async function setCampaignStatus(campaignId, newStatus) {
 // AdItems & Proof of Work
 // ----------------------------------------------------
 
-export async function submitClientAdLink(campaignId, url) {
-  const ad = await prisma.adItem.create({
-    data: {
-      campaignId,
-      url,
-      status: 'PENDING'
-    }
+export async function submitClientAdLink(campaignId, urlsArray) {
+  // Process Multi-link arrays natively.
+  const insertions = urlsArray.map(postUrl => ({
+    campaignId,
+    postUrl,
+    status: 'PENDING',
+    itemBudget: 0
+  }));
+
+  const ads = await prisma.adItem.createMany({
+    data: insertions
   });
 
-  // We could implement smart meta extraction here natively, for now we log it.
   await prisma.campaignLog.create({
     data: {
       campaignId,
-      action: 'AD_LINK_SUBMITTED',
-      details: `Client submitted new ad link: ${url}`
+      action: 'AD_LINKS_SUBMITTED',
+      details: `Client submitted ${urlsArray.length} new ad links: ${urlsArray.join(', ')}`,
+      user: 'CLIENT'
     }
   });
 
   const campaign = await prisma.agencyCampaign.findUnique({ where: { id: campaignId }});
   revalidatePath(`/[lang]/client-portal/${campaign?.clientId}`, 'page');
-  return ad;
+  return ads;
 }
 
 export async function uploadAdPreview(adId, previewImageUrl) {
@@ -154,7 +158,8 @@ export async function uploadAdPreview(adId, previewImageUrl) {
     data: {
       campaignId: ad.campaignId,
       action: 'PROOF_OF_WORK_UPLOADED',
-      details: 'Admin uploaded screenshot proof for an ad item.'
+      details: 'Admin uploaded screenshot proof for an ad item.',
+      user: 'ADMIN'
     }
   });
 
@@ -214,7 +219,7 @@ export async function checkMockData() {
   if (clients === 0) {
     const tamer = await prisma.agencyClient.create({
       data: {
-        brandName: 'Tamer Beauty Center',
+        name: 'Tamer Beauty Center',
         primaryContact: 'tamer@example.com',
         preferredCurrency: 'USD'
       }

@@ -90,7 +90,7 @@ export default function AdminAgencyHQClient({ initialCampaigns }) {
                     <option value="COMPLETED">COMPLETED</option>
                   </select>
                 </div>
-                <p className="text-slate-400 text-sm mt-1 mb-4">Client: <span className="font-bold text-amber-500">{camp.client.brandName}</span> | Portal Route: <span className="text-cyan-300 cursor-pointer" onClick={() => navigator.clipboard.writeText(`/[lang]/client-portal/${camp.client.id}`)}>Copy Secure Link</span></p>
+                <p className="text-slate-400 text-sm mt-1 mb-4">Client: <span className="font-bold text-amber-500">{camp.client.name}</span> | Portal Route: <span className="text-cyan-300 cursor-pointer" onClick={() => navigator.clipboard.writeText(`/[lang]/client-portal/${camp.client.id}`)}>Copy Secure Link</span></p>
 
                 {/* Proof of Work List */}
                 <div className="mt-8 space-y-3">
@@ -106,8 +106,8 @@ export default function AdminAgencyHQClient({ initialCampaigns }) {
                         onChange={() => toggleAdSelection(ad.id)}
                       />
                       <div className="flex-1 truncate w-full">
-                        <p className="text-sm text-blue-300 truncate">{ad.url}</p>
-                        <p className="text-[10px] uppercase mt-1 font-bold text-slate-400 tracking-wider">Status: {ad.status}</p>
+                        <p className="text-sm text-blue-300 truncate">{ad.postUrl}</p>
+                        <p className="text-[10px] uppercase mt-1 font-bold text-slate-400 tracking-wider">Status: {ad.status} · Budget Limit: ${ad.itemBudget}</p>
                       </div>
                       
                       {ad.previewImage ? (

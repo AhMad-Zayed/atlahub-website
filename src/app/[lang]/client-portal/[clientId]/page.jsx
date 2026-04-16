@@ -40,14 +40,14 @@ export default async function ClientPortalPage(props) {
           <div>
             <p className="text-amber-500/80 uppercase tracking-[0.25em] text-xs font-bold mb-2">AtlaHub Elite Portal</p>
             <h1 className="text-4xl md:text-5xl font-bold font-cairo text-white">
-              {client.brandName}
+              {client.name}
             </h1>
           </div>
-          {client.logoUrl ? (
-            <img src={client.logoUrl} alt={client.brandName} className="h-16 w-16 rounded-full border border-amber-500/20 object-cover" />
+          {client.logo ? (
+            <img src={client.logo} alt={client.name} className="h-16 w-16 rounded-full border border-amber-500/20 object-cover" />
           ) : (
             <div className="h-16 w-16 rounded-full bg-amber-500/20 flex items-center justify-center font-bold text-amber-300 border border-amber-500/30">
-              {client.brandName.charAt(0)}
+              {client.name.charAt(0)}
             </div>
           )}
         </header>
