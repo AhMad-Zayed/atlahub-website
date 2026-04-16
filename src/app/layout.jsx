@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 import { headers } from 'next/headers';
 import { Cairo, Tajawal } from 'next/font/google';
 import AnalyticsTracker from '@/components/Analytics/AnalyticsTracker';
+import CookieConsent from '@/components/Analytics/CookieConsent';
 import ToasterProvider from '@/components/UI/ToasterProvider';
 
 const cairo = Cairo({
@@ -36,6 +37,7 @@ export default async function RootLayout({ children }) {
         className={`${cairo.variable} ${tajawal.variable} min-h-screen bg-slate-950 text-slate-100 antialiased`}
       >
         <AnalyticsTracker />
+        <CookieConsent />
         <ToasterProvider />
         <main>{children}</main>
       </body>

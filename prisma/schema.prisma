@@ -281,13 +281,32 @@ model PortfolioProject {
 }
 
 // ---------------------------------------------------------------------------
-// Analytics
+// Analytics & Session Compliance Suite
 // ---------------------------------------------------------------------------
 
-model Analytics {
+model Session {
+  id         String   @id @default(uuid()) @db.Uuid
+  startTime  DateTime @default(now()) @db.Timestamp(0)
+  endTime    DateTime? @db.Timestamp(0)
+  duration   Int?
+  ipHash     String   @db.VarChar(64)
+  userAgent  String   @db.Text
+  deviceType String?  @db.VarChar(64)
+  os         String?  @db.VarChar(64)
+  browser    String?  @db.VarChar(64)
+  country    String?  @db.VarChar(64)
+  city       String?  @db.VarChar(128)
+  referrer   String?  @db.Text
+  
+  events     Event[]
+}
+
+model Event {
   id        Int      @id @default(autoincrement())
-  event     String   @db.VarChar(255)
-  path      String?  @db.VarChar(255)
+  sessionId String   @db.Uuid
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  type      String   @db.VarChar(64)
+  target    String?  @db.Text
   timestamp DateTime @default(now()) @db.Timestamp(0)
-  metadata  Json?
+  payload   Json?
 }

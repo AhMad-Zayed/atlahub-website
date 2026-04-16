@@ -29,10 +29,10 @@ import UnifiedTimeline from '@/components/PLM/UnifiedTimeline';
 import { PORTFOLIO_CATEGORIES, getPortfolioItems } from '@/lib/portfolio-admin';
 import { getPipelineProjects } from '@/lib/onboarding';
 import { getContactMessages } from '@/lib/messages-store';
-import content from '@/data/content.json';
 import prisma from '@/lib/prisma';
 import CreateEliteProjectModal from '@/components/Admin/CreateEliteProjectModal';
 import UserJourneyMap from '@/components/Admin/UserJourneyMap';
+import LiveSessionFeed from '@/components/Admin/LiveSessionFeed';
 
 export const dynamic = 'force-dynamic';
 
@@ -81,46 +81,56 @@ export default async function DashboardPage({ params }) {
   const portfolioItems = await getPortfolioItems();
   const contactMessages = await getContactMessages();
 
-  const totalEvents = await prisma.analytics.count();
-  const leads = await prisma.analytics.count({
-    where: { event: { contains: 'lead', mode: 'insensitive' } },
-  });
-  const projectEngagement = await prisma.analytics.count({
-    where: { path: { contains: 'project', mode: 'insensitive' } },
+  const totalSessions = await prisma.session.count();
+  const totalEvents = await prisma.event.count();
+  
+  const leads = await prisma.event.count({
+    where: { type: { contains: 'lead', mode: 'insensitive' } },
   });
   
-  const trendsByEvent = await prisma.analytics.groupBy({
-    by: ['event'],
+  const projectEngagement = await prisma.event.count({
+    where: { target: { contains: 'project', mode: 'insensitive' } },
+  });
+  
+  const trendsByEvent = await prisma.event.groupBy({
+    by: ['type'],
     _count: {
       id: true,
     },
   });
 
-  const recentEvents = await prisma.analytics.findMany({
+  const recentEvents = await prisma.event.findMany({
     orderBy: { timestamp: 'desc' },
     take: 20,
+    include: { session: true }
+  });
+
+  const recentSessions = await prisma.session.findMany({
+    orderBy: { startTime: 'desc' },
+    take: 15,
+    include: { events: true }
   });
 
   const analyticsSummary = {
     totals: {
-      total_reach: totalEvents,
+      total_reach: totalSessions,
       project_engagement: projectEngagement,
-      unique_identities: totalEvents, 
+      unique_identities: totalSessions, 
       qualified_leads: leads,
     },
     technicalInterestHeatmap: trendsByEvent.map((trend) => ({
-      section: trend.event,
+      section: trend.type,
       interactions: trend._count.id,
       clicks: 0,
       avg_dwell_seconds: 0,
     })),
     userJourneyTimeline: recentEvents.map((ev) => ({
       created_at: ev.timestamp.toISOString(),
-      visitor: 'Anonymous',
-      project: ev.path || 'Global',
-      action: ev.event,
+      visitor: ev.session?.ipHash?.slice(0, 8) || 'Anonymous',
+      project: ev.target || 'Global',
+      action: ev.type,
       dwell_ms: 0,
-      source_host: 'direct',
+      source_host: ev.session?.referrer || 'direct',
     })),
   };
   const logoutAction = handleLogout.bind(null, lang);
@@ -225,6 +235,10 @@ export default async function DashboardPage({ params }) {
                     </p>
                   </div>
                   <UserJourneyMap summary={analyticsSummary} />
+                </section>
+
+                <section className="mt-8">
+                  <LiveSessionFeed sessions={recentSessions} />
                 </section>
 
                 <section id="core-editor" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(56,189,248,0.14)] backdrop-blur-xl">
