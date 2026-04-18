@@ -366,6 +366,8 @@ model AdItem {
   campaign       AgencyCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   postUrl        String         @db.Text
   previewImage   String?        @db.Text
+  ogTitle        String?        @db.Text
+  ogDescription  String?        @db.Text
   targetAudience String?        @db.Text
   reachGoal      Int            @default(0)
   itemBudget     Float          @default(0)
@@ -393,6 +395,7 @@ model CampaignLog {
   action     String         @db.VarChar(255)
   user       String         @default("SYSTEM") @db.VarChar(64)
   details    String?        @db.Text
+  isVisibleToClient Boolean @default(false)
   createdAt  DateTime       @default(now()) @db.Timestamp(0)
 
   @@index([campaignId])
