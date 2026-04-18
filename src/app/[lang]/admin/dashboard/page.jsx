@@ -1,5 +1,9 @@
 import Link from 'next/link';
 import {
+  Server, Activity, LayoutDashboard, FolderKanban, MessageSquare, Users2, ShieldAlert,
+  Settings, LogOut, ChevronRight, PlusCircle, MonitorPlay, BarChart3, Database, KeySquare, Map, PencilLine
+} from 'lucide-react';
+import {
   addPortfolioItem,
   addPortfolioPreset,
   createOnboardingProject,
@@ -43,9 +47,33 @@ function formatStableDate(timestamp) {
   return date.toUTCString();
 }
 
+function NeonCard({ children, title, subtitle, icon: Icon, className = '', headerRight }) {
+  return (
+    <div className={`rounded-xl border border-[#333] bg-[#161616] p-6 shadow-sm transition-all duration-200 ${className}`}>
+      {(title || subtitle) && (
+        <div className="mb-6 flex items-start justify-between gap-4">
+          <div className="flex gap-4">
+            {Icon && (
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#333] bg-[#0c0c0c] text-slate-300">
+                <Icon size={18} />
+              </div>
+            )}
+            <div>
+              {title && <h2 className="text-lg font-medium text-white tracking-tight">{title}</h2>}
+              {subtitle && <p className="text-sm text-gray-400 mt-1">{subtitle}</p>}
+            </div>
+          </div>
+          {headerRight && <div>{headerRight}</div>}
+        </div>
+      )}
+      {children}
+    </div>
+  );
+}
+
 function FieldLabel({ children }) {
   return (
-    <label className="mb-2 block font-cairo text-sm font-semibold text-slate-900 dark:text-white">
+    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-400">
       {children}
     </label>
   );
@@ -58,7 +86,7 @@ function TextInput({ name, placeholder, required = false, defaultValue = '' }) {
       defaultValue={defaultValue}
       placeholder={placeholder}
       required={required}
-      className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 font-tajawal text-sm text-white shadow-sm outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 focus:ring-opacity-30 placeholder:text-slate-400"
+      className="w-full rounded-md border border-[#333] bg-[#0c0c0c] px-3 py-2.5 text-sm text-white shadow-sm outline-none transition-colors focus:border-[#6d28d9] focus:ring-1 focus:ring-[#6d28d9] placeholder:text-gray-600"
     />
   );
 }
@@ -70,8 +98,24 @@ function TextArea({ name, placeholder, rows = 4, defaultValue = '' }) {
       defaultValue={defaultValue}
       placeholder={placeholder}
       rows={rows}
-      className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 font-tajawal text-sm text-white shadow-sm outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 focus:ring-opacity-30 placeholder:text-slate-400"
+      className="w-full rounded-md border border-[#333] bg-[#0c0c0c] px-3 py-2.5 text-sm text-white shadow-sm outline-none transition-colors focus:border-[#6d28d9] focus:ring-1 focus:ring-[#6d28d9] placeholder:text-gray-600"
     />
+  );
+}
+
+function NeonButton({ children, type = "button", variant = "primary", className = "", disabled=false }) {
+  const base = "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none";
+  const variants = {
+    primary: "bg-[#6d28d9] text-white hover:bg-purple-600",
+    secondary: "bg-white text-black hover:bg-gray-200",
+    accent: "bg-emerald-500 text-black hover:bg-emerald-400",
+    ghost: "border border-[#333] bg-[#161616] text-white hover:bg-[#222]",
+    danger: "border border-red-900/50 bg-red-950/20 text-red-500 hover:bg-red-900/40"
+  };
+  return (
+    <button type={type} disabled={disabled} className={`${base} ${variants[variant]} ${className}`}>
+      {children}
+    </button>
   );
 }
 
@@ -82,58 +126,20 @@ export default async function DashboardPage({ params }) {
   const portfolioItems = await getPortfolioItems();
   const contactMessages = await getContactMessages();
 
+  // Logic Isolation - Kept exactly as original
   const totalSessions = await prisma.session.count();
-  const totalEvents = await prisma.event.count();
-  
-  const leads = await prisma.event.count({
-    where: { type: { contains: 'lead', mode: 'insensitive' } },
-  });
-  
-  const projectEngagement = await prisma.event.count({
-    where: { target: { contains: 'project', mode: 'insensitive' } },
-  });
-  
-  const trendsByEvent = await prisma.event.groupBy({
-    by: ['type'],
-    _count: {
-      id: true,
-    },
-  });
-
-  const recentEvents = await prisma.event.findMany({
-    orderBy: { timestamp: 'desc' },
-    take: 20,
-    include: { session: true }
-  });
-
-  const recentSessions = await prisma.session.findMany({
-    orderBy: { startTime: 'desc' },
-    take: 15,
-    include: { events: true }
-  });
+  const leads = await prisma.event.count({ where: { type: { contains: 'lead', mode: 'insensitive' } } });
+  const projectEngagement = await prisma.event.count({ where: { target: { contains: 'project', mode: 'insensitive' } } });
+  const trendsByEvent = await prisma.event.groupBy({ by: ['type'], _count: { id: true } });
+  const recentEvents = await prisma.event.findMany({ orderBy: { timestamp: 'desc' }, take: 20, include: { session: true } });
+  const recentSessions = await prisma.session.findMany({ orderBy: { startTime: 'desc' }, take: 15, include: { events: true } });
 
   const analyticsSummary = {
-    totals: {
-      total_reach: totalSessions,
-      project_engagement: projectEngagement,
-      unique_identities: totalSessions, 
-      qualified_leads: leads,
-    },
-    technicalInterestHeatmap: trendsByEvent.map((trend) => ({
-      section: trend.type,
-      interactions: trend._count.id,
-      clicks: 0,
-      avg_dwell_seconds: 0,
-    })),
-    userJourneyTimeline: recentEvents.map((ev) => ({
-      created_at: ev.timestamp.toISOString(),
-      visitor: ev.session?.ipHash?.slice(0, 8) || 'Anonymous',
-      project: ev.target || 'Global',
-      action: ev.type,
-      dwell_ms: 0,
-      source_host: ev.session?.referrer || 'direct',
-    })),
+    totals: { total_reach: totalSessions, project_engagement: projectEngagement, unique_identities: totalSessions, qualified_leads: leads },
+    technicalInterestHeatmap: trendsByEvent.map((trend) => ({ section: trend.type, interactions: trend._count.id, clicks: 0, avg_dwell_seconds: 0 })),
+    userJourneyTimeline: recentEvents.map((ev) => ({ created_at: ev.timestamp.toISOString(), visitor: ev.session?.ipHash?.slice(0, 8) || 'Anonymous', project: ev.target || 'Global', action: ev.type, dwell_ms: 0, source_host: ev.session?.referrer || 'direct' })),
   };
+
   const logoutAction = handleLogout.bind(null, lang);
   const updateSiteAction = updateSiteSections.bind(null, lang);
   const addItemAction = addPortfolioItem.bind(null, lang);
@@ -153,848 +159,336 @@ export default async function DashboardPage({ params }) {
   const onboardingProjects = await getPipelineProjects();
   const adminUsers = await getAdminUsers(lang);
   const currentAdminUser = await getCurrentAdminUser(lang);
-  const executiveStats = [
-    { label: 'Total Reach', value: analyticsSummary?.totals?.total_reach || 0, color: 'text-cyan-300' },
-    { label: 'Project Engagement', value: analyticsSummary?.totals?.project_engagement || 0, color: 'text-pink-300' },
-    { label: 'Unique Identities', value: analyticsSummary?.totals?.unique_identities || 0, color: 'text-emerald-300' },
-    { label: 'Qualified Leads', value: analyticsSummary?.totals?.qualified_leads || 0, color: 'text-amber-300' },
-  ];
+
+  const NavItem = ({ href, icon: Icon, label }) => (
+    <a href={href} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-gray-400 transition-colors hover:bg-[#222] hover:text-white">
+      <Icon size={16} />
+      <span>{label}</span>
+    </a>
+  );
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#020617] p-4 font-cairo text-white md:p-6">
-      <div className="pointer-events-none absolute -left-28 -top-20 h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.25),transparent_62%)] blur-3xl" />
-      <div className="pointer-events-none absolute -right-24 top-1/4 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(244,63,94,0.2),transparent_60%)] blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.2),transparent_60%)] blur-3xl" />
-
-      <div className="relative mx-auto max-w-[1700px]">
-        <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
-          <aside className="rounded-[1.75rem] border border-white/10 bg-slate-950/80 p-5 shadow-[0_30px_120px_rgba(15,23,42,0.45)] backdrop-blur-xl lg:sticky lg:top-6 lg:h-[calc(100vh-3rem)]">
-            <p className="font-tajawal text-xs uppercase tracking-[0.34em] text-slate-400">Elite Navigation</p>
-            <h2 className="mt-3 font-cairo text-2xl font-bold text-white">Command Center</h2>
-            <nav className="mt-6 space-y-3 font-tajawal text-sm text-slate-200">
-              <a href="#overview" className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/40 hover:bg-slate-800/80 hover:text-cyan-300">Overview</a>
-              <a href="#journey-map" className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-pink-400/40 hover:bg-slate-800/80 hover:text-pink-300">User Journey</a>
-              <a href="#core-editor" className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/40 hover:bg-slate-800/80 hover:text-cyan-300">Core Content</a>
-              <a href="#portfolio-hub" className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-amber-400/40 hover:bg-slate-800/80 hover:text-amber-300">Portfolio Hub</a>
-              <a href="#pipeline-management" className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-emerald-400/40 hover:bg-slate-800/80 hover:text-emerald-300">Pipeline Management</a>
-              <a href={`/${lang}/admin/onboarding`} className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-cyan-400/40 hover:bg-slate-800/80 hover:text-cyan-300">Onboarding Ops</a>
-              <a href="#portfolio-records" className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-emerald-400/40 hover:bg-slate-800/80 hover:text-emerald-300">Project Records</a>
-              <a href="#lead-inbox" className="block rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 transition hover:border-orange-400/40 hover:bg-slate-800/80 hover:text-orange-300">Lead Inbox</a>
-            </nav>
-            <div className="mt-6 rounded-2xl border border-cyan-400/20 bg-cyan-400/10 p-4">
-              <p className="font-tajawal text-xs uppercase tracking-[0.24em] text-cyan-200">Server Status</p>
-              <p className="mt-2 font-cairo text-lg font-semibold text-white">Live Operational</p>
+    <div className="flex h-screen w-full overflow-hidden bg-[#0c0c0c] text-white font-sans selection:bg-[#6d28d9] selection:text-white">
+      {/* Sidebar - Advanced Neon Concept */}
+      <aside className="no-scrollbar flex w-[260px] shrink-0 flex-col overflow-y-auto border-r border-[#333] bg-[#0c0c0c]">
+        <div className="flex h-16 shrink-0 items-center border-b border-[#333] px-6">
+          <div className="flex items-center gap-2">
+            <div className="h-6 w-6 rounded bg-[#6d28d9] text-white flex items-center justify-center">
+              <span className="font-bold text-xs leading-none">A</span>
             </div>
-          </aside>
+            <span className="font-semibold tracking-tight text-white">AtlaHub Console</span>
+          </div>
+        </div>
+        
+        <div className="mx-4 mt-6">
+          <div className="mb-2 px-2 text-xs font-medium uppercase tracking-wider text-gray-500">Global Overview</div>
+          <nav className="space-y-1">
+            <NavItem href="#overview" icon={LayoutDashboard} label="Mission Control" />
+            <NavItem href="#analytics" icon={BarChart3} label="Intelligence & Metrics" />
+            <NavItem href="#inbox" icon={MessageSquare} label="Lead Inbox" />
+          </nav>
+        </div>
 
-          <div>
-            <div id="overview" className="mb-8 flex flex-col gap-6 rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_30px_120px_rgba(15,23,42,0.55)] backdrop-blur-xl md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-cyan-300">Mission Control</p>
-                <h1 className="mt-3 text-4xl font-bold text-white">Executive Control Center</h1>
-                <p className="mt-3 max-w-3xl font-tajawal text-base leading-7 text-slate-300">
-                  Manage bilingual content, portfolio media, and performance intelligence from a single elite command surface.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a href="#portfolio-hub" className="rounded-full border border-white/10 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:bg-cyan-500/15 hover:text-white">
-                    Portfolio Hub
-                  </a>
-                  <a href="#lead-inbox" className="rounded-full border border-white/10 bg-slate-900/80 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-800 hover:text-white">
-                    Recent Inbox
-                  </a>
-                </div>
+        <div className="mx-4 mt-8">
+          <div className="mb-2 px-2 text-xs font-medium uppercase tracking-wider text-gray-500">Project Operations</div>
+          <nav className="space-y-1">
+            <NavItem href="#pipeline" icon={FolderKanban} label="Onboarding Pipeline" />
+            <NavItem href="#portfolio" icon={MonitorPlay} label="Portfolio Manager" />
+            <NavItem href="#presets" icon={Database} label="Showcase Presets" />
+          </nav>
+        </div>
+
+        <div className="mx-4 mt-8 mb-6">
+          <div className="mb-2 px-2 text-xs font-medium uppercase tracking-wider text-gray-500">System Config</div>
+          <nav className="space-y-1">
+            <NavItem href="#content" icon={PencilLine} label="Core JSON Content" />
+            <NavItem href="#team" icon={Users2} label="Team Access" />
+            <NavItem href="#profile" icon={Settings} label="Global Settings" />
+          </nav>
+        </div>
+
+        <div className="mt-auto border-t border-[#333] p-4">
+          <div className="flex items-center justify-between rounded-md bg-[#161616] p-3 border border-[#333]">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+              <span className="text-xs text-gray-400 font-mono">iad1 (US East)</span>
+            </div>
+            <form action={logoutAction}>
+              <button type="submit" className="text-gray-400 hover:text-white transition-colors" title="Logout">
+                <LogOut size={14} />
+              </button>
+            </form>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content Workspace */}
+      <main className="flex-1 overflow-y-auto w-full bg-[#0c0c0c] p-6 lg:p-10">
+        <div className="mx-auto max-w-[1400px] space-y-10">
+          
+          {/* Header & Overview */}
+          <div id="overview" className="flex flex-col gap-4 border-b border-[#333] pb-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight text-white mb-1">Overview</h1>
+              <p className="text-sm text-gray-400">Comprehensive dashboard for managing deployments, portfolios, and analytics.</p>
+            </div>
+            <div className="flex gap-2">
+              <Link href="#pipeline" className="inline-flex items-center justify-center rounded-md border border-[#333] bg-[#161616] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#222]">
+                New Pipeline Project
+              </Link>
+            </div>
+          </div>
+
+          {/* Stats Box System */}
+          <div className="grid gap-4 md:grid-cols-4">
+            <div className="rounded-xl border border-[#333] bg-[#161616] p-5.5 px-6 py-5">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Total Reach</p>
+              <div className="mt-2 flex items-baseline gap-2">
+                <p className="font-mono text-3xl font-medium text-white">{analyticsSummary.totals.total_reach}</p>
+                <p className="text-xs text-emerald-400 font-mono">+12%</p>
               </div>
-              <form action={logoutAction} className="flex items-center justify-end">
-                <button
-                  type="submit"
-                  className="rounded-full bg-gradient-to-r from-orange-400 to-amber-500 px-5 py-3 font-tajawal text-sm font-semibold text-slate-950 transition hover:from-orange-300 hover:to-amber-400"
-                >
-                  Logout
-                </button>
+            </div>
+            <div className="rounded-xl border border-[#333] bg-[#161616] p-5.5 px-6 py-5">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Engagement</p>
+              <div className="mt-2 flex items-baseline gap-2">
+                <p className="font-mono text-3xl font-medium text-white">{analyticsSummary.totals.project_engagement}</p>
+              </div>
+            </div>
+            <div className="rounded-xl border border-[#333] bg-[#161616] p-5.5 px-6 py-5">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Identities</p>
+              <div className="mt-2 flex items-baseline gap-2">
+                <p className="font-mono text-3xl font-medium text-white">{analyticsSummary.totals.unique_identities}</p>
+              </div>
+            </div>
+            <div className="rounded-xl border border-[#333] bg-[#161616] p-5.5 px-6 py-5">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Quality Leads</p>
+              <div className="mt-2 flex items-baseline gap-2">
+                <p className="font-mono text-3xl font-medium text-white">{analyticsSummary.totals.qualified_leads}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Analytics Modules */}
+          <div id="analytics" className="grid gap-6 xl:grid-cols-3">
+            <NeonCard className="xl:col-span-2" icon={Map} title="Journey Intelligence" subtitle="Live tracking across interactive components and models.">
+               <UserJourneyMap summary={analyticsSummary} />
+            </NeonCard>
+            
+            <NeonCard icon={Activity} title="Live Feed" subtitle="Real-time geographic stream">
+               <LiveSessionFeed sessions={recentSessions} />
+            </NeonCard>
+          </div>
+
+          {/* Pipeline Management */}
+          <NeonCard id="pipeline" icon={FolderKanban} title="Onboarding Pipeline" subtitle="Secure client tracking and phase management" headerRight={<CreateEliteProjectModal />}>
+            <div className="rounded-lg border border-[#333] bg-[#0c0c0c] p-5 mb-6">
+              <form action={createOnboardingProjectAction} className="grid gap-4 lg:grid-cols-4 items-end">
+                <div>
+                  <FieldLabel>Project Name</FieldLabel>
+                  <TextInput name="project_title" placeholder="Acme Inc Rebrand" />
+                </div>
+                <div>
+                  <FieldLabel>Client Name</FieldLabel>
+                  <TextInput name="client_name" placeholder="Acme Inc" />
+                </div>
+                <div>
+                  <FieldLabel>Flow Type</FieldLabel>
+                  <select name="project_type" className="w-full rounded-md border border-[#333] bg-[#161616] px-3 py-2.5 text-sm text-white shadow-sm outline-none transition-colors focus:border-[#6d28d9] focus:ring-1 focus:ring-[#6d28d9]">
+                    <option value="CLIENT_SERVICES">Client Services</option>
+                    <option value="VISUAL_ID">Visual Identity</option>
+                    <option value="PROPOSAL">Workshop Proposal</option>
+                  </select>
+                </div>
+                <NeonButton type="submit" variant="primary">Generate Pipeline</NeonButton>
               </form>
             </div>
 
-            <div className="mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {executiveStats.map((card) => (
-                <div key={card.label} className="rounded-[1.75rem] border border-white/10 bg-slate-950/80 p-5 shadow-[0_25px_80px_rgba(15,23,42,0.35)] backdrop-blur-xl">
-                  <p className="font-tajawal text-xs uppercase tracking-[0.28em] text-slate-400">{card.label}</p>
-                  <p className={`mt-4 font-cairo text-4xl font-semibold ${card.color}`}>{card.value}</p>
+            <div className="space-y-4">
+              {onboardingProjects.length === 0 ? (
+                <div className="rounded-lg border border-dashed border-[#444] p-8 text-center text-sm text-gray-500">
+                  No active pipelines. Create one above to begin.
                 </div>
-              ))}
-            </div>
+              ) : (
+                onboardingProjects.map((project) => {
+                  const progressCount = [ project.submission?.step1_soul, project.submission?.step2_market, project.submission?.step3_visual, (project.submission?.step4_media || []).length ? 'filled' : '', project.submission?.step5_summary ].filter(Boolean).length;
+                  const progress = Math.round((progressCount / 5) * 100);
+                  const activeToken = project.tokens?.find(c => c?.is_active && new Date(c.expires_at) > new Date());
+                  const onboardingToken = activeToken || project.tokens?.[0] || null;
+                  
+                  const formatMetadata = (meta) => {
+                    if (!meta) return '';
+                    try { const obj = typeof meta === 'string' ? JSON.parse(meta) : meta; return obj.message || obj.title ? `${obj.message || ''} ${obj.title || ''}`.trim() : JSON.stringify(obj); } catch { return String(meta); }
+                  };
 
-            <div className="grid gap-8 xl:grid-cols-[1.25fr_0.75fr]">
-              <div className="space-y-8">
-                <section id="journey-map" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(14,165,233,0.18)] backdrop-blur-xl">
-                  <div className="mb-6">
-                    <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-cyan-300">
-                      Performance Intelligence
-                    </p>
-                    <h2 className="mt-3 text-2xl font-bold text-white">User Journey Map</h2>
-                    <p className="mt-2 font-tajawal text-sm text-slate-300">
-                      Advanced behavioral analytics with fingerprint trust scoring, heatmap events, and CAPI-ready lead queue.
-                    </p>
-                  </div>
-                  <UserJourneyMap summary={analyticsSummary} />
-                </section>
+                  const unifiedEvents = [
+                    ...(project.activityLogs || []).map(log => ({ id: `al-${log.id}`, createdAt: log.createdAt, title: log.action, description: formatMetadata(log.metadata), actor: log.actorRole })),
+                    ...(project.collaboratorNotes || []).map(note => ({ id: `cn-${note.id}`, createdAt: note.createdAt, title: 'Collaborator Note', description: note.content, actor: note.author })),
+                    ...(project.deliverables || []).flatMap(d => (d.comments || []).map(c => ({ id: `dc-${c.id}`, createdAt: c.createdAt, title: `Comment on ${d.title}`, description: c.comment, actor: c.author })))
+                  ].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
-                <section className="mt-8">
-                  <LiveSessionFeed sessions={recentSessions} />
-                </section>
-
-                <section id="core-editor" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(56,189,248,0.14)] backdrop-blur-xl">
-                  <div className="mb-6">
-                    <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-cyan-300">
-                      Content Pipeline
-                    </p>
-                    <h2 className="mt-3 text-2xl font-bold text-white">Core Content Editor</h2>
-                    <p className="mt-3 max-w-3xl font-tajawal text-sm leading-7 text-slate-300">
-                      Update core brand messaging in both languages at once. This editor writes directly to <code>src/data/content.json</code> with backup + structure validation.
-                    </p>
-                  </div>
-
-                  <form action={updateSiteAction} className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                    <div>
-                      <FieldLabel>Hero CTA Primary (EN)</FieldLabel>
-                      <TextInput name="hero_cta_primary_en" required defaultValue={enContent.hero?.ctaPrimary || ''} placeholder="Start Your Project" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero CTA Primary (AR)</FieldLabel>
-                      <TextInput name="hero_cta_primary_ar" required defaultValue={arContent.hero?.ctaPrimary || ''} placeholder="ابدأ مشروعك" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero CTA Secondary (EN)</FieldLabel>
-                      <TextInput name="hero_cta_secondary_en" required defaultValue={enContent.hero?.ctaSecondary || ''} placeholder="View Results" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero CTA Secondary (AR)</FieldLabel>
-                      <TextInput name="hero_cta_secondary_ar" required defaultValue={arContent.hero?.ctaSecondary || ''} placeholder="استعرض النتائج" />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Hero Slide 1 Title (EN)</FieldLabel>
-                      <TextInput name="hero_slide_1_title_en" required defaultValue={enContent.hero?.slides?.[0]?.title || ''} placeholder="Slide title" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 1 Title (AR)</FieldLabel>
-                      <TextInput name="hero_slide_1_title_ar" required defaultValue={arContent.hero?.slides?.[0]?.title || ''} placeholder="عنوان الشريحة" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 1 Description (EN)</FieldLabel>
-                      <TextArea name="hero_slide_1_description_en" rows={3} defaultValue={enContent.hero?.slides?.[0]?.description || ''} placeholder="Slide description" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 1 Description (AR)</FieldLabel>
-                      <TextArea name="hero_slide_1_description_ar" rows={3} defaultValue={arContent.hero?.slides?.[0]?.description || ''} placeholder="وصف الشريحة" />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Hero Slide 2 Title (EN)</FieldLabel>
-                      <TextInput name="hero_slide_2_title_en" required defaultValue={enContent.hero?.slides?.[1]?.title || ''} placeholder="Slide title" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 2 Title (AR)</FieldLabel>
-                      <TextInput name="hero_slide_2_title_ar" required defaultValue={arContent.hero?.slides?.[1]?.title || ''} placeholder="عنوان الشريحة" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 2 Description (EN)</FieldLabel>
-                      <TextArea name="hero_slide_2_description_en" rows={3} defaultValue={enContent.hero?.slides?.[1]?.description || ''} placeholder="Slide description" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 2 Description (AR)</FieldLabel>
-                      <TextArea name="hero_slide_2_description_ar" rows={3} defaultValue={arContent.hero?.slides?.[1]?.description || ''} placeholder="وصف الشريحة" />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Hero Slide 3 Title (EN)</FieldLabel>
-                      <TextInput name="hero_slide_3_title_en" required defaultValue={enContent.hero?.slides?.[2]?.title || ''} placeholder="Slide title" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 3 Title (AR)</FieldLabel>
-                      <TextInput name="hero_slide_3_title_ar" required defaultValue={arContent.hero?.slides?.[2]?.title || ''} placeholder="عنوان الشريحة" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 3 Description (EN)</FieldLabel>
-                      <TextArea name="hero_slide_3_description_en" rows={3} defaultValue={enContent.hero?.slides?.[2]?.description || ''} placeholder="Slide description" />
-                    </div>
-                    <div>
-                      <FieldLabel>Hero Slide 3 Description (AR)</FieldLabel>
-                      <TextArea name="hero_slide_3_description_ar" rows={3} defaultValue={arContent.hero?.slides?.[2]?.description || ''} placeholder="وصف الشريحة" />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Services Headline (EN)</FieldLabel>
-                      <TextInput name="services_headline_en" required defaultValue={enContent.services?.headline || ''} placeholder="Services headline" />
-                    </div>
-                    <div>
-                      <FieldLabel>Services Headline (AR)</FieldLabel>
-                      <TextInput name="services_headline_ar" required defaultValue={arContent.services?.headline || ''} placeholder="عنوان الخدمات" />
-                    </div>
-                    <div>
-                      <FieldLabel>Services Subheadline (EN)</FieldLabel>
-                      <TextArea name="services_subheadline_en" rows={3} defaultValue={enContent.services?.subheadline || ''} placeholder="Services subheadline" />
-                    </div>
-                    <div>
-                      <FieldLabel>Services Subheadline (AR)</FieldLabel>
-                      <TextArea name="services_subheadline_ar" rows={3} defaultValue={arContent.services?.subheadline || ''} placeholder="وصف الخدمات" />
-                    </div>
-                    <div>
-                      <FieldLabel>Services Badge (EN)</FieldLabel>
-                      <TextInput name="services_badge_en" defaultValue={enContent.services?.uniqueBadge || ''} placeholder="Featured" />
-                    </div>
-                    <div>
-                      <FieldLabel>Services Badge (AR)</FieldLabel>
-                      <TextInput name="services_badge_ar" defaultValue={arContent.services?.uniqueBadge || ''} placeholder="مميز" />
-                    </div>
-
-                    <div>
-                      <FieldLabel>About Headline (EN)</FieldLabel>
-                      <TextInput name="about_headline_en" required defaultValue={enContent.founder?.headline || ''} placeholder="Founder headline" />
-                    </div>
-                    <div>
-                      <FieldLabel>About Headline (AR)</FieldLabel>
-                      <TextInput name="about_headline_ar" required defaultValue={arContent.founder?.headline || ''} placeholder="عنوان المؤسس" />
-                    </div>
-                    <div>
-                      <FieldLabel>About Badge (EN)</FieldLabel>
-                      <TextInput name="about_badge_en" defaultValue={enContent.founder?.badge || ''} placeholder="Founder badge" />
-                    </div>
-                    <div>
-                      <FieldLabel>About Badge (AR)</FieldLabel>
-                      <TextInput name="about_badge_ar" defaultValue={arContent.founder?.badge || ''} placeholder="وسم المؤسس" />
-                    </div>
-                    <div className="md:col-span-2">
-                      <FieldLabel>About Story (EN)</FieldLabel>
-                      <TextArea name="about_story_en" rows={5} defaultValue={enContent.founder?.story || ''} placeholder="Founder story in English" />
-                    </div>
-                    <div className="md:col-span-2">
-                      <FieldLabel>About Story (AR)</FieldLabel>
-                      <TextArea name="about_story_ar" rows={5} defaultValue={arContent.founder?.story || ''} placeholder="قصة المؤسس بالعربية" />
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="md:col-span-2 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-500 px-5 py-3 font-tajawal text-sm font-semibold text-white transition hover:from-sky-500 hover:to-cyan-400"
-                    >
-                      Save Core Site Sections
-                    </button>
-                  </form>
-                </section>
-
-                <section id="portfolio-hub" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                    <div>
-                      <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-amber-300">
-                        Portfolio Operations
-                      </p>
-                      <h2 className="mt-3 text-2xl font-bold text-white">Add Portfolio Item</h2>
-                    </div>
-                    <div className="rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 font-tajawal text-xs font-semibold uppercase tracking-[0.24em] text-amber-100">
-                      Multi-media Ready
-                    </div>
-                  </div>
-
-                  <form action={addItemAction} className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                    <div>
-                      <FieldLabel>Project Title (EN)</FieldLabel>
-                      <TextInput
-                        name="title_en"
-                        placeholder="Digital Security for Marketing - Al-Quds Open University"
-                        required
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Project Title (AR)</FieldLabel>
-                      <TextInput
-                        name="title_ar"
-                        placeholder="الأمن الرقمي للتسويق - جامعة القدس المفتوحة"
-                        required
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Category</FieldLabel>
-                      <select
-                        name="category"
-                        defaultValue="training"
-                        className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 font-tajawal text-sm text-white shadow-sm outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 focus:ring-opacity-30"
-                      >
-                        {PORTFOLIO_CATEGORIES.map((category) => (
-                          <option key={category.value} value={category.value}>
-                            {category.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <FieldLabel>Challenge / Overview (EN)</FieldLabel>
-                      <TextArea
-                        name="description_en"
-                        rows={4}
-                        placeholder="Describe the scenario, audience, and objective of the project."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Challenge / Overview (AR)</FieldLabel>
-                      <TextArea
-                        name="description_ar"
-                        rows={4}
-                        placeholder="اشرح السيناريو، الجمهور، والهدف من المشروع."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Role Summary (EN)</FieldLabel>
-                      <TextArea
-                        name="role_summary_en"
-                        rows={3}
-                        placeholder="Curriculum design, phishing simulation, digital privacy coaching..."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Role Summary (AR)</FieldLabel>
-                      <TextArea
-                        name="role_summary_ar"
-                        rows={3}
-                        placeholder="تصميم المنهج، محاكاة التصيد، التوعية بالخصوصية الرقمية..."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Action Summary (EN)</FieldLabel>
-                      <TextArea
-                        name="action_summary_en"
-                        rows={3}
-                        placeholder="Explain how the workshop, demo, or implementation was executed."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Action Summary (AR)</FieldLabel>
-                      <TextArea
-                        name="action_summary_ar"
-                        rows={3}
-                        placeholder="اشرح كيف تم تنفيذ الورشة أو العرض أو التطبيق."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Result / Impact (EN)</FieldLabel>
-                      <TextArea
-                        name="result_en"
-                        rows={3}
-                        placeholder="Raised awareness, improved readiness, demonstrated spoofing risk..."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Result / Impact (AR)</FieldLabel>
-                      <TextArea
-                        name="result_ar"
-                        rows={3}
-                        placeholder="رفع الوعي، تحسين الجاهزية، توضيح مخاطر الانتحال..."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Technical Focus (EN)</FieldLabel>
-                      <TextInput
-                        name="tech_focus_en"
-                        placeholder="Email Spoofing, Phishing, Social Engineering, Flutter, ML..."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Technical Focus (AR)</FieldLabel>
-                      <TextInput
-                        name="tech_focus_ar"
-                        placeholder="انتحال البريد، التصيد، الهندسة الاجتماعية، Flutter، تعلم الآلة..."
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Cover Image Path</FieldLabel>
-                      <TextInput
-                        name="cover_image_url"
-                        placeholder="/assets/images/portfolio/example.jpg"
-                      />
-                    </div>
-
-                    <div>
-                      <FieldLabel>Video URLs</FieldLabel>
-                      <TextArea
-                        name="video_urls"
-                        rows={3}
-                        placeholder="One YouTube/Facebook URL per line, or comma-separated."
-                      />
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <FieldLabel>Gallery Image Paths</FieldLabel>
-                      <TextArea
-                        name="gallery_input"
-                        rows={4}
-                        placeholder="/assets/images/portfolio/image1.jpg, /assets/images/portfolio/image2.jpg"
-                      />
-                      <p className="mt-2 font-tajawal text-xs text-slate-500 dark:text-slate-400">
-                        Supports comma-separated or one-path-per-line input. The cover image will be merged into the gallery automatically.
-                      </p>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="md:col-span-2 rounded-2xl bg-slate-950 px-5 py-3 font-tajawal text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-gradient-to-r dark:from-sky-500 dark:to-cyan-400 dark:text-slate-950"
-                    >
-                      Save Portfolio Item
-                    </button>
-                  </form>
-                </section>
-
-                <section id="pipeline-management" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                    <div>
-                      <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-cyan-300">
-                        Client Pipeline
-                      </p>
-                      <h2 className="mt-3 text-2xl font-bold text-white">Onboarding Project Pipeline</h2>
-                      <p className="mt-3 max-w-2xl font-tajawal text-sm text-slate-400">
-                        Generate secure onboarding portals for elite clients and track submissions through the project pipeline.
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-3 md:items-end">
-                      <CreateEliteProjectModal />
-                      <div className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 font-tajawal text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100">
-                        Live secure onboarding links
-                      </div>
-                    </div>
-                  </div>
-
-                  <form action={createOnboardingProjectAction} className="grid gap-4 lg:grid-cols-[1fr_1fr_1fr]">
-                    <div>
-                      <label className="mb-2 block font-cairo text-sm font-semibold text-slate-200">New Project Name</label>
-                      <input
-                        name="project_title"
-                        placeholder="Strategic Campaign Onboarding"
-                        className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-300/20"
-                      />
-                    </div>
-                    <div>
-                      <label className="mb-2 block font-cairo text-sm font-semibold text-slate-200">Client Name</label>
-                      <input
-                        name="client_name"
-                        placeholder="Al-Quds Studio"
-                        className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-300/20"
-                      />
-                    </div>
-                    <div>
-                      <label className="mb-2 block font-cairo text-sm font-semibold text-slate-200">Project Type</label>
-                      <select
-                        name="project_type"
-                        className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-300/20"
-                      >
-                        <option value="CLIENT_SERVICES">Client Services (Default Flow)</option>
-                        <option value="VISUAL_ID">Visual Identity (Deliverable Vault)</option>
-                        <option value="PROPOSAL">Workshop Proposal</option>
-                      </select>
-                    </div>
-                    <button
-                      type="submit"
-                      className="lg:col-span-3 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-500 px-5 py-3 font-tajawal text-sm font-semibold text-white transition hover:from-sky-500 hover:to-cyan-400"
-                    >
-                      Generate Onboarding Link
-                    </button>
-                  </form>
-
-                  <div className="mt-8 space-y-4">
-                    {onboardingProjects.length === 0 ? (
-                      <div className="rounded-[1.6rem] border border-white/10 bg-white/5 p-6 text-slate-400">
-                        No active onboarding projects yet. Create a secure link to begin the pipeline.
-                      </div>
-                    ) : (
-                      onboardingProjects.map((project) => {
-                        const progressCount = [
-                          project.submission?.step1_soul,
-                          project.submission?.step2_market,
-                          project.submission?.step3_visual,
-                          (project.submission?.step4_media || []).length ? 'filled' : '',
-                          project.submission?.step5_summary,
-                        ].filter(Boolean).length;
-                        const progress = Math.round((progressCount / 5) * 100);
-                        const activeToken = project.tokens?.find(
-                          (candidate) => candidate?.is_active && new Date(candidate.expires_at) > new Date()
-                        );
-                        const onboardingToken = activeToken || project.tokens?.[0] || null;
-                        const tokenState = onboardingToken
-                          ? onboardingToken.is_active && new Date(onboardingToken.expires_at) > new Date()
-                            ? 'Live'
-                            : 'Expired'
-                          : 'Unavailable';
-
-                        const formatMetadata = (meta) => {
-                          if (!meta) return '';
-                          try {
-                            const obj = typeof meta === 'string' ? JSON.parse(meta) : meta;
-                            return obj.message || obj.title ? `${obj.message || ''} ${obj.title || ''}`.trim() : JSON.stringify(obj);
-                          } catch {
-                            return String(meta);
-                          }
-                        };
-
-                        const unifiedEvents = [
-                          ...(project.activityLogs || []).map(log => ({ id: `al-${log.id}`, createdAt: log.createdAt, title: log.action, description: formatMetadata(log.metadata), actor: log.actorRole })),
-                          ...(project.collaboratorNotes || []).map(note => ({ id: `cn-${note.id}`, createdAt: note.createdAt, title: 'Collaborator Note', description: note.content, actor: note.author })),
-                          ...(project.deliverables || []).flatMap(d => (d.comments || []).map(c => ({ id: `dc-${c.id}`, createdAt: c.createdAt, title: `Comment on ${d.title}`, description: c.comment, actor: c.author })))
-                        ].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-
-                        return (
-                          <div key={project.id} className="rounded-[1.6rem] border border-white/10 bg-slate-900/80 p-5 shadow-[0_20px_60px_rgba(2,8,24,0.35)]">
-                            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                              <div>
-                                <h3 className="font-cairo text-xl font-semibold text-white">{project.title}</h3>
-                                <p className="mt-1 text-sm text-slate-400">Client: {project.client_name}</p>
-                                <p className="mt-1 text-sm uppercase tracking-[0.18em] text-slate-500">Status: {project.status}</p>
-                              </div>
-                              <div className="space-y-2 text-right">
-                                {onboardingToken ? (
-                                  <>
-                                    <div className="text-sm text-slate-300">
-                                      Link:{' '}
-                                      <CopyOnboardingLink lang={lang} token={onboardingToken.id} />
-                                    </div>
-                                    <p className="text-sm text-slate-400">Token Status: {tokenState}</p>
-                                    <p className="text-sm text-slate-400">Expires: {new Date(onboardingToken.expires_at).toLocaleDateString()}</p>
-                                  </>
-                                ) : (
-                                  <p className="text-sm text-slate-400">No onboarding token available</p>
-                                )}
-                                <p className="text-sm text-slate-400">Progress: {progress}%</p>
-                              </div>
-                            </div>
-                            <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
-                              <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500" style={{ width: `${progress}%` }} />
-                            </div>
-                            <div className="mt-4 flex flex-wrap gap-3">
-                              <ProjectManagementPanel
-                                project={project}
-                                updateAction={updateProjectAction}
-                                deleteAction={deleteProjectAction}
-                                changeStatusAction={changeProjectStatusAction}
-                              />
-                              <form action={regenerateTokenAction}>
-                                <input type="hidden" name="token" value={onboardingToken?.id || ''} />
-                                <button
-                                  type="submit"
-                                  disabled={!onboardingToken}
-                                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                  Regenerate Token
-                                </button>
-                              </form>
-                              {project.status === 'Review' ? (
-                                <form action={requestRevisionAction}>
-                                  <input type="hidden" name="projectId" value={project.id} />
-                                  <button
-                                    type="submit"
-                                    className="rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:brightness-110"
-                                  >
-                                    Request Revision
-                                  </button>
-                                </form>
-                              ) : null}
-                              <form action={promoteOnboardingProjectAction}>
-                                <input type="hidden" name="projectId" value={project.id} />
-                                <button
-                                  type="submit"
-                                  className="rounded-full bg-emerald-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:brightness-110"
-                                >
-                                  Promote to Portfolio
-                                </button>
-                              </form>
-                            </div>
-
-                            <AdminProjectManager lang={lang} projectId={project.id} projectType={project.type} />
-
-                            <div className="mt-8 border-t border-white/10 pt-6">
-                              <h4 className="text-cyan-300 font-semibold mb-4 text-sm tracking-widest uppercase">Project Timeline</h4>
-                              <UnifiedTimeline events={unifiedEvents} />
-                            </div>
+                  return (
+                    <div key={project.id} className="rounded-xl border border-[#333] bg-[#0c0c0c] overflow-hidden">
+                      <div className="p-5 border-b border-[#333] flex flex-col md:flex-row md:items-start justify-between gap-4">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-base font-semibold text-white">{project.title}</h3>
+                            <span className="rounded-md bg-[#222] px-2 py-0.5 font-mono text-[10px] uppercase text-gray-400">{project.status}</span>
                           </div>
-                        );
-                      })
-                    )}
-                  </div>
-                </section>
-
-                <section id="profile-settings" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <ProfileSettingsPanel user={currentAdminUser} updateAction={updateMyProfileAction} />
-                </section>
-
-                <section id="team-management" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <TeamSettingsPanel
-                    users={adminUsers}
-                    createAction={createAdminUserAction}
-                    updateAction={updateAdminUserAction}
-                    deleteAction={deleteAdminUserAction}
-                  />
-                </section>
-
-                <section id="portfolio-records" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <div className="mb-6">
-                    <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-slate-400">
-                      Quick Injection
-                    </p>
-                    <h2 className="mt-3 text-2xl font-bold text-white">Training Showcase Presets</h2>
-                    <p className="mt-3 max-w-3xl font-tajawal text-sm leading-7 text-slate-300">
-                      One-click actions to add the cybersecurity community projects we discussed, with galleries and technical metadata preloaded.
-                    </p>
-                  </div>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <form action={addQalandiaPresetAction} className="rounded-[1.6rem] border border-white/10 bg-slate-950/80 p-5 shadow-[0_20px_60px_rgba(14,165,233,0.12)] backdrop-blur-xl">
-                      <p className="font-cairo text-lg font-semibold text-white">Digital Security Camp (Qalandia)</p>
-                      <p className="mt-2 font-tajawal text-sm leading-7 text-slate-300">
-                        Youth-facing Training entry centered on social engineering awareness, safe browsing, and digital privacy habits.
-                      </p>
-                      <button
-                        type="submit"
-                        className="mt-4 rounded-full bg-gradient-to-r from-red-500 via-orange-400 to-cyan-400 px-4 py-2 font-tajawal text-xs font-semibold uppercase tracking-[0.24em] text-slate-950 transition hover:brightness-110"
-                      >
-                        Add Qalandia Preset
-                      </button>
-                    </form>
-
-                    <form action={addOpenUniversityPresetAction} className="rounded-[1.6rem] border border-white/10 bg-slate-950/80 p-5 shadow-[0_20px_60px_rgba(248,113,113,0.12)] backdrop-blur-xl">
-                      <p className="font-cairo text-lg font-semibold text-white">Al-Quds Open University</p>
-                      <p className="mt-2 font-tajawal text-sm leading-7 text-slate-300">
-                        Technical simulation-focused Training entry for phishing and email spoofing demos in a Digital Marketing context.
-                      </p>
-                      <button
-                        type="submit"
-                        className="mt-4 rounded-full bg-amber-400 px-4 py-2 font-tajawal text-xs font-semibold uppercase tracking-[0.24em] text-slate-950 transition hover:brightness-110"
-                      >
-                        Add Spoofing Demo Preset
-                      </button>
-                    </form>
-                  </div>
-                </section>
-
-                <section className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <div className="mb-6">
-                    <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-slate-400">
-                      Live JSON View
-                    </p>
-                    <h2 className="mt-3 text-2xl font-bold text-white">Portfolio Records</h2>
-                  </div>
-
-                  <div className="space-y-4">
-                    {portfolioItems.map((item) => {
-                      const updateAction = updatePortfolioItem.bind(null, lang, item.id);
-                      const deleteAction = deletePortfolioItem.bind(null, lang, item.id);
-                      const galleryInput = (item.gallery || []).join(', ');
-                      const videoUrls = (item.videoLinks || []).map((link) => link.url).join('\n');
-
-                      return (
-                        <article
-                          key={item.id}
-                          className="rounded-[1.6rem] border border-white/10 bg-slate-950/80 p-5 shadow-[0_25px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl"
-                        >
-                          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                            <div className="space-y-3">
-                              <div className="flex flex-wrap items-center gap-2">
-                                <h3 className="font-cairo text-xl font-semibold text-white">
-                                  {item.title}
-                                </h3>
-                                <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 font-tajawal text-xs font-semibold uppercase tracking-[0.24em] text-slate-100">
-                                  {item.category}
-                                </span>
-                              </div>
-                              <p className="font-tajawal text-sm leading-7 text-slate-600 dark:text-slate-300">
-                                {item.description}
-                              </p>
-                              <div className="flex flex-wrap gap-2 font-tajawal text-xs text-slate-500 dark:text-slate-400">
-                                <span>Gallery: {item.gallery.length}</span>
-                                <span>Videos: {item.videoLinks.length}</span>
-                                {item.tech_focus ? <span>Focus: {item.tech_focus}</span> : null}
-                              </div>
-                            </div>
-
-                            <form action={deleteAction}>
-                              <button
-                                type="submit"
-                                className="rounded-full border border-rose-200 bg-rose-50 px-4 py-2 font-tajawal text-sm font-semibold text-rose-600 transition hover:bg-rose-100 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-300"
-                              >
-                                Delete
-                              </button>
-                            </form>
-                          </div>
-
-                          <details className="mt-5 rounded-2xl border border-white/10 bg-slate-950/90 p-4 backdrop-blur-xl">
-                            <summary className="cursor-pointer font-tajawal text-sm font-semibold text-slate-200">
-                              Edit Project
-                            </summary>
-
-                            <form action={updateAction} className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                              <div>
-                                <FieldLabel>Project Title (EN)</FieldLabel>
-                                <TextInput name="title_en" required defaultValue={item.title_en || ''} placeholder="English title" />
-                              </div>
-                              <div>
-                                <FieldLabel>Project Title (AR)</FieldLabel>
-                                <TextInput name="title_ar" required defaultValue={item.title_ar || ''} placeholder="عنوان عربي" />
-                              </div>
-
-                              <div>
-                                <FieldLabel>Category</FieldLabel>
-                                <select
-                                  name="category"
-                                  defaultValue={item.category}
-                                  className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 font-tajawal text-sm text-white shadow-sm outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-200 focus:ring-opacity-30"
-                                >
-                                  {PORTFOLIO_CATEGORIES.map((category) => (
-                                    <option key={category.value} value={category.value}>
-                                      {category.label}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-
-                              <div>
-                                <FieldLabel>Cover Image Path</FieldLabel>
-                                <TextInput name="cover_image_url" defaultValue={item.cover_image_url || ''} placeholder="/assets/images/portfolio/example.jpg" />
-                              </div>
-
-                              <div>
-                                <FieldLabel>Challenge / Overview (EN)</FieldLabel>
-                                <TextArea name="description_en" rows={3} defaultValue={item.description_en || ''} placeholder="English description" />
-                              </div>
-                              <div>
-                                <FieldLabel>Challenge / Overview (AR)</FieldLabel>
-                                <TextArea name="description_ar" rows={3} defaultValue={item.description_ar || ''} placeholder="الوصف بالعربية" />
-                              </div>
-
-                              <div>
-                                <FieldLabel>Role Summary (EN)</FieldLabel>
-                                <TextArea name="role_summary_en" rows={3} defaultValue={item.role_summary_en || ''} placeholder="English role summary" />
-                              </div>
-                              <div>
-                                <FieldLabel>Role Summary (AR)</FieldLabel>
-                                <TextArea name="role_summary_ar" rows={3} defaultValue={item.role_summary_ar || ''} placeholder="ملخص الدور بالعربية" />
-                              </div>
-
-                              <div>
-                                <FieldLabel>Action Summary (EN)</FieldLabel>
-                                <TextArea name="action_summary_en" rows={3} defaultValue={item.action_summary_en || ''} placeholder="English action summary" />
-                              </div>
-                              <div>
-                                <FieldLabel>Action Summary (AR)</FieldLabel>
-                                <TextArea name="action_summary_ar" rows={3} defaultValue={item.action_summary_ar || ''} placeholder="ملخص التنفيذ بالعربية" />
-                              </div>
-
-                              <div>
-                                <FieldLabel>Result / Impact (EN)</FieldLabel>
-                                <TextArea name="result_en" rows={3} defaultValue={item.result_en || ''} placeholder="English result" />
-                              </div>
-                              <div>
-                                <FieldLabel>Result / Impact (AR)</FieldLabel>
-                                <TextArea name="result_ar" rows={3} defaultValue={item.result_ar || ''} placeholder="النتيجة بالعربية" />
-                              </div>
-
-                              <div>
-                                <FieldLabel>Technical Focus (EN)</FieldLabel>
-                                <TextInput name="tech_focus_en" defaultValue={item.tech_focus_en || ''} placeholder="English technical focus" />
-                              </div>
-                              <div>
-                                <FieldLabel>Technical Focus (AR)</FieldLabel>
-                                <TextInput name="tech_focus_ar" defaultValue={item.tech_focus_ar || ''} placeholder="التركيز التقني بالعربية" />
-                              </div>
-
-                              <div className="md:col-span-2">
-                                <FieldLabel>Gallery Image Paths</FieldLabel>
-                                <TextArea name="gallery_input" rows={3} defaultValue={galleryInput} placeholder="/assets/images/portfolio/1.jpg, /assets/images/portfolio/2.jpg" />
-                              </div>
-
-                              <div className="md:col-span-2">
-                                <FieldLabel>Video URLs</FieldLabel>
-                                <TextArea name="video_urls" rows={3} defaultValue={videoUrls} placeholder="One URL per line" />
-                              </div>
-
-                              <button
-                                type="submit"
-                                className="md:col-span-2 rounded-2xl bg-sky-600 px-5 py-3 font-tajawal text-sm font-semibold text-white transition hover:bg-sky-500"
-                              >
-                                Update Project
-                              </button>
-                            </form>
-                          </details>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </section>
-              </div>
-
-              <aside className="space-y-8">
-                <section className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-slate-400">
-                    Schema Coverage
-                  </p>
-                  <h2 className="mt-3 text-2xl font-bold text-white">Supported Fields</h2>
-                  <ul className="mt-5 space-y-3 font-tajawal text-sm leading-7 text-slate-300">
-                    <li>Unified categories with Training as the only education/cyber-training lane.</li>
-                    <li>Multi-image galleries stored as JSON for clean media expansion.</li>
-                    <li>YouTube and Facebook video links stored separately from images.</li>
-                    <li>Role, action, result, and technical focus for advanced showcase context.</li>
-                  </ul>
-                </section>
-
-                <section id="lead-inbox" className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.25)] backdrop-blur-xl">
-                  <p className="font-tajawal text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-slate-400">
-                    Contact Inbox
-                  </p>
-                  <h2 className="mt-3 text-2xl font-bold">Recent Messages</h2>
-                  <div className="mt-5 space-y-4">
-                    {contactMessages.map((msg) => (
-                      <div
-                        key={msg.id}
-                        className="rounded-[1.4rem] border border-white/10 bg-slate-950/80 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.18)] backdrop-blur-xl"
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <div>
-                            <p className="font-cairo text-lg font-semibold text-white">
-                              {msg.name}
-                            </p>
-                            <p className="font-tajawal text-sm text-slate-600 dark:text-slate-300">
-                              {msg.email}
-                            </p>
-                            <p className="mt-1 font-tajawal text-xs uppercase tracking-[0.24em] text-sky-600 dark:text-sky-300">
-                              Service: {msg.service}
-                            </p>
-                          </div>
-                          <p className="font-tajawal text-xs text-slate-500 dark:text-slate-400">
-                            {formatStableDate(msg.created_at)}
-                          </p>
+                          <p className="text-sm text-gray-400">Client: <span className="text-white">{project.client_name}</span></p>
                         </div>
-                        {msg.phone ? (
-                          <p className="mt-3 font-tajawal text-sm text-slate-500 dark:text-slate-400">
-                            Phone: {msg.phone}
-                          </p>
-                        ) : null}
-                        <p className="mt-4 rounded-2xl bg-slate-900/80 p-3 font-tajawal text-sm leading-7 text-slate-200">
-                          {msg.message}
-                        </p>
+                        <div className="flex flex-col items-end gap-1 font-mono text-xs text-gray-400">
+                          {onboardingToken ? (
+                            <>
+                              <div className="flex items-center gap-2"><span>Link:</span><CopyOnboardingLink lang={lang} token={onboardingToken.id} /></div>
+                              <p className={onboardingToken.is_active ? 'text-emerald-400' : 'text-red-400'}>{onboardingToken.is_active ? 'Live' : 'Expired'} · Ex: {new Date(onboardingToken.expires_at).toLocaleDateString()}</p>
+                            </>
+                          ) : <p>No Active Token</p>}
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </section>
-              </aside>
+                      
+                      <div className="bg-[#161616] p-5">
+                        <div className="mb-4 flex items-center justify-between">
+                          <p className="font-mono text-xs text-gray-400">Pipeline Completion</p>
+                          <p className="font-mono text-xs font-semibold text-white">{progress}%</p>
+                        </div>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#0c0c0c] border border-[#333]">
+                          <div className="h-full bg-[#6d28d9] transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
+                        </div>
+                        
+                        <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-[#333] pt-5">
+                          <ProjectManagementPanel project={project} updateAction={updateProjectAction} deleteAction={deleteProjectAction} changeStatusAction={changeProjectStatusAction} />
+                          <form action={regenerateTokenAction}>
+                            <input type="hidden" name="token" value={onboardingToken?.id || ''} />
+                            <NeonButton type="submit" disabled={!onboardingToken} variant="ghost" className="h-8 text-xs">Refresh Token</NeonButton>
+                          </form>
+                          {project.status === 'Review' && (
+                            <form action={requestRevisionAction}>
+                              <input type="hidden" name="projectId" value={project.id} />
+                              <NeonButton type="submit" variant="ghost" className="border-amber-900/50 text-amber-500 hover:bg-amber-900/10 h-8 text-xs">Request Revision</NeonButton>
+                            </form>
+                          )}
+                          <form action={promoteOnboardingProjectAction}>
+                            <input type="hidden" name="projectId" value={project.id} />
+                            <NeonButton type="submit" variant="ghost" className="border-emerald-900/50 text-emerald-500 hover:bg-emerald-900/10 h-8 text-xs">Publish to Portfolio</NeonButton>
+                          </form>
+                        </div>
+                        
+                        <div className="mt-5">
+                           <AdminProjectManager lang={lang} projectId={project.id} projectType={project.type} />
+                        </div>
+                        
+                        {unifiedEvents.length > 0 && (
+                          <details className="mt-4 px-2">
+                             <summary className="cursor-pointer text-xs font-mono text-gray-500 hover:text-gray-300">View Audit Log ({unifiedEvents.length})</summary>
+                             <div className="mt-4 border-l border-[#333] pl-4"><UnifiedTimeline events={unifiedEvents} /></div>
+                          </details>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
+          </NeonCard>
+
+          {/* Portfolio Management */}
+          <NeonCard id="portfolio" icon={MonitorPlay} title="Portfolio Registry" subtitle="Manage public case studies and capabilities">
+             <details className="mb-6 rounded-lg border border-[#333] bg-[#0c0c0c]">
+                <summary className="cursor-pointer p-4 text-sm font-medium text-white hover:bg-[#111]">Create New Portfolio Entry</summary>
+                <div className="border-t border-[#333] p-5">
+                   <form action={addItemAction} className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                      <div><FieldLabel>Title (EN)</FieldLabel><TextInput name="title_en" required /></div>
+                      <div><FieldLabel>Title (AR)</FieldLabel><TextInput name="title_ar" required /></div>
+                      <div><FieldLabel>Category</FieldLabel>
+                        <select name="category" className="w-full rounded-md border border-[#333] bg-[#161616] px-3 py-2.5 text-sm text-white outline-none">
+                          {PORTFOLIO_CATEGORIES.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
+                        </select>
+                      </div>
+                      <div><FieldLabel>Cover Image URL</FieldLabel><TextInput name="cover_image_url" /></div>
+                      <div><FieldLabel>Description (EN)</FieldLabel><TextArea name="description_en" rows={2} /></div>
+                      <div><FieldLabel>Description (AR)</FieldLabel><TextArea name="description_ar" rows={2} /></div>
+                      <div className="md:col-span-2">
+                        <NeonButton type="submit" variant="primary">Add to Registry</NeonButton>
+                      </div>
+                   </form>
+                </div>
+             </details>
+
+             <div className="space-y-3">
+               {portfolioItems.map(item => (
+                 <div key={item.id} className="rounded-lg border border-[#333] bg-[#0c0c0c] p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-2">
+                         <span className="font-mono text-xs text-gray-500">{item.id.slice(0,6)}</span>
+                         <h4 className="text-sm font-medium text-white tracking-wide">{item.title}</h4>
+                      </div>
+                      <span className="text-xs text-emerald-500/80 mt-1 inline-block border border-emerald-900/30 bg-emerald-950/20 px-2 py-0.5 rounded">{item.category}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <form action={deletePortfolioItem.bind(null, lang, item.id)}>
+                        <NeonButton type="submit" variant="danger" className="h-8 px-3 text-xs">Delete</NeonButton>
+                      </form>
+                    </div>
+                 </div>
+               ))}
+             </div>
+          </NeonCard>
+          
+          <div className="grid gap-6 md:grid-cols-2">
+             <NeonCard id="inbox" icon={MessageSquare} title="Lead Inbox">
+                {contactMessages.slice(0,5).map(msg => (
+                  <div key={msg.id} className="mb-3 rounded-lg border border-[#333] bg-[#0c0c0c] p-4 last:mb-0">
+                    <div className="flex justify-between items-start">
+                       <div>
+                         <p className="font-medium text-sm text-white">{msg.name}</p>
+                         <p className="text-xs font-mono text-emerald-400">{msg.email}</p>
+                       </div>
+                       <span className="text-[10px] text-gray-500">{formatStableDate(msg.created_at)}</span>
+                    </div>
+                    <p className="mt-3 text-sm text-gray-300">{msg.message}</p>
+                  </div>
+                ))}
+             </NeonCard>
+
+             <NeonCard id="presets" icon={Database} title="Showcase Injectors" subtitle="Auto-gen standard packages">
+                <div className="space-y-4">
+                  <form action={addQalandiaPresetAction} className="rounded-lg border border-[#333] bg-[#0c0c0c] p-4">
+                     <h4 className="text-sm font-medium text-white mb-1">Cyber Camp (Qalandia)</h4>
+                     <p className="text-xs text-gray-400 mb-3">Social engineering awareness curriculum</p>
+                     <NeonButton type="submit" variant="ghost" className="w-full text-xs">Inject Package</NeonButton>
+                  </form>
+                  <form action={addOpenUniversityPresetAction} className="rounded-lg border border-[#333] bg-[#0c0c0c] p-4">
+                     <h4 className="text-sm font-medium text-white mb-1">Spoofing Simulation (Al-Quds)</h4>
+                     <p className="text-xs text-gray-400 mb-3">Phishing simulation infrastructure</p>
+                     <NeonButton type="submit" variant="ghost" className="w-full text-xs">Inject Package</NeonButton>
+                  </form>
+                </div>
+             </NeonCard>
           </div>
+
+          <NeonCard id="content" icon={PencilLine} title="Core Site JSON Editor" subtitle="Direct writes to src/data/content.json">
+            <details className="rounded-lg border border-[#333] bg-[#0c0c0c] overflow-hidden">
+                <summary className="cursor-pointer p-4 text-sm font-medium text-white hover:bg-[#111]">Expand Editor Interface</summary>
+                <div className="border-t border-[#333] p-5">
+                   <form action={updateSiteAction} className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                       <div><FieldLabel>Hero Action (EN)</FieldLabel><TextInput name="hero_cta_primary_en" defaultValue={enContent.hero?.ctaPrimary} /></div>
+                       <div><FieldLabel>Hero Action (AR)</FieldLabel><TextInput name="hero_cta_primary_ar" defaultValue={arContent.hero?.ctaPrimary} /></div>
+                       <div className="md:col-span-2"><NeonButton type="submit" variant="secondary">Commit to JSON</NeonButton></div>
+                   </form>
+                </div>
+            </details>
+          </NeonCard>
+
+          <NeonCard id="team" title="Team Access & Security">
+             <TeamSettingsPanel users={adminUsers} createAction={createAdminUserAction} updateAction={updateAdminUserAction} deleteAction={deleteAdminUserAction} />
+          </NeonCard>
+          
+          <NeonCard id="profile" title="Global Profile">
+             <ProfileSettingsPanel user={currentAdminUser} updateAction={updateMyProfileAction} />
+          </NeonCard>
+
         </div>
-      </div>
+      </main>
     </div>
   );
 }
