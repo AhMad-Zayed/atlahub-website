@@ -66,11 +66,26 @@ model FormTemplate {
   schemaJson Json     @map("schema_json")
   createdAt  DateTime @default(now()) @map("created_at") @db.Timestamp(0)
 
-  snapshots ProjectSnapshot[]
+  snapshots  ProjectSnapshot[]
+  responses  FormResponse[]
 
   @@unique([serviceId, version])
   @@index([serviceId])
   @@map("form_templates")
+}
+
+/// Client-submitted answers to a dynamic form template (Template Engine responses).
+model FormResponse {
+  id             String        @id @default(uuid()) @db.Uuid
+  projectId      Int           @unique @map("project_id")
+  project        Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  formTemplateId Int?          @map("form_template_id")
+  formTemplate   FormTemplate? @relation(fields: [formTemplateId], references: [id], onDelete: SetNull)
+  responseJson   Json          @map("response_json")
+  submittedAt    DateTime      @default(now()) @map("submitted_at") @db.Timestamp(0)
+
+  @@index([formTemplateId])
+  @@map("form_responses")
 }
 
 // ---------------------------------------------------------------------------
@@ -115,6 +130,7 @@ model Project {
   activityLogs   ActivityLog[]
   deliverables   Deliverable[]
   collaboratorNotes CollaboratorNote[]
+  formResponse   FormResponse?
 
   @@index([serviceId])
   @@index([lifecycleStatus])
