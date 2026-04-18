@@ -23,7 +23,6 @@ import {
 } from '@/lib/onboarding';
 import prisma from '@/lib/prisma';
 import { hashPassword, verifyUserCredentials } from '@/lib/auth';
-import { dispatchLeadEvent } from '@/lib/analytics-store';
 import { appendActivityLog } from '@/lib/plm/activity-log';
 import { parseLifecycleStatusStrict } from '@/lib/plm/status';
 import { ActivityActorRole } from '@prisma/client';
@@ -114,11 +113,6 @@ async function revalidateCmsPaths(lang) {
   revalidatePath('/ar/services');
 }
 
-// CAPI framework entry point for server-side lead dispatching.
-export async function dispatchLeadToCapi(payload = {}) {
-  const headerStore = await headers();
-  return dispatchLeadEvent(payload, headerStore);
-}
 
 export async function handleLogin(lang, _prevState, formData) {
   const result = await verifyUserCredentials(
