@@ -70,17 +70,34 @@ export async function POST(request) {
       }
     });
 
-    // 5. Create Event (if it's an actionable event)
+    // 5. Create Event — with 2-second deduplication window to prevent data bloat & duplicate React keys
     if (body.type && body.type !== 'heartbeat') {
-      await prisma.event.create({
-        data: {
+      const deduplicationWindow = new Date(now.getTime() - 2000); // 2 seconds ago
+
+      // Check if an identical event already exists within the window
+      const existingDuplicate = await prisma.event.findFirst({
+        where: {
           sessionId: sessionId,
-          type: body.type || 'unknown',
+          type: body.type,
           target: body.target || body.path || body.click_target || null,
-          payload: body,
-          timestamp: now
-        }
+          timestamp: { gte: deduplicationWindow },
+        },
+        select: { id: true }, // Only fetch id — lightweight query
       });
+
+      if (!existingDuplicate) {
+        // Unique event: safe to persist
+        await prisma.event.create({
+          data: {
+            sessionId: sessionId,
+            type: body.type || 'unknown',
+            target: body.target || body.path || body.click_target || null,
+            payload: body,
+            timestamp: now
+          }
+        });
+      }
+      // else: duplicate detected within 2s window — silently skip to prevent bloat
     }
 
     // 6. Return response with cookie if newly minted

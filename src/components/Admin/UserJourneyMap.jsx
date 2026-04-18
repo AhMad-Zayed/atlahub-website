@@ -50,8 +50,19 @@ export default function UserJourneyMap({ summary }) {
   const specs = summary?.techSpecs || [];
   const totals = summary?.totals || {};
   const uniqueVsReturning = summary?.uniqueVsReturning || { unique: 0, returning: 0 };
-  const timeline = summary?.userJourneyTimeline || [];
+  const rawTimeline = summary?.userJourneyTimeline || [];
   const hotzones = summary?.hotzones || [];
+
+  // --- Data Integrity: Deduplicate timeline before rendering ---
+  // Guard against duplicate events (same visitor + action + project within same second)
+  const seenKeys = new Set();
+  const timeline = rawTimeline.filter((event, index) => {
+    // Build a dedup identity string
+    const identity = `${event.visitor}-${event.action}-${event.project}-${String(event.created_at || '').slice(0, 19)}`;
+    if (seenKeys.has(identity)) return false;
+    seenKeys.add(identity);
+    return true;
+  });
 
   return (
     <div className="space-y-6">
@@ -111,8 +122,10 @@ export default function UserJourneyMap({ summary }) {
 
         <GlassCard title="User Journey Timeline" subtitle="Project Dwell & Path" accent="from-amber-400/40 to-orange-500/20">
           <div className="max-h-72 space-y-3 overflow-auto pe-1">
-            {timeline.map((event) => (
-              <div key={`${event.created_at}-${event.visitor}-${event.project}`} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            {timeline.map((event, idx) => (
+              // Fix: use event.id (DB primary key) as the React key for guaranteed uniqueness.
+              // Falls back to a stable index-only key if event.id is missing (legacy data).
+              <div key={event.id ?? `timeline-fallback-${idx}`} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
                 <p className="font-tajawal text-sm font-semibold text-white">
                   Visitor {String(event.visitor || '').slice(0, 10)}... viewed {event.project}
                 </p>
