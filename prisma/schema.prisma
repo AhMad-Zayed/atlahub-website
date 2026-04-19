@@ -279,10 +279,12 @@ model AgencyClient {
   primaryContact     String   @db.VarChar(255)
   preferredCurrency  String   @default("USD") @db.VarChar(10)
   preferredLang      String   @default("en") @db.VarChar(10)
+  totalRevenue       Float    @default(0)      // Auto-updated when Invoice marked PAID
   createdAt          DateTime @default(now()) @db.Timestamp(0)
-  
+
   campaigns          AgencyCampaign[]
   contracts          ServiceContract[]
+  invoices           Invoice[]
 }
 
 /// Tracks individual renewable services per client (SSL, Hosting, etc.)
@@ -318,6 +320,7 @@ model AgencyCampaign {
   title               String         @db.VarChar(255)
   serviceType         String?        @db.VarChar(128)
   category            String?        @db.VarChar(128)
+  serviceBlocks       Json?          // Validated JSON array of typed service blocks (MetaAds/CyberAudit/Branding)
   status              CampaignStatus @default(PENDING)
   totalClientPaid     Float          @default(0)
   actualPlatformSpend Float          @default(0)
@@ -331,6 +334,7 @@ model AgencyCampaign {
   adItems             AdItem[]
   messages            CampaignMessage[]
   logs                CampaignLog[]
+  invoices            Invoice[]
 
   @@index([clientId])
 }
@@ -374,4 +378,36 @@ model CampaignLog {
   createdAt  DateTime       @default(now()) @db.Timestamp(0)
 
   @@index([campaignId])
+}
+
+// ---------------------------------------------------------------------------
+// Invoicing & Financial Intelligence
+// ---------------------------------------------------------------------------
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+/// Client invoice — marking PAID triggers totalRevenue increment on AgencyClient
+model Invoice {
+  id            String        @id @default(uuid()) @db.Uuid
+  invoiceNumber String        @unique @db.VarChar(32) // e.g. INV-2026-0001
+  clientId      String        @db.Uuid
+  client        AgencyClient  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  campaignId    String?       @db.Uuid
+  campaign      AgencyCampaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  amount        Float
+  status        InvoiceStatus @default(PENDING)
+  description   String?       @db.Text
+  paidAt        DateTime?     @db.Timestamp(0)
+  dueAt         DateTime?     @db.Timestamp(0)
+  createdAt     DateTime      @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime      @updatedAt @db.Timestamp(0)
+
+  @@index([clientId])
+  @@index([status])
+  @@map("invoices")
 }
