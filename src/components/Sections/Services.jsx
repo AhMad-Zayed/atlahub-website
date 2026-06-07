@@ -6,13 +6,13 @@ import { Server, GraduationCap, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const iconMap = {
-  code: <Code className="w-8 h-8 text-brand-blue-light" />,
-  'trending-up': <TrendingUp className="w-8 h-8 text-brand-blue-light" />,
-  'shield-alert': <ShieldAlert className="w-8 h-8 text-brand-blue-light" />,
-  video: <Video className="w-8 h-8 text-brand-blue-light" />,
-  server: <Server className="w-8 h-8 text-brand-blue-light" />,
-  academy: <GraduationCap className="w-8 h-8 text-brand-blue-light" />,
-  training: <GraduationCap className="w-8 h-8 text-brand-blue-light" />,
+  code: <Code className="w-8 h-8" />,
+  'trending-up': <TrendingUp className="w-8 h-8" />,
+  'shield-alert': <ShieldAlert className="w-8 h-8" />,
+  video: <Video className="w-8 h-8" />,
+  server: <Server className="w-8 h-8" />,
+  academy: <GraduationCap className="w-8 h-8" />,
+  training: <GraduationCap className="w-8 h-8" />,
 };
 
 export default function Services({ data, lang = 'en' }) {
@@ -23,7 +23,7 @@ export default function Services({ data, lang = 'en' }) {
       <div className="absolute inset-0 bg-tech-pattern pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -48,9 +48,9 @@ export default function Services({ data, lang = 'en' }) {
                 key={service.id}
                 className={`
                   rounded-xl transition-all duration-300 group text-start
-                  ${isHighlighted 
-                    ? 'bg-gray-900 text-white shadow-2xl shadow-brand-blue/20 scale-105 border-2 border-brand-blue-light' 
-                    : 'bg-gray-100 hover:bg-gray-200 hover:shadow-lg'
+                  ${isHighlighted
+                    ? 'bg-gray-900 text-white shadow-2xl shadow-brand-blue/20 scale-105 border-2 border-brand-blue-light'
+                    : 'bg-white hover:bg-gray-50 hover:shadow-xl border border-gray-200 hover:border-brand-blue/30'
                   }
                 `}
               >
@@ -62,9 +62,13 @@ export default function Services({ data, lang = 'en' }) {
                     relative mb-6
                     ${isHighlighted ? 'flex items-center justify-between gap-3' : ''}
                   `}>
+                    {/* Icon box — always high contrast, icon color inherited from wrapper */}
                     <div className={`
-                      w-16 h-16 rounded-lg flex items-center justify-center 
-                      ${isHighlighted ? 'bg-brand-blue/20' : 'bg-white'}
+                      w-16 h-16 rounded-lg flex items-center justify-center
+                      ${isHighlighted
+                        ? 'bg-brand-blue/20 text-brand-blue-light'
+                        : 'bg-brand-blue/10 text-brand-blue'
+                      }
                     `}>
                       {iconMap[service.icon]}
                     </div>
@@ -74,15 +78,20 @@ export default function Services({ data, lang = 'en' }) {
                       </span>
                     )}
                   </div>
-                  
-                  <h3 className="text-xl font-bold font-cairo mb-3">{service.title}</h3>
+
+                  {/* Title — always clearly visible */}
+                  <h3 className={`text-xl font-bold font-cairo mb-3 ${isHighlighted ? 'text-white' : 'text-gray-900'}`}>
+                    {service.title}
+                  </h3>
                   <p className={`mb-5 ${isHighlighted ? 'text-gray-300' : 'text-gray-600'}`}>
                     {service.description}
                   </p>
-                  
+
                   {service.highlight && (
-                    <div className={`rounded-lg border p-4 ${isHighlighted ? 'bg-brand-blue/10 border-brand-blue/30' : 'bg-white/70 border-gray-200'}`}>
-                      <p className={`font-bold text-sm ${isHighlighted ? 'text-brand-blue-light' : 'text-gray-700'}`}>{service.highlight}</p>
+                    <div className={`rounded-lg border p-4 ${isHighlighted ? 'bg-brand-blue/10 border-brand-blue/30' : 'bg-gray-50 border-gray-200'}`}>
+                      <p className={`font-bold text-sm ${isHighlighted ? 'text-brand-blue-light' : 'text-brand-blue'}`}>
+                        {service.highlight}
+                      </p>
                     </div>
                   )}
 

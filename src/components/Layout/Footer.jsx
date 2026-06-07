@@ -4,7 +4,7 @@ import logo from '@/assets/images/AtlaHub_Tech_Logo.png';
 
 export default function Footer({ lang = 'en', navData, brandData, footerData }) {
 	const homePath = `/${lang}`;
-	const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '972599000000';
+	const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '972522977790';
 	const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
 	return (
@@ -43,14 +43,19 @@ export default function Footer({ lang = 'en', navData, brandData, footerData }) 
 					<div>
 						<h3 className="text-lg font-bold mb-4 text-brand-blue-light">{footerData?.contactTitle}</h3>
 						<ul className="space-y-2 text-slate-200">
-							<li>contact@atlahub.com</li>
+							<li>
+								<a href="mailto:info@atlahub.tech" className="hover:text-white transition-colors">info@atlahub.tech</a>
+							</li>
+							<li>
+								<a href="mailto:azayed@atlahub.tech" className="hover:text-white transition-colors text-slate-300 text-sm">azayed@atlahub.tech</a>
+							</li>
 							<li className="font-semibold text-white mt-2">{footerData?.emergency}</li>
 							<li>
 								<a
 									href={whatsappUrl}
 									target="_blank"
 									rel="noreferrer"
-									className="inline-flex items-center rounded-full bg-gradient-to-r from-brand-blue to-brand-blue-light px-4 py-2 font-tajawal text-sm font-semibold text-white transition hover:opacity-90"
+									className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-blue-light px-4 py-2 font-tajawal text-sm font-semibold text-white transition hover:opacity-90"
 								>
 									WhatsApp
 								</a>

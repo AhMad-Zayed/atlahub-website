@@ -46,6 +46,8 @@ export default function Portfolio({ data, lang = 'en' }) {
               videoLabel={data?.videoLabel}
               mounted={mounted}
               index={index}
+              details={data?.details?.[item.id]}
+              lang={lang}
             />
           ))}
         </div>

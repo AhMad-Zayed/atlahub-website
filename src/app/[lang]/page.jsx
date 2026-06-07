@@ -12,6 +12,53 @@ import WhyUs from '@/components/Sections/WhyUs';
 import Contact from '@/components/Sections/Contact';
 import { getMergedPortfolio } from '@/lib/portfolio-content';
 
+const siteUrl = 'https://www.atlahub.tech';
+
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'ar' }];
+}
+
+export async function generateMetadata({ params }) {
+  const { lang } = await params;
+  const isAr = lang === 'ar';
+
+  if (isAr) {
+    return {
+      title: 'أتلا هاب تك | برمجيات، أمن سيبراني، وتسويق رقمي — القدس',
+      description:
+        'أتلا هاب تك تقدم خدمات تطوير برمجيات، أمن سيبراني وأدلة رقمية، تسويق رقمي، إنتاج إعلامي، وتدريب احترافي. بقيادة أحمد زايد من القدس.',
+      alternates: {
+        canonical: `${siteUrl}/ar`,
+        languages: { 'en': `${siteUrl}/en`, 'ar': `${siteUrl}/ar` },
+      },
+      openGraph: {
+        locale: 'ar_PS',
+        alternateLocale: 'en_US',
+        url: `${siteUrl}/ar`,
+        title: 'أتلا هاب تك | برمجيات، أمن سيبراني، وتسويق رقمي',
+        description: 'حلول تقنية متكاملة من القدس: برمجيات، أمن سيبراني، تسويق رقمي، إنتاج إعلامي، وتدريب. بقيادة أحمد زايد.',
+      },
+    };
+  }
+
+  return {
+    title: 'Atla Hub Tech | Software, Cybersecurity & Digital Marketing — Jerusalem',
+    description:
+      'Atla Hub Tech delivers elite software development, cybersecurity & forensics, digital marketing, media production, and professional training from Jerusalem. Led by Ahmad Zayed.',
+    alternates: {
+      canonical: `${siteUrl}/en`,
+      languages: { 'en': `${siteUrl}/en`, 'ar': `${siteUrl}/ar` },
+    },
+    openGraph: {
+      locale: 'en_US',
+      alternateLocale: 'ar_PS',
+      url: `${siteUrl}/en`,
+      title: 'Atla Hub Tech | Software, Cybersecurity & Digital Marketing',
+      description: 'Elite tech from Jerusalem: software, cybersecurity, marketing, media & training. Led by Ahmad Zayed.',
+    },
+  };
+}
+
 export default async function Home({ params }) {
   const { lang } = await params;
   const pageContent = content[lang] || content.en;
@@ -33,3 +80,4 @@ export default async function Home({ params }) {
     </>
   );
 }
+

@@ -593,41 +593,42 @@
       ]
     },
     "contact": {
-      "headline": "Let's Build Your Reality",
-      "subheadline": "Stop waiting. Start scaling. Reach out to our team today.",
-      "successTitle": "Transmission Secured",
-      "successMessage": "Our team will contact you shortly to initiate the protocol.",
-      "errorMessage": "Failed to send your request. Please try again or use direct contact methods.",
+      "headline": "Let's Build Something Real",
+      "subheadline": "Tell us what you need. We'll respond fast.",
+      "successTitle": "Message Received!",
+      "successMessage": "We'll get back to you shortly. You can also reach us directly on WhatsApp.",
+      "errorMessage": "Something went wrong. Please try again or contact us directly at info@atlahub.tech",
       "fields": {
         "name": "Full Name",
         "email": "Email Address",
-        "service": "Requested Capability",
-        "message": "Project Details / Challenge"
+        "service": "Service Needed",
+        "message": "Tell us about your project"
       },
       "placeholders": {
-        "name": "John Doe",
-        "email": "john@company.com",
-        "message": "Describe the outcome you are looking to achieve..."
+        "name": "Your name",
+        "email": "your@email.com",
+        "message": "What are you trying to build or solve?"
       },
-      "servicePlaceholder": "Select a core integration...",
+      "servicePlaceholder": "Select a service...",
       "serviceOptions": [
-        "Programming & Web Development",
-        "Strategic Digital Marketing",
-        "Elite Cybersecurity & Response",
-        "Field Media Production",
-        "Other Integration"
+        "Software & Web Development",
+        "Digital Marketing",
+        "Cybersecurity & Forensics",
+        "Media Production",
+        "Training",
+        "Other"
       ],
-      "submit": "Initiate Project",
+      "submit": "Send Message",
       "submitting": "Sending..."
     },
     "footer": {
-      "description": "High-conversion, result-driven enterprise solutions. Specializing in cybersecurity, development, and high-impact media.",
+      "description": "Software development, cybersecurity, digital marketing, media production, and professional training — from Jerusalem to the world.",
       "quickLinksTitle": "Quick Links",
       "contactTitle": "Contact",
       "adminPortal": "Admin Portal",
-      "emergency": "Global emergency response available 24/7.",
+      "emergency": "24/7 emergency cybersecurity response available.",
       "copyright": "Atla Hub Tech. All rights reserved.",
-      "founder": "Founder: Ahmed Zayed."
+      "founder": "Founded by Ahmad Zayed."
     }
   },
   "ar": {
@@ -648,21 +649,21 @@
     },
     "hero": {
       "ctaPrimary": "ابدأ مشروعك",
-      "ctaSecondary": "شاهد النتائج",
+      "ctaSecondary": "شاهد أعمالنا",
       "slides": [
         {
-          "title": "رؤية مقدسية، هيمنة عالمية.",
-          "description": "انشر حلولك التكنولوجية المتميزة عالمياً. نهندس نموك من القدس إلى أتلانتا.",
+          "title": "من القدس، للعالم.",
+          "description": "نبني حلولاً تقنية حقيقية تخدم أعمالك وتحل مشاكلك الفعلية.",
           "image": "/assets/images/Atlanta_Jerusalem.png"
         },
         {
-          "title": "درعك الرقمي الذي لا يُخترق.",
-          "description": "حماية عسكرية الجودة ضد الحرب السيبرانية والابتزاز. استجابة نخبوية على مدار الساعة.",
+          "title": "أمانك الرقمي مسؤوليتنا.",
+          "description": "نحمي شركتك وأجهزتك وحساباتك — قبل فوات الأوان.",
           "image": "/assets/images/Atlanta_Jerusalem.png"
         },
         {
-          "title": "سلطة سينمائية لعلامتك التجارية.",
-          "description": "استحوذ على اهتمام السوق بالكامل من خلال إعلام ميداني تفاعلي وعالي التأثير.",
+          "title": "محتوى يُشاهَد، وعلامة لا تُنسى.",
+          "description": "إنتاج إعلامي وتسويق رقمي يعطيك النتائج التي تريدها.",
           "image": "/assets/images/Atlanta_Jerusalem.png"
         }
       ]
@@ -1206,57 +1207,58 @@
       }
     },
     "whyUs": {
-      "headline": "معيار أتلا هاب للنخبة",
-      "subheadline": "لا نقدم حلولاً متوسطة. نحن شركاء نمو يركزون على الأثر الحقيقي.",
+      "headline": "ليش أتلا هاب؟",
+      "subheadline": "شغلنا يحكي عن نفسه. وبنسمع العميل قبل ما نبدأ.",
       "points": [
         {
-          "title": "تركيز على النتائج",
-          "description": "نركز على مؤشرات مهمة مثل التحويل والتفاعل والعائد على الاستثمار."
+          "title": "نتائج، مش وعود",
+          "description": "كل شغلة نعملها هدفها يخدم مشروعك ويحل مشكلة حقيقية — مش مجرد تسليم."
         },
         {
-          "title": "فريق متخصص",
-          "description": "تتعامل مباشرة مع فريق خبير ومركز بدلاً من هيكل وكالة مزدحم."
+          "title": "فريق متخصص بيعرف شغله",
+          "description": "ما رح تتعامل مع وسيط — تتواصل مباشرة مع اللي يشتغل على مشروعك."
         },
         {
-          "title": "استجابة طارئة 24/7",
-          "description": "فرقنا الفنية والأمنية جاهزة على مدار الساعة لتقليل المخاطر والتوقف."
+          "title": "متاحين وقت الأزمات",
+          "description": "إذا صار شي طارئ سواء أمن سيبراني أو عطل تقني — نحن جاهزين."
         }
       ]
     },
     "contact": {
-      "headline": "لنحوّل فكرتك إلى واقع",
-      "subheadline": "لا تؤجل. ابدأ التوسع اليوم وتواصل مع فريقنا.",
-      "successTitle": "تم استلام الطلب",
-      "successMessage": "سيتواصل معك فريقنا قريباً لبدء الخطوات التالية.",
-      "errorMessage": "تعذر إرسال الطلب. حاول مرة أخرى أو استخدم وسائل التواصل المباشرة.",
+      "headline": "خبّرنا عن مشروعك",
+      "subheadline": "إرسل رسالة وبنرد عليك بأسرع وقت.",
+      "successTitle": "وصلتنا رسالتك!",
+      "successMessage": "راح نتواصل معك قريباً. تقدر كمان تراسلنا مباشرة على الواتساب.",
+      "errorMessage": "في مشكلة بالإرسال. جرب مرة ثانية أو تواصل معنا على info@atlahub.tech",
       "fields": {
-        "name": "الاسم الكامل",
+        "name": "الاسم",
         "email": "البريد الإلكتروني",
-        "service": "الخدمة المطلوبة",
-        "message": "تفاصيل المشروع أو التحدي"
+        "service": "الخدمة اللي تحتاجها",
+        "message": "اشرح لنا المشروع أو المشكلة"
       },
       "placeholders": {
-        "name": "أحمد محمد",
-        "email": "name@company.com",
-        "message": "اشرح النتيجة التي تريد الوصول إليها..."
+        "name": "اسمك",
+        "email": "بريدك الإلكتروني",
+        "message": "شو اللي تبي تبنيه أو تحله؟"
       },
-      "servicePlaceholder": "اختر الخدمة المناسبة...",
+      "servicePlaceholder": "اختر الخدمة...",
       "serviceOptions": [
-        "البرمجة وتطوير الويب",
-        "التسويق الرقمي الاستراتيجي",
-        "الأمن السيبراني والاستجابة",
-        "الإنتاج الإعلامي الميداني",
-        "خدمة أخرى"
+        "تطوير برمجيات ومواقع",
+        "تسويق رقمي",
+        "أمن سيبراني وتحقيق رقمي",
+        "إنتاج إعلامي",
+        "تدريب",
+        "غير ذلك"
       ],
-      "submit": "ابدأ المشروع",
-      "submitting": "جارٍ الإرسال..."
+      "submit": "أرسل الرسالة",
+      "submitting": "جاري الإرسال..."
     },
     "footer": {
-      "description": "حلول مؤسسية تركز على النتائج، متخصصة في الأمن السيبراني والتطوير والإعلام عالي التأثير.",
+      "description": "برمجيات، أمن سيبراني، تسويق رقمي، إنتاج إعلامي، وتدريب — من القدس للعالم.",
       "quickLinksTitle": "روابط سريعة",
-      "contactTitle": "التواصل",
-      "adminPortal": "بوابة الإدارة",
-      "emergency": "استجابة طارئة عالمية متاحة على مدار الساعة.",
+      "contactTitle": "تواصل معنا",
+      "adminPortal": "لوحة الإدارة",
+      "emergency": "استجابة طارئة للأمن السيبراني متاحة على مدار الساعة.",
       "copyright": "أتلا هاب تك. جميع الحقوق محفوظة.",
       "founder": "المؤسس: أحمد زايد."
     }
