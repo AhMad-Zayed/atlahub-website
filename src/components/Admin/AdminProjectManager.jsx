@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { uploadDeliverableToProjectAction } from '@/app/[lang]/admin/actions';
+import { uploadDeliverableToProjectAction } from '@/app/(frontend)/[lang]/admin/actions';
 
 export default function AdminProjectManager({ lang, projectId, projectType }) {
   const [isUploading, setIsUploading] = useState(false);
