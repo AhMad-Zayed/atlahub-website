@@ -28,8 +28,9 @@ function ReleasesLoading({ isAr }) {
 
 // 2. Fetch Function
 async function getLatestRelease() {
-  const apiUrl = process.env.RELEASES_API_URL;
-  if (!apiUrl) throw new Error("RELEASES_API_URL is not defined");
+  // If the environment variable is missing, we use a placeholder absolute URL as requested by the Backend
+  const apiUrl = process.env.RELEASES_API_URL || 'https://app.atlahub.tech/api/v1/atlahub/releases/latest';
+
 
   try {
     const res = await fetch(apiUrl, {
