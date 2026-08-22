@@ -80,8 +80,8 @@
         {
           "id": "omnichannel",
           "title": "Omnichannel Platform",
-          "description": "Unified inbox connecting WhatsApp, Messenger, and Email for seamless customer support.",
-          "highlight": "WhatsApp API, Messenger, Smart Macros",
+          "description": "Unified inbox connecting WhatsApp, Messenger, Instagram, TikTok, Email & more for seamless customer support.",
+          "highlight": "WhatsApp API, Messenger, Instagram, TikTok, Smart Macros",
           "featured": true,
           "icon": "message-square"
         }
@@ -184,10 +184,10 @@
       "omnichannel": {
         "title": "Omnichannel Support Platform",
         "subtitle": "The Ultimate Omnichannel Inbox for Modern Businesses.",
-        "valueProposition": "Connect WhatsApp Business API, Messenger API, and Email in one unified dashboard to manage customer conversations effortlessly.",
+        "valueProposition": "Connect WhatsApp Business API, Messenger API, Instagram, TikTok, Email, and any platform you want in one unified dashboard to manage customer conversations effortlessly.",
         "technicalScope": [
-          "Unified Inbox for WhatsApp and Messenger",
-          "Smart Automations & Macros",
+          "Unified Inbox for WhatsApp, Messenger, Instagram, and TikTok",
+          "Smart Automations & Macros across all platforms",
           "Team Collaboration and Role Management",
           "Built for Meta Tech Providers compliance"
         ],
@@ -744,8 +744,8 @@
         {
           "id": "omnichannel",
           "title": "منصة الدعم الموحدة",
-          "description": "صندوق وارد موحد يربط WhatsApp و Messenger والبريد الإلكتروني لدعم عملاء استثنائي.",
-          "highlight": "واتساب API، ماسنجر، ردود ذكية",
+          "description": "صندوق وارد موحد يربط WhatsApp و Messenger وانستغرام وتيك توك والبريد الإلكتروني لدعم عملاء استثنائي.",
+          "highlight": "واتساب API، ماسنجر، انستغرام، تيك توك، ردود ذكية",
           "featured": true,
           "icon": "message-square"
         }
@@ -848,10 +848,10 @@
       "omnichannel": {
         "title": "منصة الدعم الموحدة",
         "subtitle": "أقوى صندوق وارد شامل للشركات الحديثة.",
-        "valueProposition": "قم بربط WhatsApp Business API و Messenger و البريد الإلكتروني في لوحة تحكم واحدة موحدة لإدارة المحادثات بكل سهولة.",
+        "valueProposition": "قم بربط WhatsApp Business API و Messenger وانستغرام وتيك توك والبريد الإلكتروني وأي منصة تريدها في لوحة تحكم واحدة موحدة لإدارة المحادثات بكل سهولة.",
         "technicalScope": [
-          "صندوق وارد موحد لواتساب وماسنجر",
-          "أتمتة ذكية وردود سريعة",
+          "صندوق وارد موحد لواتساب وماسنجر وانستغرام وتيك توك",
+          "أتمتة ذكية وردود سريعة لجميع المنصات",
           "إدارة أدوار فريق العمل",
           "مبني لمزودي تقنيات ميتا المعتمدين"
         ],

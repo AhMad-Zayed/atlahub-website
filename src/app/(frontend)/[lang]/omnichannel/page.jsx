@@ -9,8 +9,8 @@ export async function generateMetadata({ params }) {
   return {
     title: isAr ? 'منصة الدعم الموحدة | أتلا هاب تك' : 'Omnichannel Customer Support Platform | AtlaHub Tech',
     description: isAr 
-      ? 'اربط WhatsApp Business API و Messenger وغيرها في صندوق وارد واحد لدعم عملائك.' 
-      : 'Connect WhatsApp Business API, Messenger API, and other channels in a single unified dashboard to manage customer conversations.',
+      ? 'اربط WhatsApp Business API و Messenger وانستغرام وتيك توك وغيرها في صندوق وارد واحد لدعم عملائك.' 
+      : 'Connect WhatsApp Business API, Messenger, Instagram, TikTok, and other channels in a single unified dashboard to manage customer conversations.',
   };
 }
 
@@ -24,17 +24,17 @@ export default async function OmnichannelLandingPage({ params }) {
     login: isAr ? 'تسجيل الدخول' : 'Login',
     heroHeadline: isAr ? 'أقوى صندوق وارد شامل للشركات الحديثة.' : 'The Ultimate Omnichannel Inbox for Modern Businesses.',
     heroSub: isAr 
-      ? 'قم بربط WhatsApp، Messenger، والبريد الإلكتروني في لوحة تحكم واحدة موحدة. مكّن فريقك من تقديم دعم استثنائي للعملاء نيابة عن عملائك.' 
-      : 'Connect WhatsApp, Messenger, and Email in one unified dashboard. Empower your team to deliver exceptional customer support on behalf of your clients.',
+      ? 'قم بربط WhatsApp، Messenger، انستغرام، تيك توك، البريد الإلكتروني وأي منصة تريدها في لوحة تحكم واحدة موحدة. مكّن فريقك من تقديم دعم استثنائي للعملاء.' 
+      : 'Connect WhatsApp, Messenger, Instagram, TikTok, Email, and any platform you want in one unified dashboard. Empower your team to deliver exceptional customer support.',
     getStarted: isAr ? 'ابدأ الآن' : 'Get Started',
-    feat1Title: isAr ? 'تكامل WhatsApp و Messenger' : 'WhatsApp & Messenger Integration',
+    feat1Title: isAr ? 'تكامل شامل (واتساب، ماسنجر، انستغرام، تيك توك)' : 'Omnichannel Integration (WhatsApp, Messenger, Instagram, TikTok & more)',
     feat1Desc: isAr 
-      ? 'استفد من قوة منصات Meta مثل WhatsApp Business Cloud API و Messenger API للرد على عملائك بسرعة وكفاءة.' 
-      : 'Leverage the power of Meta platforms like WhatsApp Business Cloud API and Messenger API to respond to your customers quickly and efficiently.',
+      ? 'استفد من قوة منصات Meta مثل WhatsApp Business Cloud API و Messenger و Instagram واربط أي منصة أخرى مثل تيك توك للرد على عملائك بسرعة وكفاءة من مكان واحد.' 
+      : 'Leverage the power of Meta platforms like WhatsApp Business Cloud API, Messenger, and Instagram, and connect any other platform like TikTok to respond to your customers quickly and efficiently.',
     feat2Title: isAr ? 'أتمتة ذكية وردود سريعة' : 'Smart Automations & Macros',
     feat2Desc: isAr 
-      ? 'وفر وقت فريقك باستخدام الردود الآلية، والقواعد الذكية، والمقروءات السريعة (Macros) للتعامل مع الأسئلة المتكررة.' 
-      : 'Save your team\'s time using automated replies, smart rules, and Macros to handle frequently asked questions.',
+      ? 'وفر وقت فريقك باستخدام الردود الآلية، والقواعد الذكية، والمقروءات السريعة (Macros) للتعامل مع الأسئلة المتكررة عبر جميع المنصات.' 
+      : 'Save your team\'s time using automated replies, smart rules, and Macros to handle frequently asked questions across all platforms.',
     builtFor: isAr ? 'مبني لمزودي تقنيات ميتا' : 'Built for Meta Tech Providers',
     rights: isAr ? 'جميع الحقوق محفوظة.' : 'All rights reserved.',
     privacy: isAr ? 'سياسة الخصوصية' : 'Privacy Policy',
@@ -130,8 +130,6 @@ export default async function OmnichannelLandingPage({ params }) {
                    alt="AtlaHub Dashboard" 
                    fill
                    className="object-cover object-top"
-                   // Fallback visual if image doesn't exist yet
-                   onError={(e) => { e.currentTarget.style.display = 'none'; }}
                  />
                  <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-medium z-[-1]">
                     [ Dashboard Interface Preview ]
@@ -152,7 +150,7 @@ export default async function OmnichannelLandingPage({ params }) {
               {/* Feature 1 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className={`order-2 ${isAr ? 'lg:order-2' : 'lg:order-1'} bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 shadow-lg relative h-[300px] sm:h-[400px]`}>
-                  <Image src="/pics/inboxes.jpg" alt="Inbox Integration" fill className="object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                  <Image src="/pics/inboxes.jpg" alt="Inbox Integration" fill className="object-cover" />
                   <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-medium z-[-1]">[ Inbox Image: /pics/inboxes.jpg ]</div>
                 </div>
                 <div className={`order-1 ${isAr ? 'lg:order-1' : 'lg:order-2'}`}>
@@ -175,11 +173,11 @@ export default async function OmnichannelLandingPage({ params }) {
                 </div>
                 <div className={`order-2 ${isAr ? 'lg:order-2' : 'lg:order-2'} bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 shadow-lg relative h-[300px] sm:h-[400px] grid grid-cols-2 gap-2 p-2`}>
                   <div className="relative h-full rounded-2xl overflow-hidden bg-slate-200">
-                     <Image src="/pics/automations.jpg" alt="Automations" fill className="object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                     <Image src="/pics/automations.jpg" alt="Automations" fill className="object-cover" />
                      <div className="absolute inset-0 flex items-center justify-center text-slate-400 text-sm text-center font-medium z-[-1]">[ automations.jpg ]</div>
                   </div>
                   <div className="relative h-full rounded-2xl overflow-hidden bg-slate-200">
-                     <Image src="/pics/Macros.jpg" alt="Macros" fill className="object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                     <Image src="/pics/Macros.jpg" alt="Macros" fill className="object-cover" />
                      <div className="absolute inset-0 flex items-center justify-center text-slate-400 text-sm text-center font-medium z-[-1]">[ Macros.jpg ]</div>
                   </div>
                 </div>
