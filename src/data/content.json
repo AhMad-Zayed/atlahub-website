@@ -76,6 +76,14 @@
           "description": "Professional training tracks covering digital safety, cybersecurity, AI, mobile development, and practical technical facilitation.",
           "highlight": "Training Programs, ToT, and Applied Workshops",
           "icon": "training"
+        },
+        {
+          "id": "omnichannel",
+          "title": "Omnichannel Platform",
+          "description": "Unified inbox connecting WhatsApp, Messenger, and Email for seamless customer support.",
+          "highlight": "WhatsApp API, Messenger, Smart Macros",
+          "featured": true,
+          "icon": "message-square"
         }
       ]
     },
@@ -172,6 +180,30 @@
           "Support: provide follow-up material, structured notes, and next-step recommendations"
         ],
         "whyUs": "Our training offering is shaped by hands-on technical practice, community-facing facilitation, and university-level academic background. That combination allows us to present complex topics in a structured, practical, and credible format for both specialist and public audiences."
+      },
+      "omnichannel": {
+        "title": "Omnichannel Support Platform",
+        "subtitle": "The Ultimate Omnichannel Inbox for Modern Businesses.",
+        "valueProposition": "Connect WhatsApp Business API, Messenger API, and Email in one unified dashboard to manage customer conversations effortlessly.",
+        "technicalScope": [
+          "Unified Inbox for WhatsApp and Messenger",
+          "Smart Automations & Macros",
+          "Team Collaboration and Role Management",
+          "Built for Meta Tech Providers compliance"
+        ],
+        "process": [
+          "Integration: Connect your Meta business accounts",
+          "Configuration: Setup macros and smart replies",
+          "Operation: Support customers seamlessly"
+        ],
+        "whyUs": "As a verified Meta Tech Provider, we ensure 100% compliance, deep integration capabilities, and stable high-volume messaging.",
+        "links": [
+          {
+            "label": "Platform Details",
+            "type": "website",
+            "url": "/en/omnichannel"
+          }
+        ]
       }
     },
     "process": {
@@ -708,6 +740,14 @@
           "description": "مسارات تدريبية مهنية تغطي السلامة الرقمية، والأمن السيبراني، والذكاء الاصطناعي، وتطوير الموبايل، والتيسير التقني العملي.",
           "highlight": "برامج تدريبية، تدريب مدربين، وورش تطبيقية",
           "icon": "training"
+        },
+        {
+          "id": "omnichannel",
+          "title": "منصة الدعم الموحدة",
+          "description": "صندوق وارد موحد يربط WhatsApp و Messenger والبريد الإلكتروني لدعم عملاء استثنائي.",
+          "highlight": "واتساب API، ماسنجر، ردود ذكية",
+          "featured": true,
+          "icon": "message-square"
         }
       ]
     },
@@ -804,6 +844,30 @@
           "الدعم: تقديم مواد متابعة وملاحظات منظمة وتوصيات للخطوات القادمة"
         ],
         "whyUs": "تنطلق خدمات التدريب لدينا من ممارسة تقنية عملية، وخبرة في التيسير المجتمعي، وخلفية أكاديمية جامعية، ما يسمح بتقديم مواضيع معقدة بصورة منظمة وعملية وموثوقة لمتخصصين وجمهور عام في آن واحد."
+      },
+      "omnichannel": {
+        "title": "منصة الدعم الموحدة",
+        "subtitle": "أقوى صندوق وارد شامل للشركات الحديثة.",
+        "valueProposition": "قم بربط WhatsApp Business API و Messenger و البريد الإلكتروني في لوحة تحكم واحدة موحدة لإدارة المحادثات بكل سهولة.",
+        "technicalScope": [
+          "صندوق وارد موحد لواتساب وماسنجر",
+          "أتمتة ذكية وردود سريعة",
+          "إدارة أدوار فريق العمل",
+          "مبني لمزودي تقنيات ميتا المعتمدين"
+        ],
+        "process": [
+          "الربط: أوصل حسابات ميتا الخاصة بك",
+          "الإعداد: جهز الردود الذكية",
+          "التشغيل: قدم دعماً متكاملاً للعملاء"
+        ],
+        "whyUs": "بصفتنا مزود تقنيات معتمد من ميتا، نضمن لك امتثالاً بنسبة 100% وتكاملاً عميقاً.",
+        "links": [
+          {
+            "label": "تفاصيل المنصة",
+            "type": "website",
+            "url": "/ar/omnichannel"
+          }
+        ]
       }
     },
     "process": {
