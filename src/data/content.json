@@ -201,7 +201,7 @@
           {
             "label": "Platform Details",
             "type": "website",
-            "url": "/en/omnichannel"
+            "url": "/en/services/omnichannel"
           }
         ]
       }
@@ -865,7 +865,7 @@
           {
             "label": "تفاصيل المنصة",
             "type": "website",
-            "url": "/ar/omnichannel"
+            "url": "/ar/services/omnichannel"
           }
         ]
       }
