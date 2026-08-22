@@ -35,7 +35,7 @@ export default async function OmnichannelLandingPage({ params }) {
     feat2Desc: isAr 
       ? 'وفر وقت فريقك باستخدام الردود الآلية، والقواعد الذكية، والمقروءات السريعة (Macros) للتعامل مع الأسئلة المتكررة عبر جميع المنصات.' 
       : 'Save your team\'s time using automated replies, smart rules, and Macros to handle frequently asked questions across all platforms.',
-    builtFor: isAr ? 'مبني لمزودي تقنيات ميتا' : 'Built for Meta Tech Providers',
+    builtFor: isAr ? 'منصة دعم عملاء شاملة' : 'Omnichannel Customer Support',
     rights: isAr ? 'جميع الحقوق محفوظة.' : 'All rights reserved.',
     privacy: isAr ? 'سياسة الخصوصية' : 'Privacy Policy',
     terms: isAr ? 'شروط الخدمة' : 'Terms of Service',
