@@ -10,7 +10,6 @@ import Clients from '@/components/Sections/Clients';
 import Academy from '@/components/Sections/Academy';
 import WhyUs from '@/components/Sections/WhyUs';
 import Contact from '@/components/Sections/Contact';
-import Careers from '@/components/Sections/Careers';
 import { getMergedPortfolio } from '@/lib/portfolio-content';
 
 const siteUrl = 'https://www.atlahub.tech';
@@ -77,7 +76,6 @@ export default async function Home({ params }) {
       <Academy data={pageContent.training} />
       <WhyUs data={pageContent.whyUs} />
       <Contact data={pageContent.contact} />
-      <Careers lang={lang} />
       <Footer lang={lang} navData={pageContent.nav} brandData={pageContent.brand} footerData={pageContent.footer} />
     </>
   );

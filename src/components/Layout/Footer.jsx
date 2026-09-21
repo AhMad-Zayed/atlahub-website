@@ -36,6 +36,7 @@ export default function Footer({ lang = 'en', navData, brandData, footerData }) 
 							<li><Link href="#services" className="text-slate-200 transition-colors duration-300 hover:text-white">{navData?.services}</Link></li>
 							<li><Link href={`/${lang}/portfolio`} className="text-slate-200 transition-colors duration-300 hover:text-white">{navData?.portfolio}</Link></li>
 							<li><Link href="#about" className="text-slate-200 transition-colors duration-300 hover:text-white">{navData?.about}</Link></li>
+							<li><Link href={`/${lang}/careers`} className="text-slate-200 transition-colors duration-300 hover:text-white">{lang === 'ar' ? 'وظائف' : 'Careers'}</Link></li>
 							<li><Link href={`/${lang}/admin/login`} className="text-slate-200 transition-colors duration-300 hover:text-brand-blue-light">{footerData?.adminPortal}</Link></li>
 						</ul>
 					</div>
