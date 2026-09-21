@@ -150,17 +150,59 @@ const job = {
   },
 };
 
+// Expiry: 10 days from posting — Oct 1, 2026 (03:00 Palestine time)
+const CAREERS_EXPIRY = new Date('2026-10-01T00:00:00+03:00');
+
 export default async function CareersPage({ params }) {
   const { lang } = await params;
   const pageContent = content[lang] || content.en;
   const t = job[lang] || job.ar;
   const isAr = lang === 'ar';
+  const isExpired = new Date() >= CAREERS_EXPIRY;
   const emailSubject = encodeURIComponent(
     isAr
       ? 'التقدم لوظيفة: موظفة تسويق رقمي وإدارة محتوى'
       : 'Application: Digital Marketing & Content Coordinator'
   );
 
+  // ── Expired state ──────────────────────────────────────────────
+  if (isExpired) {
+    return (
+      <>
+        <Navbar lang={lang} navData={pageContent.nav} brandData={pageContent.brand} />
+        <main
+          dir={isAr ? 'rtl' : 'ltr'}
+          className="min-h-screen bg-white pt-24 pb-20 font-cairo flex items-center"
+        >
+          <div className="container mx-auto max-w-2xl px-6 py-20 text-center">
+            <div className="inline-block w-14 h-14 rounded-full border-2 border-gray-300 mb-8 flex items-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              {isAr ? 'تم إغلاق باب التقديم' : 'This Position Is No Longer Available'}
+            </h1>
+            <p className="text-gray-500 font-tajawal leading-relaxed mb-8 text-base">
+              {isAr
+                ? 'شكراً لاهتمامك بالعمل مع أتلا هاب تك. هذه الوظيفة لم تعد متاحة للتقديم. تابعونا لمعرفة الفرص القادمة.'
+                : 'Thank you for your interest in joining Atla Hub Tech. This position is no longer accepting applications. Stay connected for future opportunities.'}
+            </p>
+            <Link
+              href={`/${lang}`}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors duration-200 text-sm"
+            >
+              {isAr ? 'العودة للرئيسية' : 'Back to Home'}
+            </Link>
+          </div>
+        </main>
+        <Footer lang={lang} navData={pageContent.nav} brandData={pageContent.brand} footerData={pageContent.footer} />
+      </>
+    );
+  }
+
+  // ── Active state ───────────────────────────────────────────────
   return (
     <>
       <Navbar lang={lang} navData={pageContent.nav} brandData={pageContent.brand} />

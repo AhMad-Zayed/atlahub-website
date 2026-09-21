@@ -7,6 +7,10 @@ export default function Footer({ lang = 'en', navData, brandData, footerData }) 
 	const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '972522977790';
 	const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
+	// Careers link auto-expires on Oct 1, 2026
+	const CAREERS_EXPIRY = new Date('2026-10-01T00:00:00+03:00');
+	const showCareers = new Date() < CAREERS_EXPIRY;
+
 	return (
 		<footer className="bg-gray-900 text-white font-cairo border-t-4 border-brand-blue">
 			<div className="container mx-auto px-6 py-12">
@@ -36,7 +40,9 @@ export default function Footer({ lang = 'en', navData, brandData, footerData }) 
 							<li><Link href="#services" className="text-slate-200 transition-colors duration-300 hover:text-white">{navData?.services}</Link></li>
 							<li><Link href={`/${lang}/portfolio`} className="text-slate-200 transition-colors duration-300 hover:text-white">{navData?.portfolio}</Link></li>
 							<li><Link href="#about" className="text-slate-200 transition-colors duration-300 hover:text-white">{navData?.about}</Link></li>
-							<li><Link href={`/${lang}/careers`} className="text-slate-200 transition-colors duration-300 hover:text-white">{lang === 'ar' ? 'وظائف' : 'Careers'}</Link></li>
+							{showCareers && (
+								<li><Link href={`/${lang}/careers`} className="text-slate-200 transition-colors duration-300 hover:text-white">{lang === 'ar' ? 'وظائف' : 'Careers'}</Link></li>
+							)}
 							<li><Link href={`/${lang}/admin/login`} className="text-slate-200 transition-colors duration-300 hover:text-brand-blue-light">{footerData?.adminPortal}</Link></li>
 						</ul>
 					</div>
