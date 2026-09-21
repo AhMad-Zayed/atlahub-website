@@ -10,18 +10,51 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { lang } = await params;
   const isAr = lang === 'ar';
+
+  const title = isAr
+    ? 'وظيفة: موظفة تسويق رقمي وإدارة محتوى | أتلا هاب تك'
+    : 'Job: Digital Marketing & Content Coordinator | Atla Hub Tech';
+
+  const description = isAr
+    ? 'أتلا هاب تك — رام الله. مطلوب موظفة تسويق رقمي وإدارة محتوى، دوام كامل، خبرة 2-3 سنوات في إدارة حسابات التواصل الاجتماعي والإعلانات الممولة. أرسلي سيرتك الذاتية إلى career@atlahub.tech'
+    : 'Atla Hub Tech — Ramallah. Hiring a full-time Digital Marketing & Content Coordinator with 2-3 years of experience in social media management and paid ads. Send your CV to career@atlahub.tech';
+
+  const ogImage = 'https://www.atlahub.tech/assets/images/careers-og.png';
+  const url = `https://www.atlahub.tech/${lang}/careers`;
+
   return {
-    title: isAr
-      ? 'فرص العمل | أتلا هاب تك'
-      : 'Careers | Atla Hub Tech',
-    description: isAr
-      ? 'انضم إلى فريق أتلا هاب تك — نبحث عن موظفة تسويق رقمي وإدارة محتوى للعمل من رام الله.'
-      : 'Join the Atla Hub Tech team — we are hiring a Digital Marketing & Content Coordinator based in Ramallah.',
+    title,
+    description,
     alternates: {
-      canonical: `https://www.atlahub.tech/${lang}/careers`,
+      canonical: url,
+    },
+    openGraph: {
+      type: 'website',
+      url,
+      siteName: 'Atla Hub Tech',
+      title,
+      description,
+      locale: isAr ? 'ar_PS' : 'en_US',
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: isAr
+            ? 'وظيفة: موظفة تسويق رقمي — أتلا هاب تك'
+            : 'Job: Digital Marketing Coordinator — Atla Hub Tech',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
+
 
 const job = {
   ar: {
